@@ -6,7 +6,7 @@ This fork maintains compatibility with the original API and structure while appl
 
 ---
 
-## About the Original Project
+## Credits
 
 WindUI was originally created by **Footagesus**.
 
