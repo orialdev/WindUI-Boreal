@@ -6,7 +6,7 @@ This fork maintains compatibility with the original API and structure while appl
 
 ## Credits
 
-WindUI was originally created by **Footagesus**.
+WindUI was originally created by **[Footagesus](https://github.com/Footagesus)**.
 
 The original repository:
 [https://github.com/Footagesus/WindUI](https://github.com/Footagesus/WindUI)
