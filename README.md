@@ -11,7 +11,7 @@ WindUI was originally created by **Footagesus**.
 The original repository:
 [https://github.com/Footagesus/WindUI](https://github.com/Footagesus/WindUI)
 
-WindUI is an open-source UI library built for Roblox script hubs and executor environments, supporting CoreGui / gethui workflows.
+WindUI is an open-source UI library built for Roblox script hubs and executor environments.
 
 This fork would not exist without the original work and structure provided by Footagesus.
 
