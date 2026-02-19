@@ -20,7 +20,7 @@ Full credit for the base framework, architecture, and core systems belongs to th
 ## Loader
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/orialdev/WindUI-Boreal/refs/heads/main/WindUI%20Boreal"))()
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/orialdev/WindUI-Boreal/refs/heads/main/WindUI%20Boreal"))()
 ```
 
 ## Base Setup
