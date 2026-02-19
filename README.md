@@ -17,21 +17,6 @@ Full credit for the base framework, architecture, and core systems belongs to th
 
 # WindUI Boreal Documentation
 
-This document covers:
-
-1. Multi Section
-2. Divider
-3. Sidebar Elements
-4. Notify with Buttons
-5. Video Elements
-6. Background Video
-7. ModernLayout
-8. Button Keybind
-9. Toggle Keybind
-10. Multi Section (Locked)
-11. Section (Locked)
-12. BottomDragBarEnabled
-
 ## Loader
 
 ```lua
