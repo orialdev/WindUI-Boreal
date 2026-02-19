@@ -329,14 +329,6 @@ Tab_Divider:Button({
 
 Tab_Divider:Space({})
 
-Tab_Divider:Paragraph({
-    Title = "Divider Info",
-    Desc = "Info",
-    Text = "Use the controls above to modify the Divider at runtime.",
-})
-
-Tab_Divider:Space({})
-
 local Tab_Sidebar = Window:Tab({
     Title = "Sidebar",
     Icon = "panel-left",
