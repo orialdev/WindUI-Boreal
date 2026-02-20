@@ -4455,321 +4455,309 @@ local ab=aa.New
 
 local ac={}
 
-local function toNumber(ad,ae,af,ag)
-local ah=typeof(ad)=="number"and ad or ae
+function ac.New(ad,ae)
+ae=ae or{}
 
-if af~=nil then
-ah=math.max(af,ah)
+local af=ae.ParentType=="Group"
+
+local ag=ab("Frame",{
+Parent=ae.Parent,
+Size=af and UDim2.new(0,7,1,-7)or UDim2.new(1,-7,0,7),
+BackgroundTransparency=1,
+})
+
+local ah=ab("Frame",{
+Parent=ag,
+Name="Line",
+Size=af and UDim2.new(0,1,1,0)or UDim2.new(1,0,0,1),
+Position=UDim2.new(0.5,0,0.5,0),
+AnchorPoint=Vector2.new(0.5,0.5),
+BackgroundTransparency=.9,
+ThemeTag={
+BackgroundColor3="Text",
+},
+})
+
+local ai=ab("Frame",{
+Parent=ag,
+Name="LineSecondary",
+Size=UDim2.new(0,0,0,1),
+Position=UDim2.new(0.5,0,0.5,0),
+AnchorPoint=Vector2.new(0.5,0.5),
+BackgroundTransparency=.9,
+ThemeTag={
+BackgroundColor3="Text",
+},
+Visible=false,
+})
+
+local aj=ab("TextLabel",{
+Parent=ag,
+Name="Title",
+AutomaticSize="XY",
+BackgroundTransparency=1,
+FontFace=Font.new(aa.Font,Enum.FontWeight.Medium),
+Text="",
+TextSize=14,
+TextTransparency=.4,
+TextXAlignment="Center",
+ThemeTag={
+TextColor3="Text",
+},
+Visible=false,
+})
+
+local ak={
+__type="Divider",
+ElementFrame=ag,
+_isGroupDivider=af,
+_title=ae.Title,
+_titleAlignment="Center",
+_thickness=1,
+_titleSpacing=8,
+_color=ae.Color,
+_titleColor=ae.TitleColor,
+}
+
+local function clearThemeProperty(al,am)
+local an=aa.Objects and aa.Objects[al]
+if an and an.Properties then
+an.Properties[am]=nil
 end
-if ag~=nil then
-ah=math.min(ag,ah)
 end
 
-return ah
+local function applyColor(al,am,an,ao)
+if typeof(an)=="Color3"then
+clearThemeProperty(al,am)
+al[am]=an
+return
 end
 
-local function normalizeAlignment(ad)
-if ad=="Left"or ad=="Right"then
-return ad
+if typeof(an)=="string"then
+if string.sub(an,1,1)=="#"then
+local ap,aq=pcall(Color3.fromHex,an)
+if ap then
+clearThemeProperty(al,am)
+al[am]=aq
+return
+end
+end
+
+aa.SetThemeTag(al,{
+[am]=an,
+})
+return
+end
+
+aa.SetThemeTag(al,{
+[am]=ao,
+})
+end
+
+local function normalizeAlignment(al)
+if typeof(al)=="EnumItem"then
+if al==Enum.TextXAlignment.Left then
+return"Left"
+end
+if al==Enum.TextXAlignment.Right then
+return"Right"
+end
+return"Center"
+end
+
+if typeof(al)=="string"then
+local am=string.lower(al)
+if am=="left"then
+return"Left"
+end
+if am=="right"then
+return"Right"
+end
 end
 
 return"Center"
 end
 
-local function createLineProps(ad)
-local ae={
-ThemeTag={
-BackgroundColor3=typeof(ad.Color)=="string"and ad.Color or"Divider",
-BackgroundTransparency="DividerTransparency",
-}
-}
+local function updateMainSize()
+local al=math.max(1,tonumber(ak._thickness)or 1)
 
-if typeof(ad.Color)=="Color3"then
-ae.BackgroundColor3=ad.Color
-ae.ThemeTag.BackgroundColor3=nil
-end
-
-if typeof(ad.Transparency)=="number"then
-ae.BackgroundTransparency=math.clamp(ad.Transparency,0,1)
-ae.ThemeTag.BackgroundTransparency=nil
-end
-
-if next(ae.ThemeTag)==nil then
-ae.ThemeTag=nil
-end
-
-return ae
-end
-
-local function createTitleProps(ad)
-local ae={
-ThemeTag={
-TextColor3=typeof(ad.TitleColor)=="string"and ad.TitleColor or"DividerLabel",
-TextTransparency="DividerLabelTransparency",
-}
-}
-
-if typeof(ad.TitleColor)=="Color3"then
-ae.TextColor3=ad.TitleColor
-ae.ThemeTag.TextColor3=nil
-end
-
-if typeof(ad.TitleTransparency)=="number"then
-ae.TextTransparency=math.clamp(ad.TitleTransparency,0,1)
-ae.ThemeTag.TextTransparency=nil
-end
-
-if next(ae.ThemeTag)==nil then
-ae.ThemeTag=nil
-end
-
-return ae
-end
-
-function ac.New(ad,ae)
-local function getUIScale()
-local af=tonumber((ae.WindUI and ae.WindUI.UIScale)or ae.UIScale)or 1
-if af<=0 then
-return 1
-end
-return af
-end
-
-local function toLayoutOffset(af)
-return af/getUIScale()
-end
-
-local af=ae.Orientation
-if af~="Horizontal"and af~="Vertical"then
-af=ae.ParentType=="Group"and"Vertical"or"Horizontal"
-end
-
-local ag=ae.Title or ae.Text or""
-local ah=af=="Horizontal"and ag~=""
-
-local ai=toNumber(ae.Thickness,1,1)
-local aj=toNumber(ae.Inset,7,0)
-local ak=toNumber(ae.TitleSpacing,8,0)
-local al=normalizeAlignment(ae.TitleAlignment)
-
-local am=toNumber(ae.Height,ah and 18 or 7,2)
-local an=toNumber(ae.Width,math.max(7,ai+6),1)
-local ao=createLineProps(ae)
-local ap=createTitleProps(ae)
-
-local aq
-if af=="Vertical"then
-aq=UDim2.new(0,an,1,-aj)
-else
-aq=UDim2.new(1,-aj,0,am)
-end
-
-local ar=ab("Frame",{
-Parent=ae.Parent,
-Size=ae.Size or aq,
-BackgroundTransparency=1,
-Name="Divider",
-},{
-ab("Frame",{
-Name="Line",
-Size=af=="Horizontal"and UDim2.new(1,0,0,ai)or UDim2.new(0,ai,1,0),
-Position=UDim2.new(0.5,0,0.5,0),
-AnchorPoint=Vector2.new(0.5,0.5),
-BackgroundTransparency=ao.BackgroundTransparency or 0.9,
-BackgroundColor3=ao.BackgroundColor3,
-ThemeTag=ao.ThemeTag,
-}),
-af=="Horizontal"and ab("TextLabel",{
-Name="Title",
-AutomaticSize="None",
-Size=UDim2.new(0,0,0,16),
-Position=UDim2.new(0.5,0,0.5,0),
-AnchorPoint=Vector2.new(0.5,0.5),
-Text=ag,
-TextSize=toNumber(ae.TitleSize,13,8),
-TextTruncate="AtEnd",
-BackgroundTransparency=1,
-Visible=ah,
-TextColor3=ap.TextColor3,
-TextTransparency=ap.TextTransparency,
-ThemeTag=ap.ThemeTag,
-})or nil,
-af=="Horizontal"and ab("Frame",{
-Name="LeftLine",
-Size=UDim2.new(0,0,0,ai),
-Position=UDim2.new(0,0,0.5,0),
-AnchorPoint=Vector2.new(0,0.5),
-BackgroundTransparency=ao.BackgroundTransparency or 0.9,
-BackgroundColor3=ao.BackgroundColor3,
-Visible=false,
-ThemeTag=ao.ThemeTag,
-})or nil,
-af=="Horizontal"and ab("Frame",{
-Name="RightLine",
-Size=UDim2.new(0,0,0,ai),
-Position=UDim2.new(1,0,0.5,0),
-AnchorPoint=Vector2.new(1,0.5),
-BackgroundTransparency=ao.BackgroundTransparency or 0.9,
-BackgroundColor3=ao.BackgroundColor3,
-Visible=false,
-ThemeTag=ao.ThemeTag,
-})or nil,
-})
-
-local as=ar:FindFirstChild"Line"
-local at=ar:FindFirstChild"LeftLine"
-local au=ar:FindFirstChild"RightLine"
-local av=ar:FindFirstChild"Title"
-
-local aw={
-__type="Divider",
-ElementFrame=ar,
-Title=ag,
-Orientation=af,
-Thickness=ai,
-TitleAlignment=al,
-TitleSpacing=ak,
-AutoHeight=ae.Height==nil and ae.Size==nil and af=="Horizontal",
-}
-
-local function updateHorizontalLayout()
-if af~="Horizontal"then
+if ak._isGroupDivider then
+ag.Size=UDim2.new(0,math.max(7,math.floor(al+0.5)),1,-7)
 return
 end
 
-local ax=aw.Title~=""
-local ay=math.max(1,math.floor(aw.Thickness))
-
-as.Size=UDim2.new(1,0,0,ay)
-as.Position=UDim2.new(0.5,0,0.5,0)
-
-if aw.AutoHeight then
-ar.Size=UDim2.new(ar.Size.X.Scale,ar.Size.X.Offset,ar.Size.Y.Scale,ax and 18 or 7)
+local am=ak._title~=nil and tostring(ak._title)~=""
+local an=am and 20 or 7
+ag.Size=UDim2.new(1,-7,0,math.max(an,math.floor(al+0.5)))
 end
 
-if not ax then
-as.Visible=true
-if av then
-av.Visible=false
-end
-if at then
-at.Visible=false
-end
-if au then
-au.Visible=false
-end
+local function updateLayout()
+local al=math.max(1,tonumber(ak._thickness)or 1)
+local am=ak._title~=nil and tostring(ak._title)~=""
+
+if ak._isGroupDivider then
+aj.Visible=false
+ah.Visible=true
+ai.Visible=false
+ah.AnchorPoint=Vector2.new(0.5,0.5)
+ah.Position=UDim2.new(0.5,0,0.5,0)
+ah.Size=UDim2.new(0,al,1,0)
 return
 end
 
-as.Visible=false
-av.Visible=true
+aj.Visible=am
+aj.Text=am and tostring(ak._title)or""
+aj.TextXAlignment=ak._titleAlignment
 
-local az=toLayoutOffset(ar.AbsoluteSize.X)
-local aA=math.max(az-(aw.TitleSpacing*2),0)
-local aB=toLayoutOffset(av.TextBounds.X)
-local b=math.min(aB,aA)
-local d=aw.TitleSpacing
-
-if aA<=0 or aB<=0 then
-as.Visible=true
-av.Visible=false
-at.Visible=false
-au.Visible=false
+if not am then
+ah.Visible=true
+ai.Visible=false
+ah.AnchorPoint=Vector2.new(0,0.5)
+ah.Position=UDim2.new(0,0,0.5,0)
+ah.Size=UDim2.new(1,0,0,al)
 return
 end
 
-av.Size=UDim2.new(0,math.max(0,math.floor(b+0.5)),0,av.Size.Y.Offset)
+local an=math.max(0,tonumber(ak._titleSpacing)or 0)
+local ao=ag.AbsoluteSize.X
+local ap=aj.TextBounds.X
+local aq=math.max(ao-ap-(an*2),0)
 
-if aw.TitleAlignment=="Left"then
-av.AnchorPoint=Vector2.new(0,0.5)
-av.Position=UDim2.new(0,0,0.5,0)
-av.TextXAlignment=Enum.TextXAlignment.Left
+ah.Visible=true
+ai.Visible=false
 
-at.Visible=false
+if ak._titleAlignment=="Left"then
+aj.AnchorPoint=Vector2.new(0,0.5)
+aj.Position=UDim2.new(0,0,0.5,0)
 
-local f=math.floor(b+d+0.5)
-local g=math.max(0,az-f)
-
-au.AnchorPoint=Vector2.new(0,0.5)
-au.Position=UDim2.new(0,f,0.5,0)
-au.Size=UDim2.new(0,g,0,ay)
-au.Visible=g>0
+ah.AnchorPoint=Vector2.new(0,0.5)
+ah.Position=UDim2.new(0,ap+an,0.5,0)
+ah.Size=UDim2.new(0,math.max(ao-ap-an,0),0,al)
 return
 end
 
-if aw.TitleAlignment=="Right"then
-av.AnchorPoint=Vector2.new(1,0.5)
-av.Position=UDim2.new(1,0,0.5,0)
-av.TextXAlignment=Enum.TextXAlignment.Right
+if ak._titleAlignment=="Right"then
+aj.AnchorPoint=Vector2.new(1,0.5)
+aj.Position=UDim2.new(1,0,0.5,0)
 
-au.Visible=false
-
-local f=math.max(0,az-math.floor(b+d+0.5))
-
-at.AnchorPoint=Vector2.new(0,0.5)
-at.Position=UDim2.new(0,0,0.5,0)
-at.Size=UDim2.new(0,f,0,ay)
-at.Visible=f>0
+ah.AnchorPoint=Vector2.new(0,0.5)
+ah.Position=UDim2.new(0,0,0.5,0)
+ah.Size=UDim2.new(0,math.max(ao-ap-an,0),0,al)
 return
 end
 
-av.AnchorPoint=Vector2.new(0.5,0.5)
-av.Position=UDim2.new(0.5,0,0.5,0)
-av.TextXAlignment=Enum.TextXAlignment.Center
+local ar=math.floor(aq/2)
+local as=math.max(aq-ar,0)
+local at=ar+an
 
-local f=math.max(0,math.floor((az-(b+(d*2)))/2+0.5))
+aj.AnchorPoint=Vector2.new(0,0.5)
+aj.Position=UDim2.new(0,at,0.5,0)
 
-at.AnchorPoint=Vector2.new(0,0.5)
-at.Position=UDim2.new(0,0,0.5,0)
-at.Size=UDim2.new(0,f,0,ay)
-at.Visible=f>0
+ah.AnchorPoint=Vector2.new(0,0.5)
+ah.Position=UDim2.new(0,0,0.5,0)
+ah.Size=UDim2.new(0,ar,0,al)
 
-au.AnchorPoint=Vector2.new(1,0.5)
-au.Position=UDim2.new(1,0,0.5,0)
-au.Size=UDim2.new(0,f,0,ay)
-au.Visible=f>0
+ai.Visible=true
+ai.AnchorPoint=Vector2.new(0,0.5)
+ai.Position=UDim2.new(0,at+ap+an,0.5,0)
+ai.Size=UDim2.new(0,as,0,al)
 end
 
-if af=="Horizontal"then
-aa.AddSignal(ar:GetPropertyChangedSignal"AbsoluteSize",updateHorizontalLayout)
-aa.AddSignal(av:GetPropertyChangedSignal"AbsoluteSize",updateHorizontalLayout)
-aa.AddSignal(av:GetPropertyChangedSignal"TextBounds",updateHorizontalLayout)
-else
-as.Size=UDim2.new(0,aw.Thickness,1,0)
+function ak.Title(al,am)
+if am==false then
+am=nil
 end
 
-function aw.SetTitle(ax,ay)
-aw.Title=ay and tostring(ay)or""
-if av then
-av.Text=aw.Title
-end
-updateHorizontalLayout()
+ak._title=am
+
+if am~=nil then
+aa:ChangeTranslationKey(aj,tostring(am))
 end
 
-function aw.SetThickness(ax,ay)
-aw.Thickness=toNumber(ay,aw.Thickness,1)
-
-if af=="Vertical"then
-as.Size=UDim2.new(0,aw.Thickness,1,0)
-return
+updateMainSize()
+updateLayout()
+return ak
 end
 
-updateHorizontalLayout()
+function ak.TitleAlignment(al,am)
+ak._titleAlignment=normalizeAlignment(am)
+updateLayout()
+return ak
 end
 
-function aw.SetTitleAlignment(ax,ay)
-aw.TitleAlignment=normalizeAlignment(ay)
-updateHorizontalLayout()
+function ak.Thickness(al,am)
+ak._thickness=math.max(1,tonumber(am)or ak._thickness or 1)
+updateMainSize()
+updateLayout()
+return ak
 end
 
-function aw.SetTitleSpacing(ax,ay)
-aw.TitleSpacing=toNumber(ay,aw.TitleSpacing,0)
-updateHorizontalLayout()
+function ak.TitleSpacing(al,am)
+ak._titleSpacing=math.max(0,tonumber(am)or ak._titleSpacing or 0)
+updateLayout()
+return ak
 end
 
-task.defer(updateHorizontalLayout)
+function ak.Color(al,am)
+ak._color=am
+applyColor(ah,"BackgroundColor3",am,"Text")
+applyColor(ai,"BackgroundColor3",am,"Text")
+return ak
+end
 
-return aw.__type,aw
+function ak.TitleColor(al,am)
+ak._titleColor=am
+applyColor(aj,"TextColor3",am,"Text")
+return ak
+end
+
+function ak.Set(al,am)
+if typeof(am)~="table"then
+return ak
+end
+
+if am.Title~=nil then
+ak:Title(am.Title)
+end
+if am.TitleAlignment~=nil then
+ak:TitleAlignment(am.TitleAlignment)
+end
+if am.Thickness~=nil then
+ak:Thickness(am.Thickness)
+end
+if am.TitleSpacing~=nil then
+ak:TitleSpacing(am.TitleSpacing)
+end
+if am.Color~=nil then
+ak:Color(am.Color)
+end
+if am.TitleColor~=nil then
+ak:TitleColor(am.TitleColor)
+end
+
+return ak
+end
+
+function ak.Destroy(al)
+if ak.ElementFrame then
+ak.ElementFrame:Destroy()
+ak.ElementFrame=nil
+end
+end
+
+aa.AddSignal(ag:GetPropertyChangedSignal"AbsoluteSize",updateLayout)
+aa.AddSignal(aj:GetPropertyChangedSignal"TextBounds",updateLayout)
+
+ak:TitleAlignment(ae.TitleAlignment)
+ak:Thickness(ae.Thickness)
+ak:TitleSpacing(ae.TitleSpacing)
+ak:Title(ae.Title)
+ak:Color(ae.Color)
+ak:TitleColor(ae.TitleColor)
+
+task.defer(updateLayout)
+
+return ak.__type,ak
 end
 
 return ac end function a.w():typeof(__modImpl())local aa=a.cache.w if not aa then aa={c=__modImpl()}a.cache.w=aa end return aa.c end end do local function __modImpl()
@@ -10424,6 +10412,18 @@ local al
 local am=false
 local an=false
 
+local function GetUIScale()
+local ao=tonumber((aj.WindUI and aj.WindUI.UIScale)or aj.UIScale)or 1
+if ao<=0 then
+return 1
+end
+return ao
+end
+
+local function ToLayoutOffset(ao)
+return ao/GetUIScale()
+end
+
 local ao=ad("Frame",{
 Size=UDim2.new(0,ak.IconSize+10,0,ak.IconSize+10),
 BackgroundTransparency=1,
@@ -10603,13 +10603,13 @@ Chevron=as.ImageLabel,
 }
 
 local function UpdateTitleSize()
-local aw=ao.Visible and(ao.AbsoluteSize.X+ak.HeaderGap)or 0
-local ax=at.AbsoluteSize.X>0 and(at.AbsoluteSize.X+ak.HeaderGap)or 0
+local aw=ao.Visible and(ToLayoutOffset(ao.AbsoluteSize.X)+ak.HeaderGap)or 0
+local ax=at.AbsoluteSize.X>0 and(ToLayoutOffset(at.AbsoluteSize.X)+ak.HeaderGap)or 0
 ap.Size=UDim2.new(1,-(aw+ax),0,0)
 end
 
 local function UpdateContentLayout()
-local aw=av.Top.AbsoluteSize.Y/aj.UIScale
+local aw=av.Top.AbsoluteSize.Y/GetUIScale()
 av.Content.Position=UDim2.new(0,0,0,aw)
 av.HeaderDivider.Position=UDim2.new(0.5,0,0,aw)
 end
@@ -10667,7 +10667,7 @@ UpdateContentLayout()
 
 local ax=av.Top.AbsoluteSize.Y
 local ay=ak.Opened and av.Content.AbsoluteSize.Y or 0
-local az=(ax+ay)/aj.UIScale
+local az=(ax+ay)/GetUIScale()
 
 local aA=UDim2.new(av.Size.X.Scale,av.Size.X.Offset,0,az)
 
@@ -13364,6 +13364,15 @@ end
 end
 end
 
+local function getUIScale()
+local aw=ar and ar.GetUIScale and ar:GetUIScale()or aq
+aw=tonumber(aw)or 1
+if aw<=0 then
+return 1
+end
+return aw
+end
+
 
 function as.Tab(aw,ax)
 EnsureExpandable()
@@ -13483,7 +13492,7 @@ ay.Parent=av.Content
 ay.ParentType=ay.ParentType or"Section"local
 
 az, aA=ak:New(ay)
-return aA.ElementFrame
+return aA
 end
 
 function as.Space(aw,ax)
@@ -13502,7 +13511,7 @@ function as.Open(aw)
 if as.Expandable then
 as.Opened=true
 ag(av,0.33,{
-Size=UDim2.new(1,0,0,as.HeaderSize+(av.Content.AbsoluteSize.Y/aq))
+Size=UDim2.new(1,0,0,as.HeaderSize+(av.Content.AbsoluteSize.Y/getUIScale()))
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
 ag(au.ImageLabel,0.1,{Rotation=180},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
@@ -16022,7 +16031,7 @@ end
 
 function aw.Divider(J,L)
 local M=CreateSideBarDivider(L,aw.UIElements.SideBar.Frame)
-return M.ElementFrame
+return M
 end
 
 function aw.SideBarDivider(J,L)
