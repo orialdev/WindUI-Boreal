@@ -18,79 +18,26 @@ local Window = WindUI:CreateWindow({
     },
 })
 
-local SidebarLabel = nil
-local SidebarButton = nil
-local SidebarSpaceFrame = nil
-local SidebarDividerFrame = nil
-local SidebarPlaceholderLabel = nil
+Window:Divider({
+    Title = "Example",
+    TitleAlignment = "Left",
+    Thickness = 2,
+    TitleSpacing = 10,
+    Color = "#8EA1B5",
+    TitleColor = "Text",
+})
 
-local function CreateSidebarElements()
-    if not SidebarLabel then
-        SidebarLabel = Window:SideBarLabel({
-            Title = "SideBarLabel",
-            Icon = "tag",
-        })
+Window:SideBarLabel({
+    Title = "Example",
+})
+
+Window:SideBarButton({
+    Title = "Button",
+    Icon = "refresh-ccw",
+    Callback = function()
+        print("Sidebar button clicked")
     end
-
-    if not SidebarButton then
-        SidebarButton = Window:SideBarButton({
-            Title = "SideBarButton",
-            Icon = "locate-fixed",
-            Variant = "Secondary",
-            Callback = function()
-                WindUI:Notify({
-                    Title = "Notify",
-                    Content = "SideBarButton: CenterWindow",
-                    Icon = "bell",
-                    Duration = 4,
-                })
-                Window:SetToTheCenter()
-            end,
-        })
-    end
-
-    if not SidebarSpaceFrame then
-        SidebarSpaceFrame = Window:SideBarSpace({
-            Columns = 2,
-        })
-    end
-
-    if not SidebarDividerFrame then
-        SidebarDividerFrame = Window:SideBarDivider({
-            Title = "SideBarDivider",
-            TitleAlignment = "Left",
-        })
-    end
-end
-
-local function DestroySidebarElements()
-    if SidebarLabel then
-        SidebarLabel:Destroy()
-        SidebarLabel = nil
-    end
-
-    if SidebarButton then
-        SidebarButton:Destroy()
-        SidebarButton = nil
-    end
-
-    if SidebarSpaceFrame then
-        SidebarSpaceFrame:Destroy()
-        SidebarSpaceFrame = nil
-    end
-
-    if SidebarDividerFrame then
-        SidebarDividerFrame:Destroy()
-        SidebarDividerFrame = nil
-    end
-
-    if SidebarPlaceholderLabel then
-        SidebarPlaceholderLabel:Destroy()
-        SidebarPlaceholderLabel = nil
-    end
-end
-
-CreateSidebarElements()
+})
 
 local Tab_MultiSection = Window:Tab({
     Title = "MultiSection",
@@ -272,256 +219,15 @@ local Tab_Divider = Window:Tab({
 Tab_Divider:Space({})
 
 local Divider_Element = Tab_Divider:Divider({
-    Title = "Divider",
+    Title = "Example",
     TitleAlignment = "Center",
-    Thickness = 1,
-    TitleSpacing = 8,
+    Thickness = 2,
+    TitleSpacing = 10,
+    Color = "#8EA1B5",
+    TitleColor = "Text",
 })
 
 Tab_Divider:Space({})
-
-Tab_Divider:Input({
-    Title = "Set Divider Title",
-    Desc = "SetTitle",
-    Value = "Divider",
-    Placeholder = "Divider Title",
-    Callback = function(v)
-        Divider_Element:SetTitle(v)
-    end,
-})
-
-Tab_Divider:Space({})
-
-Tab_Divider:Dropdown({
-    Title = "Set Title Alignment",
-    Desc = "SetTitleAlignment",
-    Values = { "Left", "Center", "Right" },
-    Value = "Center",
-    Callback = function(v)
-        Divider_Element:SetTitleAlignment(v)
-    end,
-})
-
-Tab_Divider:Space({})
-
-Tab_Divider:Slider({
-    Title = "Set Thickness",
-    Desc = "SetThickness",
-    Value = { Min = 1, Max = 6, Default = 2 },
-    Callback = function(v)
-        Divider_Element:SetThickness(math.floor(v + 0.5))
-    end,
-})
-
-Tab_Divider:Space({})
-
-Tab_Divider:Slider({
-    Title = "Set Title Spacing",
-    Desc = "SetTitleSpacing",
-    Value = { Min = 0, Max = 30, Default = 14 },
-    Callback = function(v)
-        Divider_Element:SetTitleSpacing(math.floor(v + 0.5))
-    end,
-})
-
-Tab_Divider:Space({})
-
-Tab_Divider:Button({
-    Title = "Reset Divider Defaults",
-    Desc = "Reset",
-    Icon = "rotate-ccw",
-    Callback = function()
-        Divider_Element:SetTitle("Divider")
-        Divider_Element:SetTitleAlignment("Center")
-        Divider_Element:SetThickness(1)
-        Divider_Element:SetTitleSpacing(8)
-    end,
-})
-
-Tab_Divider:Space({})
-
-local Tab_Sidebar = Window:Tab({
-    Title = "Sidebar",
-    Icon = "panel-left",
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Button({
-    Title = "Create Sidebar Elements",
-    Desc = "Create",
-    Icon = "plus",
-    Callback = function()
-        CreateSidebarElements()
-        WindUI:Notify({
-            Title = "Notify",
-            Content = "Sidebar elements created",
-            Icon = "bell",
-            Duration = 4,
-        })
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Button({
-    Title = "Destroy Sidebar Elements",
-    Desc = "Destroy",
-    Icon = "trash-2",
-    Callback = function()
-        DestroySidebarElements()
-        WindUI:Notify({
-            Title = "Notify",
-            Content = "Sidebar elements destroyed",
-            Icon = "bell",
-            Duration = 4,
-        })
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Input({
-    Title = "Set SideBarLabel Title",
-    Desc = "SetTitle",
-    Value = "SideBarLabel",
-    Placeholder = "SideBarLabel",
-    Callback = function(v)
-        if SidebarLabel then
-            SidebarLabel:SetTitle(v)
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Toggle({
-    Title = "SideBarLabel Visible",
-    Desc = "SetVisible",
-    Value = true,
-    Callback = function(v)
-        if SidebarLabel then
-            SidebarLabel:SetVisible(v)
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Input({
-    Title = "Set SideBarButton Title",
-    Desc = "SetTitle",
-    Value = "SideBarButton",
-    Placeholder = "SideBarButton",
-    Callback = function(v)
-        if SidebarButton then
-            SidebarButton:SetTitle(v)
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Toggle({
-    Title = "SideBarButton Visible",
-    Desc = "SetVisible",
-    Value = true,
-    Callback = function(v)
-        if SidebarButton then
-            SidebarButton:SetVisible(v)
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Button({
-    Title = "Set SideBarButton Callback: CenterWindow",
-    Desc = "SetCallback",
-    Icon = "locate-fixed",
-    Callback = function()
-        if SidebarButton then
-            SidebarButton:SetCallback(function()
-                WindUI:Notify({
-                    Title = "Notify",
-                    Content = "SideBarButton: CenterWindow",
-                    Icon = "bell",
-                    Duration = 4,
-                })
-                Window:SetToTheCenter()
-            end)
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Button({
-    Title = "Set SideBarButton Callback: ShowNotify",
-    Desc = "SetCallback",
-    Icon = "message-square",
-    Callback = function()
-        if SidebarButton then
-            SidebarButton:SetCallback(function()
-                WindUI:Notify({
-                    Title = "Notify",
-                    Content = "SideBarButton: ShowNotify",
-                    Icon = "bell",
-                    Duration = 4,
-                })
-            end)
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Toggle({
-    Title = "SideBarDivider Enabled",
-    Desc = "Create/Destroy",
-    Value = true,
-    Callback = function(v)
-        if v then
-            if not SidebarDividerFrame then
-                SidebarDividerFrame = Window:SideBarDivider({
-                    Title = "SideBarDivider",
-                    TitleAlignment = "Left",
-                })
-            end
-        else
-            if SidebarDividerFrame then
-                SidebarDividerFrame:Destroy()
-                SidebarDividerFrame = nil
-            end
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
-
-Tab_Sidebar:Toggle({
-    Title = "SideBarPlaceholderLabel Enabled",
-    Desc = "Placeholder",
-    Value = false,
-    Callback = function(v)
-        if v then
-            if not SidebarPlaceholderLabel then
-                SidebarPlaceholderLabel = Window:SideBarLabel({
-                    Title = "SideBarPlaceholderLabel",
-                    Icon = "tag",
-                    Placeholder = true,
-                })
-            end
-        else
-            if SidebarPlaceholderLabel then
-                SidebarPlaceholderLabel:Destroy()
-                SidebarPlaceholderLabel = nil
-            end
-        end
-    end,
-})
-
-Tab_Sidebar:Space({})
 
 local Tab_Video = Window:Tab({
     Title = "Video",
