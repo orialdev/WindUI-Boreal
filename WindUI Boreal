@@ -8335,6 +8335,8 @@ end
 end
 
 function aq.Refresh(as,at,au)
+at=typeof(at)=="table"and at or{}
+
 for av,aw in next,am.UIElements.Menu.Frame.ScrollingFrame:GetChildren()do
 if not aw:IsA"UIListLayout"then
 aw:Destroy()
@@ -9007,14 +9009,14 @@ ap.Close=ap.DropdownMenu.Close
 function ap.RefreshSpecialValues(at,au)
 if ap.SpecialType=="None"then
 ap.Values=ap.ManualValues
-return as(ap.Values,au==true)
+return as(ap.DropdownMenu,ap.Values,au==true)
 end
 
 local av=BuildSpecialValues()
 ReconcileSelection(av)
 ap.Values=av
 
-return as(av,au==true)
+return as(ap.DropdownMenu,av,au==true)
 end
 
 function ap.SetSpecialType(at,au)
@@ -9035,14 +9037,14 @@ if au~=nil then
 if ap.SpecialType=="None"then
 ap.ManualValues=au
 ap.Values=au
-return as(au)
+return as(ap.DropdownMenu,au)
 end
 
 return ap:RefreshSpecialValues()
 end
 
 if ap.SpecialType=="None"then
-return as(ap.ManualValues)
+return as(ap.DropdownMenu,ap.ManualValues)
 end
 
 return ap:RefreshSpecialValues()
