@@ -10235,42 +10235,51 @@ end
 local function ApplyButtonState(at,au)
 local av=IsEntrySelected(at)
 local aw=ak.Locked or at.Option.Disabled
+local ax=at.Icon and FindImageObject(at.Icon)or nil
 
-local ax=av and 0.08 or 0.94
-local ay=av and 0 or 0.35
-local az=av and 0.05 or 0.35
+
+aa.SetThemeTag(at.Button,{
+ImageColor3=av and"Accent"or"Text",
+})
+if ax then
+aa.SetThemeTag(ax,{
+ImageColor3=av and"Text"or"Icon",
+})
+end
+
+local ay=av and 0.08 or 0.94
+local az=av and 0 or 0.35
+local aA=av and 0.05 or 0.35
 
 if aw then
-ax=av and 0.2 or 0.97
-ay=av and 0.2 or 0.55
+ay=av and 0.2 or 0.97
 az=av and 0.2 or 0.55
+aA=av and 0.2 or 0.55
 end
 
 at.Button.Active=not aw
 
 if au then
-at.Button.ImageTransparency=ax
-at.Label.TextTransparency=ay
+at.Button.ImageTransparency=ay
+at.Label.TextTransparency=az
 
-local aA=at.Icon and FindImageObject(at.Icon)or nil
-if aA then
-aA.ImageTransparency=az
+if ax then
+ax.ImageTransparency=aA
 end
 return
 end
 
 ae(at.Button,0.12,{
-ImageTransparency=ax,
+ImageTransparency=ay,
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
 ae(at.Label,0.12,{
-TextTransparency=ay,
+TextTransparency=az,
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
-local aA=at.Icon and FindImageObject(at.Icon)or nil
-if aA then
-ae(aA,0.12,{
-ImageTransparency=az,
+if ax then
+ae(ax,0.12,{
+ImageTransparency=aA,
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 end
 end
