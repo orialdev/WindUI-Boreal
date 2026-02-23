@@ -6681,6 +6681,8 @@ if af.Window.ModernLayout then
 local l
 if af.ParentConfig.ParentType=="Group"then
 l="Squircle"
+elseif af.Window.ModernLayoutMergeElements==false then
+l="Squircle"
 else
 l=getElementPosition(j.Elements,ag.Index,j.__type)
 end
@@ -16445,6 +16447,7 @@ ScrollBarEnabled=au.ScrollBarEnabled or false,
 SideBarWidth=au.SideBarWidth or 200,
 Acrylic=au.Acrylic or false,
 ModernLayout=au.ModernLayout or false,
+ModernLayoutMergeElements=au.ModernLayoutMergeElements~=false and au.ModernLayoutMerge~=false,
 IgnoreAlerts=au.IgnoreAlerts or false,
 HidePanelBackground=au.HidePanelBackground or false,
 AutoScale=au.AutoScale~=false,
