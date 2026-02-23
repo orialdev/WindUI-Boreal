@@ -1,6 +1,6 @@
 -- WindUI Boreal
 -- Version: v0.0.1
--- BuildDate: 2026-02-23
+-- BuildDate: 2026-02-22
 -- Description: Roblox UI Library for scripts
 -- Repository: https://github.com/orialdev/WindUI-Boreal
 -- Discord: http://discord.gg/B3dEqP2EX6
@@ -230,97 +230,126 @@ return g
 end
 
 return d end function a.a():typeof(__modImpl())local b=a.cache.a if not b then b={c=__modImpl()}a.cache.a=b end return b.c end end do local function __modImpl()
-return{
-Accent="#18181B",
-Background="#101010",
-Button="Accent",
-Dialog="Accent",
-Text="#FFFFFF",
-Icon="Text",
-Outline="White",
-Placeholder="#999999",
-Black="#000000",
-White="#FFFFFF",
 
-Primary="Accent",
-Layer="Background",
-ElementBackground="Accent",
-LabelBackground="Accent",
-LabelBackgroundTransparency=0.08,
+return{
+
+
+Primary="Icon",
+
+White=Color3.new(1,1,1),
+Black=Color3.new(0,0,0),
+
+Dialog="Accent",
+
+Background="Accent",
+BackgroundTransparency=0,
+Hover="Text",
+
+PanelBackground="White",
+PanelBackgroundTransparency=.95,
 
 WindowBackground="Background",
-WindowTopbarTitle="Text",
-WindowTopbarAuthor="Placeholder",
-WindowTopbarIcon="Icon",
-WindowTopbarButtonIcon="Text",
-WindowSearchBarBackground="Accent",
+
 WindowShadow="Black",
-WindowShadowTransparency=0.65,
 
-PanelBackground="Background",
-PanelBackgroundTransparency=0.04,
 
-TabBackground="Background",
-TabBackgroundHover="Accent",
+WindowTopbarTitle="Text",
+WindowTopbarAuthor="Text",
+WindowTopbarIcon="Icon",
+WindowTopbarButtonIcon="Icon",
+
+WindowSearchBarBackground="Background",
+
+TabBackground="Hover",
+TabBackgroundHover="Hover",
+TabBackgroundHoverTransparency=.97,
+TabBackgroundActive="Hover",
+TabBackgroundActiveTransparency=0.93,
+TabText="Text",
+TabTextTransparency=0.3,
+TabTextTransparencyActive=0,
 TabTitle="Text",
 TabIcon="Icon",
-TabBorder="White",
-TabBackgroundActiveTransparency=0.95,
-TabBackgroundHoverTransparency=0.95,
+TabIconTransparency=0.4,
+TabIconTransparencyActive=0.1,
 TabBorderTransparency=1,
 TabBorderTransparencyActive=0.75,
-TabTextTransparency=0.4,
-TabTextTransparencyActive=0,
-TabIconTransparency=0.2,
-TabIconTransparencyActive=0,
+TabBorder="White",
+
+
+ElementBackground="Text",
+ElementTitle="Text",
+ElementDesc="Text",
+ElementIcon="Icon",
+
+PopupBackground="Background",
+PopupBackgroundTransparency="BackgroundTransparency",
+PopupTitle="Text",
+PopupContent="Text",
+PopupIcon="Icon",
+
+DialogBackground="Background",
+DialogBackgroundTransparency="BackgroundTransparency",
+DialogTitle="Text",
+DialogContent="Text",
+DialogIcon="Icon",
+
+Toggle="Button",
+ToggleBar="White",
+
+Checkbox="Primary",
+CheckboxIcon="White",
+CheckboxBorder="White",
+CheckboxBorderTransparency=.75,
+
+SliderIcon="Icon",
+
+Slider="Primary",
+SliderThumb="White",
+SliderIconFrom="SliderIcon",
+SliderIconTo="SliderIcon",
+
+Tooltip=Color3.fromHex"4C4C4C",
+TooltipText="White",
+TooltipSecondary="Primary",
+TooltipSecondaryText="White",
+
+SectionExpandIcon="White",
+SectionExpandIconTransparency=.4,
+SectionTitle="Text",
+SectionDesc="Text",
+SectionIcon="Icon",
+SectionIconBackground="White",
+SectionIconBackgroundTransparency=.92,
+SectionCounterBackground="White",
+SectionCounterBackgroundTransparency=.88,
+SectionCounterText="Text",
+SectionContentDivider="White",
+SectionContentDividerTransparency=.86,
+SectionBox="White",
+SectionBoxTransparency=.95,
+SectionBoxBorder="White",
+SectionBoxBorderTransparency=.75,
+SectionBoxBackground="White",
+SectionBoxBackgroundTransparency=.95,
 
 SearchBarBorder="White",
-SearchBarBorderTransparency=0.75,
-DropdownTabBorder="White",
-
-SectionIcon="Icon",
-SectionExpandIcon="Icon",
-SectionExpandIconTransparency=0.3,
-SectionBoxBorder="White",
-SectionBoxBorderTransparency=0.75,
-SectionBoxBackgroundTransparency=1,
-SectionContentDivider="Text",
-SectionContentDividerTransparency=0.9,
-
-Slider="Accent",
-SliderThumb="Text",
-SliderIconFrom="Icon",
-SliderIconTo="Icon",
-
-Toggle="Accent",
-ToggleBar="Accent",
-Checkbox="Accent",
-CheckboxBorder="White",
-CheckboxBorderTransparency=0.8,
-
-Tooltip="Background",
-
-PopupIcon="Icon",
-PopupTitle="Text",
-PopupContent="Placeholder",
+SearchBarBorderTransparency=.75,
 
 Notification="Background",
-NotificationBorder="White",
-NotificationBorderTransparency=0.8,
 NotificationTitle="Text",
 NotificationTitleTransparency=0,
-NotificationContent="Placeholder",
-NotificationContentTransparency=0,
-NotificationDuration="Accent",
-NotificationDurationTransparency=0,
+NotificationContent="Text",
+NotificationContentTransparency=.4,
+NotificationDuration="White",
+NotificationDurationTransparency=.95,
+NotificationBorder="White",
+NotificationBorderTransparency=.75,
 
-AcrylicMain="Background",
-AcrylicGradient="Background",
-AcrylicNoise="White",
-AcrylicBorder="White",
+DropdownTabBorder="White",
 
-PlaceholderText="Placeholder",
-ElementIcon="Icon",
+LabelBackground="White",
+LabelBackgroundTransparency=.95,
 }end function a.b():typeof(__modImpl())local b=a.cache.b if not b then b={c=__modImpl()}a.cache.b=b end return b.c end end do local function __modImpl()
 
 
@@ -557,10 +586,6 @@ end
 
 function p.GetThemeProperty(r,u)
 local function getValue(v,x)
-if type(x)~="table"then
-return nil
-end
-
 local z=x[v]
 
 if z==nil then return nil end
@@ -3278,649 +3303,6 @@ end
 
 return aa end function a.n():typeof(__modImpl())local aa=a.cache.n if not aa then aa={c=__modImpl()}a.cache.n=aa end return aa.c end end do local function __modImpl()
 
-local aa=(cloneref or clonereference or function(aa)return aa end)
-local ab=aa(game:GetService"HttpService")
-
-local ac={}
-ac.__index=ac
-
-local ad="__windui_theme_manager_v1"
-local ae=1
-
-local af={
-"Accent",
-"Background",
-"Button",
-"Dialog",
-"Text",
-"Icon",
-"Outline",
-"Placeholder",
-}
-
-local ag={
-"Dark",
-"Light",
-"Amber",
-"Emerald",
-"Indigo",
-"Plant",
-"Red",
-"Rose",
-"Sky",
-"Violet",
-}
-
-local function DeepCopy(ah)
-if type(ah)~="table"then
-return ah
-end
-
-local ai={}
-for aj,ak in pairs(ah)do
-ai[aj]=DeepCopy(ak)
-end
-return ai
-end
-
-local function Trim(ah)
-if type(ah)~="string"then
-return""
-end
-return(ah:gsub("^%s+",""):gsub("%s+$",""))
-end
-
-local function SortNames(ah)
-table.sort(ah,function(ai,aj)
-return string.lower(ai)<string.lower(aj)
-end)
-return ah
-end
-
-local function NormalizeHex(ah)
-if typeof(ah)=="Color3"then
-return"#"..string.upper(ah:ToHex())
-end
-
-if type(ah)~="string"then
-return nil,"Color must be a hex string or Color3"
-end
-
-local ai=Trim(ah):gsub("#","")
-if#ai~=6 or not ai:match"^[%x]+$"then
-return nil,"Color must be in #RRGGBB format"
-end
-
-return"#"..string.upper(ai)
-end
-
-function ac._SafeCallback(ah,ai,...)
-if not ai then
-return
-end
-
-if ah.Creator and ah.Creator.SafeCallback then
-ah.Creator.SafeCallback(ai,...)
-return
-end
-
-local aj,ak=pcall(ai,...)
-if not aj then
-warn("[ WindUI.ThemeManager ] "..tostring(ak))
-end
-end
-
-function ac._ValidateThemeName(ah,ai)
-local aj=Trim(ai)
-if aj==""then
-return nil,"Theme name cannot be empty"
-end
-
-if#aj>48 then
-return nil,"Theme name is too long (max 48 chars)"
-end
-
-if not aj:match"^[%w%s%-%._]+$"then
-return nil,"Theme name contains unsupported characters"
-end
-
-return aj
-end
-
-function ac._NormalizeTheme(ah,ai,aj,ak)
-if type(ai)~="table"then
-return nil,"Theme must be a table"
-end
-
-local al,am=ah:_ValidateThemeName(aj or ai.Name)
-if not al then
-return nil,am
-end
-
-local an={
-Name=al,
-}
-
-for ao,ap in ipairs(ah.EditableKeys)do
-local aq=ai[ap]
-if aq==nil and type(ak)=="table"then
-aq=ak[ap]
-end
-
-if aq==nil then
-return nil,"Theme is missing required key: "..ap
-end
-
-local ar,as=NormalizeHex(aq)
-if not ar then
-return nil,string.format("Invalid color for '%s': %s",ap,tostring(as))
-end
-
-an[ap]=ar
-end
-
-return an
-end
-
-function ac._ClearTable(ah,ai)
-for aj in pairs(ai)do
-ai[aj]=nil
-end
-end
-
-function ac._GetCustomThemeNames(ah)
-local ai={}
-for aj in pairs(ah.CustomThemes)do
-table.insert(ai,aj)
-end
-return SortNames(ai)
-end
-
-function ac._RebuildThemes(ah)
-ah:_ClearTable(ah.Themes)
-
-for ai,aj in ipairs(ah.BuiltInOrder)do
-local ak=ah.BuiltInThemes[aj]
-if ak then
-ah.Themes[aj]=DeepCopy(ak)
-end
-end
-
-for ai,aj in ipairs(ah:_GetCustomThemeNames())do
-ah.Themes[aj]=DeepCopy(ah.CustomThemes[aj])
-end
-
-if ah.WindUI then
-ah.WindUI.Themes=ah.Themes
-if ah.CurrentThemeName and ah.Themes[ah.CurrentThemeName]then
-ah.WindUI.Theme=ah.Themes[ah.CurrentThemeName]
-end
-end
-
-if ah.Creator then
-ah.Creator.Themes=ah.Themes
-end
-end
-
-function ac._BuildPersistencePayload(ah)
-local ai={}
-for aj,ak in pairs(ah.CustomThemes)do
-ai[aj]=DeepCopy(ak)
-end
-
-return{
-version=ae,
-selectedTheme=ah.CurrentThemeName,
-customThemes=ai,
-}
-end
-
-function ac._GetConfigForPersistence(ah,ai)
-if ai and ai.configModule then
-return ai.configModule
-end
-
-local aj=ah.AttachedWindow
-if aj and aj.CurrentConfig and type(aj.CurrentConfig.Set)=="function"then
-return aj.CurrentConfig
-end
-
-return nil
-end
-
-function ac._Persist(ah,ai)
-if ai and ai.persist==false then
-return false
-end
-
-local aj=ah:_GetConfigForPersistence(ai)
-if not aj or type(aj.Set)~="function"then
-return false
-end
-
-aj:Set(ah.PersistenceKey,ah:_BuildPersistencePayload())
-return true
-end
-
-function ac.GetBuiltInThemes(ah)
-return DeepCopy(ah.BuiltInThemes)
-end
-
-function ac.GetCustomThemes(ah)
-return DeepCopy(ah.CustomThemes)
-end
-
-function ac.GetThemes(ah)
-return ah.Themes
-end
-
-function ac.GetTheme(ah,ai)
-if type(ai)~="string"then
-return nil
-end
-return ah.Themes[ai]
-end
-
-function ac.GetCurrentThemeName(ah)
-return ah.CurrentThemeName
-end
-
-function ac.GetBuiltInThemeNames(ah)
-local ai={}
-for aj,ak in ipairs(ah.BuiltInOrder)do
-if ah.BuiltInThemes[ak]then
-table.insert(ai,ak)
-end
-end
-return ai
-end
-
-function ac.GetCustomThemeNames(ah)
-return ah:_GetCustomThemeNames()
-end
-
-function ac.IsBuiltIn(ah,ai)
-return type(ai)=="string"and ah.BuiltInThemes[ai]~=nil
-end
-
-function ac.ApplyTheme(ah,ai,aj)
-if type(ai)~="string"or ai==""then
-return nil,"Theme name is required"
-end
-
-local ak=ah.Themes[ai]
-if not ak then
-return nil,"Theme not found: "..tostring(ai)
-end
-
-ah.CurrentThemeName=ai
-
-if ah.Creator and ah.Creator.SetTheme then
-ah.Creator.SetTheme(ak)
-end
-
-if ah.WindUI then
-ah.WindUI.Theme=ak
-
-if not aj or aj.triggerCallback~=false then
-ah:_SafeCallback(ah.WindUI.OnThemeChangeFunction,ai)
-end
-end
-
-ah:_Persist(aj)
-return ak
-end
-
-function ac.CreateTheme(ah,ai,aj,ak)
-local al,am=ah:_ValidateThemeName(ai)
-if not al then
-return nil,am
-end
-
-if ah:IsBuiltIn(al)then
-return nil,"Built-in themes are read-only"
-end
-
-if ah.CustomThemes[al]and not(ak and ak.overwrite==true)then
-return nil,"Theme already exists: "..al
-end
-
-local an
-if type(aj)=="string"then
-an=ah.Themes[aj]
-if not an then
-return nil,"Base theme not found: "..tostring(aj)
-end
-elseif type(aj)=="table"then
-an=aj
-else
-local ao=ah.CurrentThemeName or"Dark"
-an=ah.Themes[ao]or ah.Themes.Dark
-end
-
-local ao,ap=ah:_NormalizeTheme(an,al)
-if not ao then
-return nil,ap
-end
-
-ah.CustomThemes[al]=ao
-ah:_RebuildThemes()
-ah:_Persist(ak)
-return ah.Themes[al]
-end
-
-function ac.UpdateTheme(ah,ai,aj,ak)
-if type(ai)~="string"or ai==""then
-return nil,"Theme name is required"
-end
-
-if ah:IsBuiltIn(ai)then
-return nil,"Built-in themes are read-only"
-end
-
-local al=ah.CustomThemes[ai]
-if not al then
-return nil,"Custom theme not found: "..tostring(ai)
-end
-
-if type(aj)~="table"then
-return nil,"Theme patch must be a table"
-end
-
-local am=DeepCopy(al)
-for an,ao in pairs(aj)do
-if an~="Name"and an~="__type"then
-am[an]=ao
-end
-end
-
-local an,ao=ah:_NormalizeTheme(am,ai)
-if not an then
-return nil,ao
-end
-
-ah.CustomThemes[ai]=an
-ah:_RebuildThemes()
-
-if ak and ak.apply then
-ah:ApplyTheme(ai,{
-persist=false,
-triggerCallback=ak.triggerCallback,
-})
-end
-
-ah:_Persist(ak)
-return ah.Themes[ai]
-end
-
-function ac.RenameTheme(ah,ai,aj,ak)
-if type(ai)~="string"or ai==""then
-return false,"Source theme name is required"
-end
-
-if ah:IsBuiltIn(ai)then
-return false,"Built-in themes are read-only"
-end
-
-local al=ah.CustomThemes[ai]
-if not al then
-return false,"Custom theme not found: "..tostring(ai)
-end
-
-local am,an=ah:_ValidateThemeName(aj)
-if not am then
-return false,an
-end
-
-if ah:IsBuiltIn(am)then
-return false,"Built-in themes are read-only"
-end
-
-if am~=ai and ah.CustomThemes[am]and not(ak and ak.overwrite==true)then
-return false,"Theme already exists: "..am
-end
-
-local ao=DeepCopy(al)
-ao.Name=am
-
-ah.CustomThemes[ai]=nil
-ah.CustomThemes[am]=ao
-
-if ah.CurrentThemeName==ai then
-ah.CurrentThemeName=am
-end
-
-ah:_RebuildThemes()
-ah:_Persist(ak)
-return true
-end
-
-function ac.DeleteTheme(ah,ai,aj)
-if type(ai)~="string"or ai==""then
-return false,"Theme name is required"
-end
-
-if ah:IsBuiltIn(ai)then
-return false,"Built-in themes are read-only"
-end
-
-if not ah.CustomThemes[ai]then
-return false,"Custom theme not found: "..tostring(ai)
-end
-
-ah.CustomThemes[ai]=nil
-local ak=ah.CurrentThemeName==ai
-
-ah:_RebuildThemes()
-
-if ak then
-ah:ApplyTheme("Dark",{
-persist=false,
-})
-end
-
-ah:_Persist(aj)
-return true
-end
-
-function ac.CloneTheme(ah,ai,aj,ak)
-if type(ai)~="string"or ai==""then
-return nil,"Source theme name is required"
-end
-
-local al=ah.Themes[ai]
-if not al then
-return nil,"Theme not found: "..tostring(ai)
-end
-
-return ah:CreateTheme(aj,al,ak)
-end
-
-function ac.ExportTheme(ah,ai)
-local aj=ai or ah.CurrentThemeName
-if type(aj)~="string"or aj==""then
-return nil,"Theme name is required"
-end
-
-local ak=ah.Themes[aj]
-if not ak then
-return nil,"Theme not found: "..tostring(aj)
-end
-
-local al={
-version=ae,
-theme=DeepCopy(ak),
-}
-
-local am,an=pcall(function()
-return ab:JSONEncode(al)
-end)
-
-if not am then
-return nil,"Failed to encode theme JSON"
-end
-
-return an
-end
-
-function ac.ImportTheme(ah,ai,aj)
-local ak
-
-if type(ai)=="string"then
-local al,am=pcall(function()
-return ab:JSONDecode(ai)
-end)
-
-if not al then
-return nil,"Invalid JSON payload"
-end
-
-ak=am
-elseif type(ai)=="table"then
-ak=ai
-else
-return nil,"Payload must be a JSON string or table"
-end
-
-local al=ak
-if type(ak.theme)=="table"then
-al=ak.theme
-end
-
-if type(al)~="table"then
-return nil,"Theme payload is missing a valid theme table"
-end
-
-local am=aj and aj.name or al.Name
-local an,ao=ah:CreateTheme(am,al,{
-overwrite=aj and aj.overwrite==true,
-persist=false,
-})
-
-if not an then
-return nil,ao
-end
-
-if not aj or aj.apply~=false then
-ah:ApplyTheme(an.Name,{
-persist=false,
-})
-end
-
-ah:_Persist(aj)
-return ah.Themes[an.Name]
-end
-
-function ac.AttachWindow(ah,ai)
-ah.AttachedWindow=ai
-end
-
-function ac.SyncFromConfig(ah,ai)
-local aj=ai or ah:_GetConfigForPersistence{}
-if not aj or type(aj.Get)~="function"then
-return false,"Config module is not available"
-end
-
-local ak=aj:Get(ah.PersistenceKey)
-if type(ak)~="table"then
-return false,"No persisted theme manager data"
-end
-
-ah.CustomThemes={}
-local al=ak.customThemes
-
-if type(al)=="table"then
-for am,an in pairs(al)do
-local ao=type(an)=="table"and(an.Name or am)or am
-local ap=ah:_ValidateThemeName(ao)
-if ap and not ah:IsBuiltIn(ap)then
-local aq=ah:_NormalizeTheme(an,ap)
-if aq then
-ah.CustomThemes[ap]=aq
-end
-end
-end
-end
-
-ah:_RebuildThemes()
-
-local am=type(ak.selectedTheme)=="string"and ak.selectedTheme or nil
-if am and ah.Themes[am]then
-ah:ApplyTheme(am,{
-persist=false,
-})
-elseif ah.CurrentThemeName and ah.Themes[ah.CurrentThemeName]then
-ah:ApplyTheme(ah.CurrentThemeName,{
-persist=false,
-})
-elseif ah.Themes.Dark then
-ah:ApplyTheme("Dark",{
-persist=false,
-})
-end
-
-ah:_Persist{
-configModule=aj,
-}
-
-return true
-end
-
-function ac.Init(ah,ai,aj)
-local ak=setmetatable({
-WindUI=ah,
-Creator=ai,
-EditableKeys=af,
-BuiltInOrder=table.clone(ag),
-PersistenceKey=ad,
-Version=ae,
-BuiltInThemes={},
-CustomThemes={},
-Themes={},
-CurrentThemeName=nil,
-AttachedWindow=nil,
-},ac)
-
-local al=type(aj)=="table"and aj or{}
-
-for am,an in ipairs(ak.BuiltInOrder)do
-if type(al[an])=="table"then
-local ao=ak:_NormalizeTheme(al[an],an)
-if ao then
-ak.BuiltInThemes[an]=ao
-end
-end
-end
-
-local am={}
-for an in pairs(al)do
-if not table.find(ak.BuiltInOrder,an)then
-table.insert(am,an)
-end
-end
-
-for an,ao in ipairs(SortNames(am))do
-local ap=ak:_NormalizeTheme(al[ao],ao)
-if ap then
-ak.BuiltInThemes[ao]=ap
-table.insert(ak.BuiltInOrder,ao)
-end
-end
-
-ak:_RebuildThemes()
-
-if ak.Themes.Dark then
-ak.CurrentThemeName="Dark"
-if ak.WindUI then
-ak.WindUI.Theme=ak.Themes.Dark
-end
-end
-
-return ak
-end
-
-return ac end function a.o():typeof(__modImpl())local aa=a.cache.o if not aa then aa={c=__modImpl()}a.cache.o=aa end return aa.c end end do local function __modImpl()
-
 
 
 
@@ -3941,7 +3323,7 @@ local ab=aa(game:GetService"Workspace").CurrentCamera.ViewportSize.Y
 return map(ab,0,2560,8,56)
 end
 
-return{viewportPointToWorld,getOffset}end function a.p():typeof(__modImpl())local aa=a.cache.p if not aa then aa={c=__modImpl()}a.cache.p=aa end return aa.c end end do local function __modImpl()
+return{viewportPointToWorld,getOffset}end function a.o():typeof(__modImpl())local aa=a.cache.o if not aa then aa={c=__modImpl()}a.cache.o=aa end return aa.c end end do local function __modImpl()
 
 
 
@@ -3952,7 +3334,7 @@ local ab=a.c()
 local ac=ab.New
 
 
-local ad,ae=unpack(a.p())
+local ad,ae=unpack(a.o())
 local af=Instance.new("Folder",aa(game:GetService"Workspace").CurrentCamera)
 
 
@@ -4088,12 +3470,12 @@ ah.Frame=ak
 ah.Model=aj
 
 return ah
-end end function a.q():typeof(__modImpl())local aa=a.cache.q if not aa then aa={c=__modImpl()}a.cache.q=aa end return aa.c end end do local function __modImpl()
+end end function a.p():typeof(__modImpl())local aa=a.cache.p if not aa then aa={c=__modImpl()}a.cache.p=aa end return aa.c end end do local function __modImpl()
 
 
 
 local aa=a.c()
-local ab=a.q()
+local ab=a.p()
 
 local ac=aa.New
 
@@ -4213,7 +3595,7 @@ ae.SetVisibility=af.SetVisibility
 end
 
 return ae,af
-end end function a.r():typeof(__modImpl())local aa=a.cache.r if not aa then aa={c=__modImpl()}a.cache.r=aa end return aa.c end end do local function __modImpl()
+end end function a.q():typeof(__modImpl())local aa=a.cache.q if not aa then aa={c=__modImpl()}a.cache.q=aa end return aa.c end end do local function __modImpl()
 
 
 
@@ -4221,9 +3603,9 @@ local aa=(cloneref or clonereference or function(aa)return aa end)
 
 
 local ab={
-AcrylicBlur=a.q(),
+AcrylicBlur=a.p(),
 
-AcrylicPaint=a.r(),
+AcrylicPaint=a.q(),
 }
 
 function ab.init()
@@ -4270,7 +3652,7 @@ registerDefaults()
 ab.Enable()
 end
 
-return ab end function a.s():typeof(__modImpl())local aa=a.cache.s if not aa then aa={c=__modImpl()}a.cache.s=aa end return aa.c end end do local function __modImpl()
+return ab end function a.r():typeof(__modImpl())local aa=a.cache.r if not aa then aa={c=__modImpl()}a.cache.r=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -4464,139 +3846,335 @@ ah:Open()
 return af
 end
 
-return aa end function a.t():typeof(__modImpl())local aa=a.cache.t if not aa then aa={c=__modImpl()}a.cache.t=aa end return aa.c end end do local function __modImpl()
-return function()
-local aa={
+return aa end function a.s():typeof(__modImpl())local aa=a.cache.s if not aa then aa={c=__modImpl()}a.cache.s=aa end return aa.c end end do local function __modImpl()
+return function(aa)
+return{
 Dark={
 Name="Dark",
-Accent="#18181B",
-Background="#101010",
-Button="#52525B",
-Dialog="#18181B",
-Text="#FFFFFF",
-Icon="#A1A1AA",
-Outline="#FFFFFF",
-Placeholder="#999999",
+
+Accent=Color3.fromHex"#18181b",
+Dialog=Color3.fromHex"#161616",
+Outline=Color3.fromHex"#FFFFFF",
+Text=Color3.fromHex"#FFFFFF",
+Placeholder=Color3.fromHex"#7a7a7a",
+Background=Color3.fromHex"#101010",
+Button=Color3.fromHex"#52525b",
+Icon=Color3.fromHex"#a1a1aa",
+Toggle=Color3.fromHex"#33C759",
+Slider=Color3.fromHex"#0091FF",
+Checkbox=Color3.fromHex"#0091FF",
+
+PanelBackground=Color3.fromHex"#FFFFFF",
+PanelBackgroundTransparency=0.95,
+
+SliderIcon=Color3.fromHex"#908F95",
+Primary=Color3.fromHex"#0091FF",
 },
+
 Light={
 Name="Light",
-Accent="#FFFFFF",
-Background="#E4E4E7",
-Button="#18181B",
-Dialog="#F4F4F5",
-Text="#000000",
-Icon="#52525B",
-Outline="#09090B",
-Placeholder="#777777",
+
+Accent=Color3.fromHex"#FFFFFF",
+Dialog=Color3.fromHex"#f4f4f5",
+Outline=Color3.fromHex"#09090b",
+Text=Color3.fromHex"#000000",
+Placeholder=Color3.fromHex"#555555",
+Background=Color3.fromHex"#e9e9e9",
+Button=Color3.fromHex"#18181b",
+Icon=Color3.fromHex"#52525b",
+Toggle=Color3.fromHex"#33C759",
+Slider=Color3.fromHex"#0091FF",
+Checkbox=Color3.fromHex"#0091FF",
+
+TabBackground=Color3.fromHex"#ffffff",
+TabBackgroundHover=Color3.fromHex"#ffffff",
+TabBackgroundHoverTransparency=0.5,
+TabBackgroundActive=Color3.fromHex"#ffffff",
+TabBackgroundActiveTransparency=0,
+
+PanelBackground=Color3.fromHex"#FFFFFF",
+PanelBackgroundTransparency=0,
+
+LabelBackground=Color3.fromHex"#ffffff",
+LabelBackgroundTransparency=0,
 },
-Amber={
-Name="Amber",
-Accent="#F59E0B",
-Background="#78350F",
-Button="#F59E0B",
-Dialog="#92400E",
-Text="#FEF3C7",
-Icon="#FDE68A",
-Outline="#FEF3C7",
-Placeholder="#FCD34D",
-},
-Emerald={
-Name="Emerald",
-Accent="#10B981",
-Background="#064E3B",
-Button="#10B981",
-Dialog="#065F46",
-Text="#D1FAE5",
-Icon="#A7F3D0",
-Outline="#D1FAE5",
-Placeholder="#6EE7B7",
-},
-Indigo={
-Name="Indigo",
-Accent="#6366F1",
-Background="#312E81",
-Button="#6366F1",
-Dialog="#3730A3",
-Text="#E0E7FF",
-Icon="#C7D2FE",
-Outline="#E0E7FF",
-Placeholder="#A5B4FC",
-},
-Plant={
-Name="Plant",
-Accent="#22C55E",
-Background="#14532D",
-Button="#22C55E",
-Dialog="#166534",
-Text="#DCFCE7",
-Icon="#86EFAC",
-Outline="#DCFCE7",
-Placeholder="#BBF7D0",
-},
-Red={
-Name="Red",
-Accent="#EF4444",
-Background="#7F1D1D",
-Button="#EF4444",
-Dialog="#991B1B",
-Text="#FFE4E6",
-Icon="#FECACA",
-Outline="#FEE2E2",
-Placeholder="#FCA5A5",
-},
+
 Rose={
 Name="Rose",
-Accent="#F43F5E",
-Background="#881337",
-Button="#E11D48",
-Dialog="#9F1239",
-Text="#FFE4E6",
-Icon="#FECDD3",
-Outline="#FFE4E6",
-Placeholder="#FDA4AF",
+
+Accent=Color3.fromHex"#be185d",
+Dialog=Color3.fromHex"#4c0519",
+Outline=Color3.fromHex"#fecdd3",
+Text=Color3.fromHex"#fdf2f8",
+Placeholder=Color3.fromHex"#d67aa6",
+Background=Color3.fromHex"#1f0308",
+Button=Color3.fromHex"#e95f74",
+Icon=Color3.fromHex"#fb7185",
 },
+
+Plant={
+Name="Plant",
+
+Accent=Color3.fromHex"#166534",
+Dialog=Color3.fromHex"#052e16",
+Outline=Color3.fromHex"#bbf7d0",
+Text=Color3.fromHex"#f0fdf4",
+Placeholder=Color3.fromHex"#4fbf7a",
+Background=Color3.fromHex"#0a1b0f",
+Button=Color3.fromHex"#16a34a",
+Icon=Color3.fromHex"#4ade80",
+},
+
+Red={
+Name="Red",
+
+Accent=Color3.fromHex"#991b1b",
+Dialog=Color3.fromHex"#450a0a",
+Outline=Color3.fromHex"#fecaca",
+Text=Color3.fromHex"#fef2f2",
+Placeholder=Color3.fromHex"#d95353",
+Background=Color3.fromHex"#1c0606",
+Button=Color3.fromHex"#dc2626",
+Icon=Color3.fromHex"#ef4444",
+},
+
+Indigo={
+Name="Indigo",
+
+Accent=Color3.fromHex"#3730a3",
+Dialog=Color3.fromHex"#1e1b4b",
+Outline=Color3.fromHex"#c7d2fe",
+Text=Color3.fromHex"#f1f5f9",
+Placeholder=Color3.fromHex"#7078d9",
+Background=Color3.fromHex"#0f0a2e",
+Button=Color3.fromHex"#4f46e5",
+Icon=Color3.fromHex"#6366f1",
+},
+
 Sky={
 Name="Sky",
-Accent="#0EA5E9",
-Background="#075985",
-Button="#0EA5E9",
-Dialog="#0369A1",
-Text="#E0F2FE",
-Icon="#BAE6FD",
-Outline="#E0F2FE",
-Placeholder="#7DD3FC",
+
+Accent=Color3.fromHex"#00d4ff",
+Dialog=Color3.fromHex"#0a4d66",
+Outline=Color3.fromHex"#4dd9ff",
+Text=Color3.fromHex"#e6f7ff",
+Placeholder=Color3.fromHex"#66b3cc",
+Background=Color3.fromHex"#051a26",
+Button=Color3.fromHex"#00a8cc",
+Icon=Color3.fromHex"#2db8d9",
+
+Toggle=Color3.fromHex"#00d9d9",
+Slider=Color3.fromHex"#00d4ff",
+Checkbox=Color3.fromHex"#00d4ff",
+
+PanelBackground=Color3.fromHex"#0d3a47",
+PanelBackgroundTransparency=0.8,
 },
+
 Violet={
 Name="Violet",
-Accent="#8B5CF6",
-Background="#4C1D95",
-Button="#8B5CF6",
-Dialog="#5B21B6",
-Text="#EDE9FE",
-Icon="#DDD6FE",
-Outline="#EDE9FE",
-Placeholder="#C4B5FD",
+
+Accent=Color3.fromHex"#6d28d9",
+Dialog=Color3.fromHex"#3c1361",
+Outline=Color3.fromHex"#ddd6fe",
+Text=Color3.fromHex"#faf5ff",
+Placeholder=Color3.fromHex"#8f7ee0",
+Background=Color3.fromHex"#1e0a3e",
+Button=Color3.fromHex"#7c3aed",
+Icon=Color3.fromHex"#8b5cf6",
+},
+
+Amber={
+Name="Amber",
+
+Accent=aa:Gradient({
+["0"]={Color=Color3.fromHex"#b45309",Transparency=0},
+["100"]={Color=Color3.fromHex"#d97706",Transparency=0},
+},{Rotation=45}),
+
+Dialog=aa:Gradient({
+["0"]={Color=Color3.fromHex"#451a03",Transparency=0},
+["100"]={Color=Color3.fromHex"#6b2e05",Transparency=0},
+},{Rotation=90}),
+
+Outline=aa:Gradient({
+["0"]={Color=Color3.fromHex"#fde68a",Transparency=0},
+["100"]={Color=Color3.fromHex"#fcd34d",Transparency=0},
+},{Rotation=45}),
+
+Text=aa:Gradient({
+["0"]={Color=Color3.fromHex"#fffbeb",Transparency=0},
+["100"]={Color=Color3.fromHex"#fff7ed",Transparency=0},
+},{Rotation=45}),
+
+Placeholder=aa:Gradient({
+["0"]={Color=Color3.fromHex"#d1a326",Transparency=0},
+["100"]={Color=Color3.fromHex"#fbbf24",Transparency=0},
+},{Rotation=45}),
+
+Background=aa:Gradient({
+["0"]={Color=Color3.fromHex"#1c1003",Transparency=0},
+["100"]={Color=Color3.fromHex"#3f210d",Transparency=0},
+},{Rotation=90}),
+
+Button=aa:Gradient({
+["0"]={Color=Color3.fromHex"#d97706",Transparency=0},
+["100"]={Color=Color3.fromHex"#f59e0b",Transparency=0},
+},{Rotation=45}),
+
+Icon=Color3.fromHex"#f59e0b",
+
+Toggle=aa:Gradient({
+["0"]={Color=Color3.fromHex"#d97706",Transparency=0},
+["100"]={Color=Color3.fromHex"#f59e0b",Transparency=0},
+},{Rotation=45}),
+
+Slider=Color3.fromHex"#d97706",
+
+Checkbox=aa:Gradient({
+["0"]={Color=Color3.fromHex"#d97706",Transparency=0},
+["100"]={Color=Color3.fromHex"#fbbf24",Transparency=0},
+},{Rotation=45}),
+
+PanelBackground=Color3.fromHex"#FFFFFF",
+PanelBackgroundTransparency=0.95,
+},
+
+Emerald={
+Name="Emerald",
+
+Accent=Color3.fromHex"#047857",
+Dialog=Color3.fromHex"#022c22",
+Outline=Color3.fromHex"#a7f3d0",
+Text=Color3.fromHex"#ecfdf5",
+Placeholder=Color3.fromHex"#3fbf8f",
+Background=Color3.fromHex"#011411",
+Button=Color3.fromHex"#059669",
+Icon=Color3.fromHex"#10b981",
+},
+
+Midnight={
+Name="Midnight",
+
+Accent=Color3.fromHex"#1e3a8a",
+Dialog=Color3.fromHex"#0c1e42",
+Outline=Color3.fromHex"#bfdbfe",
+Text=Color3.fromHex"#dbeafe",
+Placeholder=Color3.fromHex"#2f74d1",
+Background=Color3.fromHex"#0a0f1e",
+Button=Color3.fromHex"#2563eb",
+Primary=Color3.fromHex"#2563eb",
+Icon=Color3.fromHex"#5591f4",
+},
+
+Crimson={
+Name="Crimson",
+
+Accent=Color3.fromHex"#b91c1c",
+Dialog=Color3.fromHex"#450a0a",
+Outline=Color3.fromHex"#fca5a5",
+Text=Color3.fromHex"#fef2f2",
+Placeholder=Color3.fromHex"#6f757b",
+Background=Color3.fromHex"#0c0404",
+Button=Color3.fromHex"#991b1b",
+Icon=Color3.fromHex"#dc2626",
+},
+
+MonokaiPro={
+Name="Monokai Pro",
+
+Accent=Color3.fromHex"#fc9867",
+Dialog=Color3.fromHex"#1e1e1e",
+Outline=Color3.fromHex"#78dce8",
+Text=Color3.fromHex"#fcfcfa",
+Placeholder=Color3.fromHex"#6f6f6f",
+Background=Color3.fromHex"#191622",
+Button=Color3.fromHex"#ab9df2",
+Icon=Color3.fromHex"#a9dc76",
+
+Metadata={
+PullRequest=23,
+}
+},
+
+CottonCandy={
+Name="Cotton Candy",
+
+Accent=Color3.fromHex"#ec4899",
+Dialog=Color3.fromHex"#2d1b3d",
+Outline=Color3.fromHex"#f9a8d4",
+Text=Color3.fromHex"#fdf2f8",
+Placeholder=Color3.fromHex"#8a5fd3",
+Background=Color3.fromHex"#1a0b2e",
+Button=Color3.fromHex"#d946ef",
+Slider=Color3.fromHex"#d946ef",
+Icon=Color3.fromHex"#06b6d4",
+},
+
+Mellowsi={
+Name="Mellowsi",
+
+Accent=Color3.fromHex"#342A1E",
+Dialog=Color3.fromHex"#291C13",
+Outline=Color3.fromHex"#6B5A45",
+Text=Color3.fromHex"#F5EBDD",
+Placeholder=Color3.fromHex"#9C8A73",
+Background=Color3.fromHex"#1C1002",
+Button=Color3.fromHex"#342A1E",
+Icon=Color3.fromHex"#C9B79C",
+
+Toggle=Color3.fromHex"#a9873f",
+Slider=Color3.fromHex"#C9A24D",
+Checkbox=Color3.fromHex"#C9A24D",
+
+Metadata={
+PullRequest=52,
+}
+},
+
+Rainbow={
+Name="Rainbow",
+
+Accent=aa:Gradient({
+["0"]={Color=Color3.fromHex"#00ff41",Transparency=0},
+["33"]={Color=Color3.fromHex"#00ffff",Transparency=0},
+["66"]={Color=Color3.fromHex"#0080ff",Transparency=0},
+["100"]={Color=Color3.fromHex"#8000ff",Transparency=0},
+},{Rotation=45}),
+
+Dialog=aa:Gradient({
+["0"]={Color=Color3.fromHex"#ff0080",Transparency=0},
+["25"]={Color=Color3.fromHex"#8000ff",Transparency=0},
+["50"]={Color=Color3.fromHex"#0080ff",Transparency=0},
+["75"]={Color=Color3.fromHex"#00ff80",Transparency=0},
+["100"]={Color=Color3.fromHex"#ff8000",Transparency=0},
+},{Rotation=135}),
+
+Outline=Color3.fromHex"#ffffff",
+Text=Color3.fromHex"#ffffff",
+Placeholder=Color3.fromHex"#00ff80",
+
+Background=aa:Gradient({
+["0"]={Color=Color3.fromHex"#ff0040",Transparency=0},
+["20"]={Color=Color3.fromHex"#ff4000",Transparency=0},
+["40"]={Color=Color3.fromHex"#ffff00",Transparency=0},
+["60"]={Color=Color3.fromHex"#00ff40",Transparency=0},
+["80"]={Color=Color3.fromHex"#0040ff",Transparency=0},
+["100"]={Color=Color3.fromHex"#4000ff",Transparency=0},
+},{Rotation=90}),
+
+Button=aa:Gradient({
+["0"]={Color=Color3.fromHex"#ff0080",Transparency=0},
+["25"]={Color=Color3.fromHex"#ff8000",Transparency=0},
+["50"]={Color=Color3.fromHex"#ffff00",Transparency=0},
+["75"]={Color=Color3.fromHex"#80ff00",Transparency=0},
+["100"]={Color=Color3.fromHex"#00ffff",Transparency=0},
+},{Rotation=60}),
+
+Icon=Color3.fromHex"#ffffff",
 },
 }
-
-local ab={}
-for ac,ad in ipairs{
-"Dark",
-"Light",
-"Amber",
-"Emerald",
-"Indigo",
-"Plant",
-"Red",
-"Rose",
-"Sky",
-"Violet",
-}do
-ab[ad]=table.clone(aa[ad])
-end
-
-return ab
-end end function a.u():typeof(__modImpl())local aa=a.cache.u if not aa then aa={c=__modImpl()}a.cache.u=aa end return aa.c end end do local function __modImpl()
+end end function a.t():typeof(__modImpl())local aa=a.cache.t if not aa then aa={c=__modImpl()}a.cache.t=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -4701,7 +4279,7 @@ return am
 end
 
 
-return aa end function a.v():typeof(__modImpl())local aa=a.cache.v if not aa then aa={c=__modImpl()}a.cache.v=aa end return aa.c end end do local function __modImpl()
+return aa end function a.u():typeof(__modImpl())local aa=a.cache.u if not aa then aa={c=__modImpl()}a.cache.u=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ab=(cloneref or clonereference or function(ab)return ab end)
@@ -4877,7 +4455,7 @@ return ak
 end
 
 
-return aa end function a.w():typeof(__modImpl())local aa=a.cache.w if not aa then aa={c=__modImpl()}a.cache.w=aa end return aa.c end end do local function __modImpl()
+return aa end function a.v():typeof(__modImpl())local aa=a.cache.v if not aa then aa={c=__modImpl()}a.cache.v=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 
@@ -4893,7 +4471,7 @@ BackgroundTransparency=1,
 return"Space",{__type="Space",ElementFrame=af}
 end
 
-return ac end function a.x():typeof(__modImpl())local aa=a.cache.x if not aa then aa={c=__modImpl()}a.cache.x=aa end return aa.c end end do local function __modImpl()
+return ac end function a.w():typeof(__modImpl())local aa=a.cache.w if not aa then aa={c=__modImpl()}a.cache.w=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 
@@ -5052,7 +4630,7 @@ end
 return ah.__type,ah
 end
 
-return ac end function a.y():typeof(__modImpl())local aa=a.cache.y if not aa then aa={c=__modImpl()}a.cache.y=aa end return aa.c end end do local function __modImpl()
+return ac end function a.x():typeof(__modImpl())local aa=a.cache.x if not aa then aa={c=__modImpl()}a.cache.x=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -5221,7 +4799,7 @@ return ah
 end
 
 
-return aa end function a.z():typeof(__modImpl())local aa=a.cache.z if not aa then aa={c=__modImpl()}a.cache.z=aa end return aa.c end end do local function __modImpl()
+return aa end function a.y():typeof(__modImpl())local aa=a.cache.y if not aa then aa={c=__modImpl()}a.cache.y=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ab=a.c()
@@ -5387,7 +4965,7 @@ ah.Label=aj
 return ah
 end
 
-return aa end function a.A():typeof(__modImpl())local aa=a.cache.A if not aa then aa={c=__modImpl()}a.cache.A=aa end return aa.c end end do local function __modImpl()
+return aa end function a.z():typeof(__modImpl())local aa=a.cache.z if not aa then aa={c=__modImpl()}a.cache.z=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -5765,16 +5343,6 @@ end
 
 ai.CustomData=al.__custom or{}
 
-if ad and ad.OnConfigCustomDataLoaded then
-local am,an=pcall(function()
-ad:OnConfigCustomDataLoaded(ai,ai.CustomData)
-end)
-
-if not am then
-warn("[ WindUI.ConfigManager ] Failed to run custom-data hook: "..tostring(an))
-end
-end
-
 return ai.CustomData
 end
 
@@ -5908,7 +5476,7 @@ function ae.GetConfig(af,ag)
 return ae.Configs[ag]
 end
 
-return ae end function a.B():typeof(__modImpl())local aa=a.cache.B if not aa then aa={c=__modImpl()}a.cache.B=aa end return aa.c end end do local function __modImpl()
+return ae end function a.A():typeof(__modImpl())local aa=a.cache.A if not aa then aa={c=__modImpl()}a.cache.A=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -6195,7 +5763,7 @@ end
 
 
 
-return aa end function a.C():typeof(__modImpl())local aa=a.cache.C if not aa then aa={c=__modImpl()}a.cache.C=aa end return aa.c end end do local function __modImpl()
+return aa end function a.B():typeof(__modImpl())local aa=a.cache.B if not aa then aa={c=__modImpl()}a.cache.B=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -6358,7 +5926,7 @@ end
 
 
 
-return aa end function a.D():typeof(__modImpl())local aa=a.cache.D if not aa then aa={c=__modImpl()}a.cache.D=aa end return aa.c end end do local function __modImpl()
+return aa end function a.C():typeof(__modImpl())local aa=a.cache.C if not aa then aa={c=__modImpl()}a.cache.C=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 local ac=aa.NewRoundFrame
@@ -7100,7 +6668,7 @@ end
 
 
 return ag
-end end function a.E():typeof(__modImpl())local aa=a.cache.E if not aa then aa={c=__modImpl()}a.cache.E=aa end return aa.c end end do local function __modImpl()
+end end function a.D():typeof(__modImpl())local aa=a.cache.D if not aa then aa={c=__modImpl()}a.cache.D=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ab=aa.New
@@ -7122,7 +6690,7 @@ Desc=af.Desc or nil,
 
 Locked=af.Locked or false,
 }
-local ah=a.E()(af)
+local ah=a.D()(af)
 
 ag.ParagraphFrame=ah
 if af.Buttons and#af.Buttons>0 then
@@ -7150,7 +6718,7 @@ return ag.__type,ag
 
 end
 
-return ac end function a.F():typeof(__modImpl())local aa=a.cache.F if not aa then aa={c=__modImpl()}a.cache.F=aa end return aa.c end end do local function __modImpl()
+return ac end function a.E():typeof(__modImpl())local aa=a.cache.E if not aa then aa={c=__modImpl()}a.cache.E=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()local ab=
 aa.New
@@ -7175,7 +6743,7 @@ UIElements={}
 
 local ag=true
 
-af.ButtonFrame=a.E(){
+af.ButtonFrame=a.D(){
 Title=af.Title,
 Desc=af.Desc,
 Parent=ae.Parent,
@@ -7252,7 +6820,7 @@ end)
 return af.__type,af
 end
 
-return ac end function a.G():typeof(__modImpl())local aa=a.cache.G if not aa then aa={c=__modImpl()}a.cache.G=aa end return aa.c end end do local function __modImpl()
+return ac end function a.F():typeof(__modImpl())local aa=a.cache.F if not aa then aa={c=__modImpl()}a.cache.F=aa end return aa.c end end do local function __modImpl()
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
 local ab=aa(game:GetService"UserInputService")
@@ -7260,7 +6828,7 @@ local ab=aa(game:GetService"UserInputService")
 local ac=a.c()
 local ad=ac.New
 
-local ae=a.v().New
+local ae=a.u().New
 
 local af={}
 
@@ -7296,7 +6864,7 @@ UIElements={}
 local aj=true
 local ak=false
 
-ai.ButtonKeybindFrame=a.E(){
+ai.ButtonKeybindFrame=a.D(){
 Title=ai.Title,
 Desc=ai.Desc,
 Parent=ah.Parent,
@@ -7483,7 +7051,7 @@ end)
 return ai.__type,ai
 end
 
-return af end function a.H():typeof(__modImpl())local aa=a.cache.H if not aa then aa={c=__modImpl()}a.cache.H=aa end return aa.c end end do local function __modImpl()
+return af end function a.G():typeof(__modImpl())local aa=a.cache.G if not aa then aa={c=__modImpl()}a.cache.G=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -7762,7 +7330,7 @@ end
 return ao,al
 end
 
-return aa end function a.I():typeof(__modImpl())local aa=a.cache.I if not aa then aa={c=__modImpl()}a.cache.I=aa end return aa.c end end do local function __modImpl()
+return aa end function a.H():typeof(__modImpl())local aa=a.cache.H if not aa then aa={c=__modImpl()}a.cache.H=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -7863,11 +7431,11 @@ return an,ak
 end
 
 
-return aa end function a.J():typeof(__modImpl())local aa=a.cache.J if not aa then aa={c=__modImpl()}a.cache.J=aa end return aa.c end end do local function __modImpl()
+return aa end function a.I():typeof(__modImpl())local aa=a.cache.I if not aa then aa={c=__modImpl()}a.cache.I=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 
-local ab=a.I().New
-local ac=a.J().New
+local ab=a.H().New
+local ac=a.I().New
 
 local ad={}
 
@@ -7885,7 +7453,7 @@ Type=af.Type or"Toggle",
 Callback=af.Callback or function()end,
 UIElements={}
 }
-ag.ToggleFrame=a.E(){
+ag.ToggleFrame=a.D(){
 Title=ag.Title,
 Desc=ag.Desc,
 
@@ -7956,7 +7524,7 @@ end)
 return ag.__type,ag
 end
 
-return ad end function a.K():typeof(__modImpl())local aa=a.cache.K if not aa then aa={c=__modImpl()}a.cache.K=aa end return aa.c end end do local function __modImpl()
+return ad end function a.J():typeof(__modImpl())local aa=a.cache.J if not aa then aa={c=__modImpl()}a.cache.J=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -7965,9 +7533,9 @@ local ab=aa(game:GetService"UserInputService")
 local ac=a.c()
 local ad=ac.New
 
-local ae=a.I().New
-local af=a.J().New
-local ag=a.v().New
+local ae=a.H().New
+local af=a.I().New
+local ag=a.u().New
 
 local ah={}
 
@@ -8008,7 +7576,7 @@ end
 
 local an=(40.8)
 
-ak.ToggleKeybindFrame=a.E(){
+ak.ToggleKeybindFrame=a.D(){
 Title=ak.Title,
 Desc=ak.Desc,
 Window=aj.Window,
@@ -8176,7 +7744,7 @@ end)
 return ak.__type,ak
 end
 
-return ah end function a.L():typeof(__modImpl())local aa=a.cache.L if not aa then aa={c=__modImpl()}a.cache.L=aa end return aa.c end end do local function __modImpl()
+return ah end function a.K():typeof(__modImpl())local aa=a.cache.K if not aa then aa={c=__modImpl()}a.cache.K=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -8300,7 +7868,7 @@ au.Size=UDim2.new(0,ak.IconSize,0,ak.IconSize)
 av=av+ak.IconSize-2
 end
 end
-ak.SliderFrame=a.E(){
+ak.SliderFrame=a.D(){
 Title=ak.Title,
 Desc=ak.Desc,
 Parent=aj.Parent,
@@ -8401,7 +7969,7 @@ Visible=ak.IsTextbox,
 
 local aw
 if ak.IsTooltip then
-aw=a.D().New(ao,ak.UIElements.SliderIcon.Frame.Thumb,true,"Secondary","Small",false)
+aw=a.C().New(ao,ak.UIElements.SliderIcon.Frame.Thumb,true,"Secondary","Small",false)
 aw.Container.AnchorPoint=Vector2.new(0.5,1)
 aw.Container.Position=UDim2.new(0.5,0,0,-8)
 end
@@ -8553,7 +8121,7 @@ end)
 return ak.__type,ak
 end
 
-return ag end function a.M():typeof(__modImpl())local aa=a.cache.M if not aa then aa={c=__modImpl()}a.cache.M=aa end return aa.c end end do local function __modImpl()
+return ag end function a.L():typeof(__modImpl())local aa=a.cache.L if not aa then aa={c=__modImpl()}a.cache.L=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -8650,7 +8218,7 @@ local as=typeof(ai.Width)=="number"and math.max(math.floor(ai.Width),168)or 182
 local at=typeof(ai.ButtonSize)=="number"and math.max(math.floor(ai.ButtonSize),28)or 34
 local au=math.max(ai.Window.ElementConfig.UICorner-4,8)
 
-ao.StepperFrame=a.E(){
+ao.StepperFrame=a.D(){
 Title=ao.Title,
 Desc=ao.Desc,
 Parent=ai.Parent,
@@ -9019,7 +8587,7 @@ end
 return ao.__type,ao
 end
 
-return ag end function a.N():typeof(__modImpl())local aa=a.cache.N if not aa then aa={c=__modImpl()}a.cache.N=aa end return aa.c end end do local function __modImpl()
+return ag end function a.M():typeof(__modImpl())local aa=a.cache.M if not aa then aa={c=__modImpl()}a.cache.M=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -9034,7 +8602,7 @@ UICorner=6,
 UIPadding=8,
 }
 
-local ag=a.v().New
+local ag=a.u().New
 
 function af.New(ah,ai)
 local function NormalizeKeyCode(aj)
@@ -9062,7 +8630,7 @@ UIElements={},
 
 local ak=true
 
-aj.KeybindFrame=a.E(){
+aj.KeybindFrame=a.D(){
 Title=aj.Title,
 Desc=aj.Desc,
 Parent=ai.Parent,
@@ -9181,7 +8749,7 @@ end)
 return aj.__type,aj
 end
 
-return af end function a.O():typeof(__modImpl())local aa=a.cache.O if not aa then aa={c=__modImpl()}a.cache.O=aa end return aa.c end end do local function __modImpl()
+return af end function a.N():typeof(__modImpl())local aa=a.cache.N if not aa then aa={c=__modImpl()}a.cache.N=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ab=aa.New local ac=
@@ -9216,7 +8784,7 @@ Width=150,
 
 local aj=true
 
-ai.InputFrame=a.E(){
+ai.InputFrame=a.D(){
 Title=ai.Title,
 Desc=ai.Desc,
 Parent=ah.Parent,
@@ -9292,7 +8860,7 @@ end
 return ai.__type,ai
 end
 
-return ad end function a.P():typeof(__modImpl())local aa=a.cache.P if not aa then aa={c=__modImpl()}a.cache.P=aa end return aa.c end end do local function __modImpl()
+return ad end function a.O():typeof(__modImpl())local aa=a.cache.O if not aa then aa={c=__modImpl()}a.cache.O=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -9958,7 +9526,7 @@ UpdatePosition
 return aq
 end
 
-return aa end function a.Q():typeof(__modImpl())local aa=a.cache.Q if not aa then aa={c=__modImpl()}a.cache.Q=aa end return aa.c end end do local function __modImpl()
+return aa end function a.P():typeof(__modImpl())local aa=a.cache.P if not aa then aa={c=__modImpl()}a.cache.P=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -9972,9 +9540,9 @@ local af=a.c()
 local ag=af.New local ah=
 af.Tween
 
-local ai=a.v().New local aj=a.l()
+local ai=a.u().New local aj=a.l()
 .New
-local ak=a.Q().New local al=
+local ak=a.P().New local al=
 
 workspace.CurrentCamera
 
@@ -10185,7 +9753,7 @@ end
 
 local as=true
 
-ap.DropdownFrame=a.E(){
+ap.DropdownFrame=a.D(){
 Title=ap.Title,
 Desc=ap.Desc,
 Parent=ao.Parent,
@@ -10364,7 +9932,7 @@ end
 return ap.__type,ap
 end
 
-return am end function a.R():typeof(__modImpl())local aa=a.cache.R if not aa then aa={c=__modImpl()}a.cache.R=aa end return aa.c end end do local function __modImpl()
+return am end function a.Q():typeof(__modImpl())local aa=a.cache.Q if not aa then aa={c=__modImpl()}a.cache.Q=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -10508,7 +10076,7 @@ local ap=typeof(ai.SegmentPaddingX)=="number"and math.max(math.floor(ai.SegmentP
 local aq=typeof(ai.SegmentGap)=="number"and math.max(math.floor(ai.SegmentGap),4)or 6
 local ar=math.max(ai.Window.ElementConfig.UICorner-5,8)
 
-ak.SegmentedFrame=a.E(){
+ak.SegmentedFrame=a.D(){
 Title=ak.Title,
 Desc=ak.Desc,
 Parent=ai.Parent,
@@ -11021,7 +10589,7 @@ end
 return ak.__type,ak
 end
 
-return af end function a.S():typeof(__modImpl())local aa=a.cache.S if not aa then aa={c=__modImpl()}a.cache.S=aa end return aa.c end end do local function __modImpl()
+return af end function a.R():typeof(__modImpl())local aa=a.cache.R if not aa then aa={c=__modImpl()}a.cache.R=aa end return aa.c end end do local function __modImpl()
 
 
 
@@ -11194,14 +10762,14 @@ end
 return table.concat(aq)
 end
 
-return aa end function a.T():typeof(__modImpl())local aa=a.cache.T if not aa then aa={c=__modImpl()}a.cache.T=aa end return aa.c end end do local function __modImpl()
+return aa end function a.S():typeof(__modImpl())local aa=a.cache.S if not aa then aa={c=__modImpl()}a.cache.S=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ad=a.c()
 local ae=ad.New
 local af=ad.Tween
 
-local ag=a.T()
+local ag=a.S()
 
 function aa.New(ai,ak,al,am,an)
 local ao={
@@ -11404,12 +10972,12 @@ return ao
 end
 
 
-return aa end function a.U():typeof(__modImpl())local aa=a.cache.U if not aa then aa={c=__modImpl()}a.cache.U=aa end return aa.c end end do local function __modImpl()
+return aa end function a.T():typeof(__modImpl())local aa=a.cache.T if not aa then aa={c=__modImpl()}a.cache.T=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()local ad=
 aa.New
 
 
-local ae=a.U()
+local ae=a.T()
 
 local af={}
 
@@ -11476,7 +11044,7 @@ ak.ElementFrame=am.CodeFrame
 return ak.__type,ak
 end
 
-return af end function a.V():typeof(__modImpl())local aa=a.cache.V if not aa then aa={c=__modImpl()}a.cache.V=aa end return aa.c end end do local function __modImpl()
+return af end function a.U():typeof(__modImpl())local aa=a.cache.U if not aa then aa={c=__modImpl()}a.cache.U=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New local ae=
@@ -12133,7 +11701,7 @@ local au=true
 
 
 
-at.ColorpickerFrame=a.E(){
+at.ColorpickerFrame=a.D(){
 Title=at.Title,
 Desc=at.Desc,
 Parent=as.Parent,
@@ -12201,7 +11769,7 @@ end)
 return at.__type,at
 end
 
-return aq end function a.W():typeof(__modImpl())local aa=a.cache.W if not aa then aa={c=__modImpl()}a.cache.W=aa end return aa.c end end do local function __modImpl()
+return aq end function a.V():typeof(__modImpl())local aa=a.cache.V if not aa then aa={c=__modImpl()}a.cache.V=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -12283,7 +11851,7 @@ UIElements={},
 
 local ap=true
 
-ao.ProgressFrame=a.E(){
+ao.ProgressFrame=a.D(){
 Title=ao.Title,
 Desc=ao.Desc,
 Parent=ai.Parent,
@@ -12555,7 +12123,7 @@ ao:Set(ao.Value,false,false)
 return ao.__type,ao
 end
 
-return af end function a.X():typeof(__modImpl())local aa=a.cache.X if not aa then aa={c=__modImpl()}a.cache.X=aa end return aa.c end end do local function __modImpl()
+return af end function a.W():typeof(__modImpl())local aa=a.cache.W if not aa then aa={c=__modImpl()}a.cache.W=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -12649,7 +12217,7 @@ UIElements={},
 local an=true
 local ao={}
 
-am.StatsFrame=a.E(){
+am.StatsFrame=a.D(){
 Title=am.Title,
 Desc=am.Desc,
 Parent=ag.Parent,
@@ -12873,7 +12441,7 @@ RenderRows()
 return am.__type,am
 end
 
-return ae end function a.Y():typeof(__modImpl())local aa=a.cache.Y if not aa then aa={c=__modImpl()}a.cache.Y=aa end return aa.c end end do local function __modImpl()
+return ae end function a.X():typeof(__modImpl())local aa=a.cache.X if not aa then aa={c=__modImpl()}a.cache.X=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -13454,7 +13022,7 @@ end)
 return ak.__type,ak
 end
 
-return af end function a.Z():typeof(__modImpl())local aa=a.cache.Z if not aa then aa={c=__modImpl()}a.cache.Z=aa end return aa.c end end do local function __modImpl()
+return af end function a.Y():typeof(__modImpl())local aa=a.cache.Y if not aa then aa={c=__modImpl()}a.cache.Y=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -14645,7 +14213,7 @@ end)
 return am.__type,am
 end
 
-return ai end function a._():typeof(__modImpl())local aa=a.cache._ if not aa then aa={c=__modImpl()}a.cache._=aa end return aa.c end end do local function __modImpl()
+return ai end function a.Z():typeof(__modImpl())local aa=a.cache.Z if not aa then aa={c=__modImpl()}a.cache.Z=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -14715,7 +14283,7 @@ end
 return ai.__type,ai
 end
 
-return ae end function a.aa():typeof(__modImpl())local aa=a.cache.aa if not aa then aa={c=__modImpl()}a.cache.aa=aa end return aa.c end end do local function __modImpl()
+return ae end function a._():typeof(__modImpl())local aa=a.cache._ if not aa then aa={c=__modImpl()}a.cache._=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ad=aa.New
 
@@ -14795,7 +14363,7 @@ ag.Tab
 return ai.__type,ai
 end
 
-return ae end function a.ab():typeof(__modImpl())local aa=a.cache.ab if not aa then aa={c=__modImpl()}a.cache.ab=aa end return aa.c end end do local function __modImpl()
+return ae end function a.aa():typeof(__modImpl())local aa=a.cache.aa if not aa then aa={c=__modImpl()}a.cache.aa=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -14957,32 +14525,32 @@ end
 return ai.__type,ai
 end
 
-return ae end function a.ac():typeof(__modImpl())local aa=a.cache.ac if not aa then aa={c=__modImpl()}a.cache.ac=aa end return aa.c end end do local function __modImpl()
+return ae end function a.ab():typeof(__modImpl())local aa=a.cache.ab if not aa then aa={c=__modImpl()}a.cache.ab=aa end return aa.c end end do local function __modImpl()
 
 return{
 Elements={
-Paragraph=a.F(),
-Button=a.G(),
-ButtonKeybind=a.H(),
-Toggle=a.K(),
-ToggleKeybind=a.L(),
-Slider=a.M(),
-Stepper=a.N(),
-Keybind=a.O(),
-Input=a.P(),
-Dropdown=a.R(),
-Segmented=a.S(),
-Code=a.V(),
-Colorpicker=a.W(),
-Progress=a.X(),
-Stats=a.Y(),
-Section=a.Z(),
-MultiSection=a._(),
-Space=a.x(),
-Divider=a.y(),
-Image=a.aa(),
-Group=a.ab(),
-Video=a.ac(),
+Paragraph=a.E(),
+Button=a.F(),
+ButtonKeybind=a.G(),
+Toggle=a.J(),
+ToggleKeybind=a.K(),
+Slider=a.L(),
+Stepper=a.M(),
+Keybind=a.N(),
+Input=a.O(),
+Dropdown=a.Q(),
+Segmented=a.R(),
+Code=a.U(),
+Colorpicker=a.V(),
+Progress=a.W(),
+Stats=a.X(),
+Section=a.Y(),
+MultiSection=a.Z(),
+Space=a.w(),
+Divider=a.x(),
+Image=a._(),
+Group=a.aa(),
+Video=a.ab(),
 },
 Load=function(aa,ad,ae,af,ag,ai,ak,al,am)
 local function removeFromList(an,ao)
@@ -15154,7 +14722,7 @@ end
 end
 end,
 
-}end function a.ad():typeof(__modImpl())local aa=a.cache.ad if not aa then aa={c=__modImpl()}a.cache.ad=aa end return aa.c end end do local function __modImpl()
+}end function a.ac():typeof(__modImpl())local aa=a.cache.ac if not aa then aa={c=__modImpl()}a.cache.ac=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -15164,8 +14732,8 @@ local ad=game.Players.LocalPlayer:GetMouse()
 local ae=a.c()
 local af=ae.New
 
-local ag=a.D().New
-local ai=a.w().New
+local ag=a.C().New
+local ai=a.v().New
 
 
 
@@ -15594,7 +15162,7 @@ end
 
 
 
-local aw=a.ad()
+local aw=a.ac()
 
 aw.Load(an,an.UIElements.ContainerFrame,aw.Elements,Window,WindUI,nil,aw,am)
 
@@ -15801,7 +15369,7 @@ end
 return nil
 end
 
-return ak end function a.ae():typeof(__modImpl())local aa=a.cache.ae if not aa then aa={c=__modImpl()}a.cache.ae=aa end return aa.c end end do local function __modImpl()
+return ak end function a.ad():typeof(__modImpl())local aa=a.cache.ad if not aa then aa={c=__modImpl()}a.cache.ad=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -15810,12 +15378,12 @@ local ad=a.c()
 local ae=ad.New
 local af=ad.Tween
 
-local ag=a.v().New
+local ag=a.u().New
 local ai=a.e().New
-local ak=a.x()
-local al=a.y()
+local ak=a.w()
+local al=a.x()
 
-local am=a.ae()
+local am=a.ad()
 
 function aa.New(an,ao,ap,aq,ar)
 local as={
@@ -16130,7 +15698,7 @@ return as
 end
 
 
-return aa end function a.af():typeof(__modImpl())local aa=a.cache.af if not aa then aa={c=__modImpl()}a.cache.af=aa end return aa.c end end do local function __modImpl()
+return aa end function a.ae():typeof(__modImpl())local aa=a.cache.ae if not aa then aa={c=__modImpl()}a.cache.ae=aa end return aa.c end end do local function __modImpl()
 
 return{
 Tab="table-of-contents",
@@ -16147,7 +15715,7 @@ Code="terminal",
 Colorpicker="palette",
 Divider="minus",
 Video="video",
-}end function a.ag():typeof(__modImpl())local aa=a.cache.ag if not aa then aa={c=__modImpl()}a.cache.ag=aa end return aa.c end end do local function __modImpl()
+}end function a.af():typeof(__modImpl())local aa=a.cache.af if not aa then aa={c=__modImpl()}a.cache.af=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -16172,7 +15740,7 @@ Radius=22,
 Width=400,
 MaxHeight=380,
 
-Icons=a.ag()
+Icons=a.af()
 }
 
 
@@ -16673,7 +16241,7 @@ am:Open()
 return am
 end
 
-return ad end function a.ah():typeof(__modImpl())local aa=a.cache.ah if not aa then aa={c=__modImpl()}a.cache.ah=aa end return aa.c end end do local function __modImpl()
+return ad end function a.ag():typeof(__modImpl())local aa=a.cache.ag if not aa then aa={c=__modImpl()}a.cache.ag=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -16681,7 +16249,7 @@ local ad=aa(game:GetService"UserInputService")
 local ae=aa(game:GetService"RunService")
 local af=aa(game:GetService"Players")
 
-local ag=a.s()
+local ag=a.r()
 
 local ai=a.c()
 local ak=ai.New
@@ -16767,15 +16335,15 @@ return as and at or nil
 end
 
 
-local am=a.v().New
+local am=a.u().New
 local an=a.e().New
-local ao=a.w().New
-local ap=a.x()
-local aq=a.y()
-local ar=a.z()
-local as=a.A()
+local ao=a.v().New
+local ap=a.w()
+local aq=a.x()
+local ar=a.y()
+local as=a.z()
 
-local at=a.B()
+local at=a.A()
 
 
 
@@ -16834,7 +16402,6 @@ IsOpenButtonEnabled=true,
 
 CurrentConfig=nil,
 ConfigManager=nil,
-ThemeManagerController=nil,
 AcrylicPaint=nil,
 CurrentTab=nil,
 TabModule=nil,
@@ -16907,10 +16474,6 @@ CornerRadius=UDim.new(0,av.UICorner)
 
 if av.Folder then
 av.ConfigManager=at:Init(av)
-end
-
-if au.WindUI and au.WindUI.ThemeManager then
-au.WindUI.ThemeManager:AttachWindow(av)
 end
 
 
@@ -17871,7 +17434,7 @@ end
 
 
 
-av.OpenButtonMain=a.C().New(av)
+av.OpenButtonMain=a.B().New(av)
 
 
 task.spawn(function()
@@ -18358,22 +17921,6 @@ al(av.UIElements.Main,0.45,{Position=UDim2.new(0.5,0,0.5,0)},Enum.EasingStyle.Qu
 return av
 end
 
-local function SyncThemeManagerWithConfig(C)
-local F=au.WindUI and au.WindUI.ThemeManager
-if not F then
-return false
-end
-
-F:AttachWindow(av)
-F:SyncFromConfig(C)
-
-if av.ThemeManagerController and av.ThemeManagerController.Refresh then
-av.ThemeManagerController:Refresh()
-end
-
-return true
-end
-
 function av.SetCurrentConfig(C,F)
 av.CurrentConfig=F
 
@@ -18409,12 +17956,6 @@ end
 end
 end
 end
-
-SyncThemeManagerWithConfig(F)
-end
-
-function av.OnConfigCustomDataLoaded(C,F,G)
-SyncThemeManagerWithConfig(F)
 end
 
 function av.GetFlagElement(C,F)
@@ -18691,8 +18232,8 @@ av:EditOpenButton(av.OpenButton)
 end
 
 
-local C=a.ae()
-local F=a.af()
+local C=a.ad()
+local F=a.ae()
 local G=C.Init(av,au.WindUI,au.WindUI.TooltipGui)
 G:OnChange(function(H)av.CurrentTab=H end)
 
@@ -18902,456 +18443,26 @@ end
 av.SidebarDivider=av.SideBarDivider
 av.Divider=av.SideBarDivider
 
-function av.ThemeManager(H,J)
-local L=au.WindUI and au.WindUI.ThemeManager
-if not L then
-return nil,"ThemeManager is not available on WindUI"
+function av.IsResizable(H,J)
+av.Resizable=J
+av.CanResize=J
 end
 
-J=J or{}
-local M=J.Tab
-
-if typeof(M)~="table"then
-return nil,"ThemeManager requires config.Tab"
-end
-
-if av.ThemeManagerController and av.ThemeManagerController.Destroy then
-av.ThemeManagerController:Destroy()
-end
-
-L:AttachWindow(av)
-
-local function trim(N)
-if type(N)~="string"then
-return""
-end
-
-return(N:gsub("^%s+",""):gsub("%s+$",""))
-end
-
-local function getColor(N)
-if typeof(N)=="Color3"then
-return N
-end
-
-if type(N)=="string"then
-local O=N:gsub("#","")
-local P,Q=pcall(Color3.fromHex,O)
-if P then
-return Q
-end
-end
-
-return Color3.new(1,1,1)
-end
-
-local function notify(N,O,P)
-if au.WindUI and au.WindUI.Notify then
-au.WindUI:Notify{
-Title=N,
-Content=O,
-Icon=P or"palette",
-Duration=4,
-}
-end
-end
-
-local function getDropdownValues()
-local N={}
-
-for O,P in ipairs(L:GetBuiltInThemeNames())do
-table.insert(N,P)
-end
-
-for O,P in ipairs(L:GetCustomThemeNames())do
-table.insert(N,P)
-end
-
-return N
-end
-
-local N={
-Destroyed=false,
-Elements={
-Colorpickers={},
-Buttons={},
-},
-State={
-SelectedTheme=L:GetCurrentThemeName(),
-IsBuiltIn=false,
-JsonPayload="",
-},
-}
-
-local O=false
-local P=L.EditableKeys or{
-"Accent",
-"Background",
-"Button",
-"Dialog",
-"Text",
-"Icon",
-"Outline",
-"Placeholder",
-}
-
-local Q
-local R
-local S
-local T
-local U
-local V
-local W
-local X
-
-Q=M:Dropdown{
-Title="Theme",
-Desc="Select and apply a theme",
-Values=getDropdownValues(),
-Value=L:GetCurrentThemeName()or"Dark",
-Callback=function(Y)
-if O or N.Destroyed then
-return
-end
-
-local _=typeof(Y)=="table"and(Y.Title or Y.Value)or Y local
-aC, aD=L:ApplyTheme(_)
-
-if aD then
-notify("Theme Error",aD,"triangle-alert")
-return
-end
-
-N:Refresh()
-notify("Theme Applied","Applied '"..tostring(_).."'.")
-end,
-}
-
-R=M:Input{
-Title="Theme Name",
-Desc="Used by clone, rename and import",
-Placeholder="Enter theme name...",
-Value=L:GetCurrentThemeName()or"Dark",
-Callback=function(aC)
-N.State.NameInput=aC
-end,
-}
-
-S=M:Input{
-Title="Theme JSON",
-Desc="Exported payload or import source",
-Type="Textarea",
-Placeholder="Paste theme JSON...",
-Value="",
-Callback=function(aC)
-N.State.JsonPayload=aC
-end,
-}
-
-for aC,aD in ipairs(P)do
-local Y=L:GetTheme(L:GetCurrentThemeName()or"Dark")or{}
-N.Elements.Colorpickers[aD]=M:Colorpicker{
-Title=aD,
-Desc="Edit "..aD.." color",
-Default=getColor(Y[aD]),
-Callback=function(_)
-if O or N.Destroyed then
-return
-end
-
-local aE=L:GetCurrentThemeName()
-if L:IsBuiltIn(aE)then
-N:Refresh()
-notify("Theme Locked","Built-in themes are read-only.","lock")
-return
-end local
-
-aF, aG=L:UpdateTheme(aE,{
-[aD]=_,
-},{
-apply=true,
-})
-
-if aG then
-notify("Theme Error",aG,"triangle-alert")
-return
-end
-
-N:Refresh()
-end,
-}
-end
-
-V=M:Button{
-Title="Clone Theme",
-Icon="copy",
-Callback=function()
-if N.Destroyed then
-return
-end
-
-local aC=L:GetCurrentThemeName()
-local aD=trim((R and R.Value)or"")
-
-local aE,aF=L:CloneTheme(aC,aD)
-if not aE then
-notify("Theme Error",aF or"Failed to clone theme.","triangle-alert")
-return
-end
-
-L:ApplyTheme(aE.Name)
-N:Refresh()
-notify("Theme Cloned","Created '"..aE.Name.."'.")
-end,
-}
-
-T=M:Button{
-Title="Rename Theme",
-Icon="pencil",
-Callback=function()
-if N.Destroyed then
-return
-end
-
-local aC=L:GetCurrentThemeName()
-local aD=trim((R and R.Value)or"")
-
-local aE,aF=L:RenameTheme(aC,aD)
-if not aE then
-notify("Theme Error",aF or"Failed to rename theme.","triangle-alert")
-return
-end
-
-L:ApplyTheme(aD)
-N:Refresh()
-notify("Theme Renamed","Renamed to '"..aD.."'.")
-end,
-}
-
-U=M:Button{
-Title="Delete Theme",
-Icon="trash-2",
-Color="Red",
-Callback=function()
-if N.Destroyed then
-return
-end
-
-local aC=L:GetCurrentThemeName()
-local aD,aE=L:DeleteTheme(aC)
-if not aD then
-notify("Theme Error",aE or"Failed to delete theme.","triangle-alert")
-return
-end
-
-N:Refresh()
-notify("Theme Deleted","Deleted '"..tostring(aC).."'.")
-end,
-}
-
-X=M:Button{
-Title="Export Theme",
-Icon="download",
-Callback=function()
-if N.Destroyed then
-return
-end
-
-local aC,aD=L:ExportTheme(L:GetCurrentThemeName())
-if not aC then
-notify("Theme Error",aD or"Failed to export theme.","triangle-alert")
-return
-end
-
-if S and S.Set then
-S:Set(aC)
-end
-
-if setclipboard then
-pcall(setclipboard,aC)
-end
-
-N.State.JsonPayload=aC
-notify("Theme Exported","Theme JSON copied to input.")
-end,
-}
-
-W=M:Button{
-Title="Import Theme",
-Icon="upload",
-Callback=function()
-if N.Destroyed then
-return
-end
-
-local aC=trim((S and S.Value)or N.State.JsonPayload or"")
-if aC==""then
-notify("Theme Error","Theme JSON input is empty.","triangle-alert")
-return
-end
-
-local aD,aE=L:ImportTheme(aC,{
-apply=true,
-})
-
-if not aD then
-notify("Theme Error",aE or"Failed to import theme.","triangle-alert")
-return
-end
-
-N:Refresh()
-notify("Theme Imported","Imported '"..aD.Name.."'.")
-end,
-}
-
-N.Elements.ThemeDropdown=Q
-N.Elements.ThemeNameInput=R
-N.Elements.ThemeJsonInput=S
-N.Elements.Buttons.Clone=V
-N.Elements.Buttons.Rename=T
-N.Elements.Buttons.Delete=U
-N.Elements.Buttons.Export=X
-N.Elements.Buttons.Import=W
-
-local function setEditingLocked(aC)
-local aD="Built-in themes are read-only"
-
-if T and T.Lock then
-if aC then
-T:Lock(aD)
-else
-T:Unlock()
-end
-end
-
-if U and U.Lock then
-if aC then
-U:Lock(aD)
-else
-U:Unlock()
-end
-end
-
-for aE,aF in ipairs(P)do
-local aG=N.Elements.Colorpickers[aF]
-if aG and aG.Lock then
-if aC then
-aG:Lock(aD)
-else
-aG:Unlock()
-end
-end
-end
-end
-
-function N.Refresh(aC)
-if aC.Destroyed then
-return
-end
-
-O=true
-
-local aD=L:GetCurrentThemeName()or"Dark"
-local aE=L:GetTheme(aD)or L:GetTheme"Dark"or{}
-local aF=getDropdownValues()
-
-if Q and Q.Refresh then
-Q:Refresh(aF,true)
-end
-
-if Q and Q.Select then
-Q:Select(aD,true)
-end
-
-if R and R.Set then
-R:Set(aD)
-end
-
-for aG,Y in ipairs(P)do
-local _=aC.Elements.Colorpickers[Y]
-if _ and _.Set then
-_:Set(getColor(aE[Y]))
-end
-end
-
-local aG=L:IsBuiltIn(aD)
-setEditingLocked(aG)
-
-aC.State.SelectedTheme=aD
-aC.State.IsBuiltIn=aG
-aC.State.Values=aF
-
-O=false
-end
-
-function N.Destroy(aC)
-if aC.Destroyed then
-return
-end
-
-aC.Destroyed=true
-
-local function destroyElement(aD)
-if aD and aD.Destroy then
-pcall(function()
-aD:Destroy()
-end)
-end
-end
-
-destroyElement(Q)
-destroyElement(R)
-destroyElement(S)
-destroyElement(V)
-destroyElement(T)
-destroyElement(U)
-destroyElement(X)
-destroyElement(W)
-
-for aD,aE in ipairs(P)do
-destroyElement(aC.Elements.Colorpickers[aE])
-aC.Elements.Colorpickers[aE]=nil
-end
-
-if av.ThemeManagerController==aC then
-av.ThemeManagerController=nil
-end
-end
-
-function N.GetElements(aC)
-return aC.Elements
-end
-
-function N.GetState(aC)
-return table.clone(aC.State)
-end
-
-av.ThemeManagerController=N
-N:Refresh()
-
-return N
-end
-
-function av.IsResizable(aC,aD)
-av.Resizable=aD
-av.CanResize=aD
-end
-
-function av.SetPanelBackground(aC,aD,aE)
-if typeof(aD)=="boolean"then
-local aF=aE==true and(not aD)or aD
-av.HidePanelBackground=aF
-local aG=not aF
-
-av.UIElements.MainBar.Background.Visible=aG
+function av.SetPanelBackground(H,J,L)
+if typeof(J)=="boolean"then
+local M=L==true and(not J)or J
+av.HidePanelBackground=M
+local N=not M
+
+av.UIElements.MainBar.Background.Visible=N
 
 if G then
-local H=av.HidePanelBackground and 10 or 20
-for J,L in next,G.Containers do
-L.ScrollingFrame.UIPadding.PaddingTop=UDim.new(0,H)
-L.ScrollingFrame.UIPadding.PaddingLeft=UDim.new(0,H)
-L.ScrollingFrame.UIPadding.PaddingRight=UDim.new(0,H)
-L.ScrollingFrame.UIPadding.PaddingBottom=UDim.new(0,H)
+local O=av.HidePanelBackground and 10 or 20
+for P,Q in next,G.Containers do
+Q.ScrollingFrame.UIPadding.PaddingTop=UDim.new(0,O)
+Q.ScrollingFrame.UIPadding.PaddingLeft=UDim.new(0,O)
+Q.ScrollingFrame.UIPadding.PaddingRight=UDim.new(0,O)
+Q.ScrollingFrame.UIPadding.PaddingBottom=UDim.new(0,O)
 end
 end
 end
@@ -19359,99 +18470,99 @@ end
 return av
 end
 
-function av.SetPanelBackgroundVisible(aC,aD)
-if typeof(aD)=="boolean"then
-return av:SetPanelBackground(aD,true)
+function av.SetPanelBackgroundVisible(H,J)
+if typeof(J)=="boolean"then
+return av:SetPanelBackground(J,true)
 end
 return av
 end
 
-function av.SetPanelBackgroundHidden(aC,aD)
-if typeof(aD)=="boolean"then
-return av:SetPanelBackground(aD,false)
+function av.SetPanelBackgroundHidden(H,J)
+if typeof(J)=="boolean"then
+return av:SetPanelBackground(J,false)
 end
 return av
 end
 
-local aC=a.m().Init(av,nil)
-function av.Dialog(aD,aE)
-local aF={
-Title=aE.Title or"Dialog",
-Width=aE.Width or 320,
-Content=aE.Content,
-Buttons=aE.Buttons or{},
+local H=a.m().Init(av,nil)
+function av.Dialog(J,L)
+local M={
+Title=L.Title or"Dialog",
+Width=L.Width or 320,
+Content=L.Content,
+Buttons=L.Buttons or{},
 
 TextPadding=14,
 }
-local aG=aC.Create(false)
+local N=H.Create(false)
 
-aG.UIElements.Main.Size=UDim2.new(0,aF.Width,0,0)
+N.UIElements.Main.Size=UDim2.new(0,M.Width,0,0)
 
-local H=ak("Frame",{
+local O=ak("Frame",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 BackgroundTransparency=1,
-Parent=aG.UIElements.Main
+Parent=N.UIElements.Main
 },{
 ak("UIListLayout",{
 FillDirection="Horizontal",
-Padding=UDim.new(0,aG.UIPadding),
+Padding=UDim.new(0,N.UIPadding),
 VerticalAlignment="Center"
 }),
 ak("UIPadding",{
-PaddingTop=UDim.new(0,aF.TextPadding/2),
-PaddingLeft=UDim.new(0,aF.TextPadding/2),
-PaddingRight=UDim.new(0,aF.TextPadding/2),
+PaddingTop=UDim.new(0,M.TextPadding/2),
+PaddingLeft=UDim.new(0,M.TextPadding/2),
+PaddingRight=UDim.new(0,M.TextPadding/2),
 })
 })
 
-local J
-if aE.Icon then
-J=ai.Image(
-aE.Icon,
-aF.Title..":"..aE.Icon,
+local P
+if L.Icon then
+P=ai.Image(
+L.Icon,
+M.Title..":"..L.Icon,
 0,
 av,
 "Dialog",
 true,
-aE.IconThemed
+L.IconThemed
 )
-J.Size=UDim2.new(0,22,0,22)
-J.Parent=H
+P.Size=UDim2.new(0,22,0,22)
+P.Parent=O
 end
 
-aG.UIElements.UIListLayout=ak("UIListLayout",{
+N.UIElements.UIListLayout=ak("UIListLayout",{
 Padding=UDim.new(0,12),
 FillDirection="Vertical",
 HorizontalAlignment="Left",
-Parent=aG.UIElements.Main
+Parent=N.UIElements.Main
 })
 
 ak("UISizeConstraint",{
 MinSize=Vector2.new(180,20),
 MaxSize=Vector2.new(400,math.huge),
-Parent=aG.UIElements.Main,
+Parent=N.UIElements.Main,
 })
 
 
-aG.UIElements.Title=ak("TextLabel",{
-Text=aF.Title,
+N.UIElements.Title=ak("TextLabel",{
+Text=M.Title,
 TextSize=20,
 FontFace=Font.new(ai.Font,Enum.FontWeight.SemiBold),
 TextXAlignment="Left",
 TextWrapped=true,
 RichText=true,
-Size=UDim2.new(1,J and-26-aG.UIPadding or 0,0,0),
+Size=UDim2.new(1,P and-26-N.UIPadding or 0,0,0),
 AutomaticSize="Y",
 ThemeTag={
 TextColor3="Text"
 },
 BackgroundTransparency=1,
-Parent=H
+Parent=O
 })
-if aF.Content then
+if M.Content then
 ak("TextLabel",{
-Text=aF.Content,
+Text=M.Content,
 TextSize=18,
 TextTransparency=.4,
 TextWrapped=true,
@@ -19465,30 +18576,30 @@ ThemeTag={
 TextColor3="Text"
 },
 BackgroundTransparency=1,
-Parent=aG.UIElements.Main
+Parent=N.UIElements.Main
 },{
 ak("UIPadding",{
-PaddingLeft=UDim.new(0,aF.TextPadding/2),
-PaddingRight=UDim.new(0,aF.TextPadding/2),
-PaddingBottom=UDim.new(0,aF.TextPadding/2),
+PaddingLeft=UDim.new(0,M.TextPadding/2),
+PaddingRight=UDim.new(0,M.TextPadding/2),
+PaddingBottom=UDim.new(0,M.TextPadding/2),
 })
 })
 end
 
-local L=ak("UIListLayout",{
+local Q=ak("UIListLayout",{
 Padding=UDim.new(0,6),
 FillDirection="Horizontal",
 HorizontalAlignment="Right",
 })
 
-local M=ak("Frame",{
+local R=ak("Frame",{
 Size=UDim2.new(1,0,0,40),
 AutomaticSize="None",
 BackgroundTransparency=1,
-Parent=aG.UIElements.Main,
+Parent=N.UIElements.Main,
 LayoutOrder=4,
 },{
-L,
+Q,
 
 
 
@@ -19498,76 +18609,76 @@ L,
 })
 
 
-local N={}
+local S={}
 
-for O,P in next,aF.Buttons do
-local Q=an(P.Title,P.Icon,P.Callback,P.Variant,M,aG,true)
-table.insert(N,Q)
+for T,U in next,M.Buttons do
+local V=an(U.Title,U.Icon,U.Callback,U.Variant,R,N,true)
+table.insert(S,V)
 end
 
 local function CheckButtonsOverflow()
-L.FillDirection=Enum.FillDirection.Horizontal
-L.HorizontalAlignment=Enum.HorizontalAlignment.Right
-L.VerticalAlignment=Enum.VerticalAlignment.Center
-M.AutomaticSize=Enum.AutomaticSize.None
+Q.FillDirection=Enum.FillDirection.Horizontal
+Q.HorizontalAlignment=Enum.HorizontalAlignment.Right
+Q.VerticalAlignment=Enum.VerticalAlignment.Center
+R.AutomaticSize=Enum.AutomaticSize.None
 
-for O,P in ipairs(N)do
-P.Size=UDim2.new(0,0,1,0)
-P.AutomaticSize=Enum.AutomaticSize.X
+for T,U in ipairs(S)do
+U.Size=UDim2.new(0,0,1,0)
+U.AutomaticSize=Enum.AutomaticSize.X
 end
 
 wait()
 
-local O=L.AbsoluteContentSize.X/au.WindUI.UIScale
-local P=M.AbsoluteSize.X/au.WindUI.UIScale
+local T=Q.AbsoluteContentSize.X/au.WindUI.UIScale
+local U=R.AbsoluteSize.X/au.WindUI.UIScale
 
-if O>P then
-L.FillDirection=Enum.FillDirection.Vertical
-L.HorizontalAlignment=Enum.HorizontalAlignment.Right
-L.VerticalAlignment=Enum.VerticalAlignment.Bottom
-M.AutomaticSize=Enum.AutomaticSize.Y
+if T>U then
+Q.FillDirection=Enum.FillDirection.Vertical
+Q.HorizontalAlignment=Enum.HorizontalAlignment.Right
+Q.VerticalAlignment=Enum.VerticalAlignment.Bottom
+R.AutomaticSize=Enum.AutomaticSize.Y
 
-for Q,R in ipairs(N)do
-R.Size=UDim2.new(1,0,0,40)
-R.AutomaticSize=Enum.AutomaticSize.None
+for V,W in ipairs(S)do
+W.Size=UDim2.new(1,0,0,40)
+W.AutomaticSize=Enum.AutomaticSize.None
 end
 else
-local Q=P-O
-if Q>0 then
-local R
-local S=math.huge
+local V=U-T
+if V>0 then
+local W
+local X=math.huge
 
-for T,U in ipairs(N)do
-local V=U.AbsoluteSize.X/au.WindUI.UIScale
-if V<S then
-S=V
-R=U
-end
-end
-
-if R then
-R.Size=UDim2.new(0,S+Q,1,0)
-R.AutomaticSize=Enum.AutomaticSize.None
-end
-end
+for Y,_ in ipairs(S)do
+local aC=_.AbsoluteSize.X/au.WindUI.UIScale
+if aC<X then
+X=aC
+W=_
 end
 end
 
-ai.AddSignal(aG.UIElements.Main:GetPropertyChangedSignal"AbsoluteSize",CheckButtonsOverflow)
+if W then
+W.Size=UDim2.new(0,X+V,1,0)
+W.AutomaticSize=Enum.AutomaticSize.None
+end
+end
+end
+end
+
+ai.AddSignal(N.UIElements.Main:GetPropertyChangedSignal"AbsoluteSize",CheckButtonsOverflow)
 CheckButtonsOverflow()
 
 wait()
-aG:Open()
+N:Open()
 
-return aG
+return N
 end
 
-local aD=false
+local aC=false
 
 av:CreateTopbarButton("Close","x",function()
-if not aD then
+if not aC then
 if not av.IgnoreAlerts then
-aD=true
+aC=true
 av:SetToTheCenter()
 av:Dialog{
 
@@ -19577,14 +18688,14 @@ Buttons={
 {
 Title="Cancel",
 
-Callback=function()aD=false end,
+Callback=function()aC=false end,
 Variant="Secondary",
 },
 {
 Title="Close Window",
 
 Callback=function()
-aD=false
+aC=false
 av:Destroy()
 end,
 Variant="Primary",
@@ -19597,14 +18708,14 @@ end
 end
 end,(av.Topbar.ButtonsType=="Default"and 999 or 997),nil,Color3.fromHex"#F4695F")
 
-function av.Tag(aE,aF)
+function av.Tag(J,L)
 if av.UIElements.Main.Main.Topbar.Center.Visible==false then av.UIElements.Main.Main.Topbar.Center.Visible=true end
-return ar:New(aF,av.UIElements.Main.Main.Topbar.Center)
+return ar:New(L,av.UIElements.Main.Main.Topbar.Center)
 end
 
-function av.Watermark(aE,aF)
-if typeof(aF)~="table"then
-aF={}
+function av.Watermark(J,L)
+if typeof(L)~="table"then
+L={}
 end
 
 if av.WatermarkObject and av.WatermarkObject.Destroy then
@@ -19612,22 +18723,22 @@ av.WatermarkObject:Destroy()
 av.WatermarkObject=nil
 end
 
-av.WatermarkObject=as:New(aF,av.UIElements.Main.Background)
+av.WatermarkObject=as:New(L,av.UIElements.Main.Background)
 
 return av.WatermarkObject
 end
 
-function av.CreateWatermark(aE,aF)
-return av:Watermark(aF)
+function av.CreateWatermark(J,L)
+return av:Watermark(L)
 end
 
-function av.SetBottomDragBarEnabled(aE,aF)
-if aF~=false then aF=true end
+function av.SetBottomDragBarEnabled(J,L)
+if L~=false then L=true end
 
-av.BottomDragBarEnabled=aF
-r.Frame.Active=aF
+av.BottomDragBarEnabled=L
+r.Frame.Active=L
 
-if aF then
+if L then
 r.Visible=true
 r.ImageTransparency=.8
 if not av.Closed then
@@ -19649,25 +18760,25 @@ if av.WatermarkConfig and av.WatermarkConfig~=false then
 av:Watermark(typeof(av.WatermarkConfig)=="table"and av.WatermarkConfig or{})
 end
 
-local aE=false
-local aF=av.UIElements.Main.Size
-local aG=Vector2.new(0,0)
+local J=false
+local L=av.UIElements.Main.Size
+local M=Vector2.new(0,0)
 
-local function startResizing(H)
+local function startResizing(N)
 if av.CanResize then
-aE=true
+J=true
 aA.Active=true
-aF=av.UIElements.Main.Size
-aG=H.Position
+L=av.UIElements.Main.Size
+M=N.Position
 
 
 if az then
 al(az,0.1,{ImageTransparency=.35}):Play()
 end
 
-ai.AddSignal(H.Changed,function()
-if H.UserInputState==Enum.UserInputState.End then
-aE=false
+ai.AddSignal(N.Changed,function()
+if N.UserInputState==Enum.UserInputState.End then
+J=false
 aA.Active=false
 
 
@@ -19679,32 +18790,32 @@ end)
 end
 end
 
-ai.AddSignal(ay.InputBegan,function(H)
-if H.UserInputType==Enum.UserInputType.MouseButton1 or H.UserInputType==Enum.UserInputType.Touch then
+ai.AddSignal(ay.InputBegan,function(N)
+if N.UserInputType==Enum.UserInputType.MouseButton1 or N.UserInputType==Enum.UserInputType.Touch then
 if av.CanResize then
-startResizing(H)
+startResizing(N)
 end
 end
 end)
 
-ai.AddSignal(ad.InputChanged,function(H)
-if H.UserInputType==Enum.UserInputType.MouseMovement or H.UserInputType==Enum.UserInputType.Touch then
-if aE and av.CanResize then
-local J=H.Position-aG
-local L=UDim2.new(0,aF.X.Offset+J.X*2,0,aF.Y.Offset+J.Y*2)
+ai.AddSignal(ad.InputChanged,function(N)
+if N.UserInputType==Enum.UserInputType.MouseMovement or N.UserInputType==Enum.UserInputType.Touch then
+if J and av.CanResize then
+local O=N.Position-M
+local P=UDim2.new(0,L.X.Offset+O.X*2,0,L.Y.Offset+O.Y*2)
 
-L=UDim2.new(
-L.X.Scale,
-math.clamp(L.X.Offset,av.MinSize.X,av.MaxSize.X),
-L.Y.Scale,
-math.clamp(L.Y.Offset,av.MinSize.Y,av.MaxSize.Y)
+P=UDim2.new(
+P.X.Scale,
+math.clamp(P.X.Offset,av.MinSize.X,av.MaxSize.X),
+P.Y.Scale,
+math.clamp(P.Y.Offset,av.MinSize.Y,av.MaxSize.Y)
 )
 
 al(av.UIElements.Main,0,{
-Size=L
+Size=P
 }):Play()
 
-av.Size=L
+av.Size=P
 end
 end
 end)
@@ -19712,10 +18823,10 @@ end)
 
 
 
-local H=0
-local J=0.4
-local L
-local M=0
+local N=0
+local O=0.4
+local P
+local Q=0
 
 function onDoubleClick()
 av:SetToTheCenter()
@@ -19724,35 +18835,35 @@ end
 r.Frame.MouseButton1Up:Connect(function()
 if not av.BottomDragBarEnabled then return end
 
-local N=tick()
-local O=av.Position
+local R=tick()
+local S=av.Position
 
-M=M+1
+Q=Q+1
 
-if M==1 then
-H=N
-L=O
+if Q==1 then
+N=R
+P=S
 
 task.spawn(function()
-task.wait(J)
-if M==1 then
-M=0
-L=nil
+task.wait(O)
+if Q==1 then
+Q=0
+P=nil
 end
 end)
 
-elseif M==2 then
-if N-H<=J and O==L then
+elseif Q==2 then
+if R-N<=O and S==P then
 onDoubleClick()
 end
 
-M=0
-L=nil
-H=0
+Q=0
+P=nil
+N=0
 else
-M=1
-H=N
-L=O
+Q=1
+N=R
+P=S
 end
 end)
 
@@ -19761,8 +18872,8 @@ end)
 
 
 if not av.HideSearchBar then
-local N=a.ah()
-local O=false
+local R=a.ag()
+local S=false
 
 
 
@@ -19784,16 +18895,16 @@ local O=false
 
 
 
-local P=am("Search","search",av.UIElements.SideBarContainer,true)
-P.Size=UDim2.new(1,-av.UIPadding/2,0,39)
-P.Position=UDim2.new(0,av.UIPadding/2,0,0)
+local T=am("Search","search",av.UIElements.SideBarContainer,true)
+T.Size=UDim2.new(1,-av.UIPadding/2,0,39)
+T.Position=UDim2.new(0,av.UIPadding/2,0,0)
 
-ai.AddSignal(P.MouseButton1Click,function()
-if O then return end
+ai.AddSignal(T.MouseButton1Click,function()
+if S then return end
 
-N.new(av.TabModule,av.UIElements.Main,function()
+R.new(av.TabModule,av.UIElements.Main,function()
 
-O=false
+S=false
 if av.Resizable then
 av.CanResize=true
 end
@@ -19804,7 +18915,7 @@ end)
 al(aB,0.1,{ImageTransparency=.65}):Play()
 aB.Active=true
 
-O=true
+S=true
 av.CanResize=false
 end)
 end
@@ -19812,11 +18923,11 @@ end
 
 
 
-function av.DisableTopbarButtons(N,O)
-for P,Q in next,O do
-for R,S in next,av.TopBarButtons do
-if S.Name==Q then
-S.Object.Visible=false
+function av.DisableTopbarButtons(R,S)
+for T,U in next,S do
+for V,W in next,av.TopBarButtons do
+if W.Name==U then
+W.Object.Visible=false
 end
 end
 end
@@ -19850,13 +18961,12 @@ end
 
 
 return av
-end end function a.ai():typeof(__modImpl())local aa=a.cache.ai if not aa then aa={c=__modImpl()}a.cache.ai=aa end return aa.c end end end
+end end function a.ah():typeof(__modImpl())local aa=a.cache.ah if not aa then aa={c=__modImpl()}a.cache.ah=aa end return aa.c end end end
 
 local aa=game:GetService"RunService"
 local ad={
 Window=nil,
 Theme=nil,
-ThemeManager=nil,
 Creator=a.c(),
 LocalizationModule=a.d(),
 NotificationModule=a.f(),
@@ -19889,39 +18999,38 @@ local ag=ae(game:GetService"CoreGui")local ai=
 
 af.LocalPlayer or nil
 
-local ak=a.n()
-local al=a.o()local am=
+local ak=a.n()local al=
 
 ad.Services
 
 
-local an=ad.Creator
+local am=ad.Creator
 
-local ao=an.New local ap=
-an.Tween
-
-
-local aq=a.s()
+local an=am.New local ao=
+am.Tween
 
 
-local ar=protectgui or(syn and syn.protect_gui)or function()end
+local ap=a.r()
 
-local as=gethui and gethui()or(ag or game.Players.LocalPlayer:WaitForChild"PlayerGui")
 
-local at=ao("UIScale",{
+local aq=protectgui or(syn and syn.protect_gui)or function()end
+
+local ar=gethui and gethui()or(ag or game.Players.LocalPlayer:WaitForChild"PlayerGui")
+
+local as=an("UIScale",{
 Scale=ad.UIScale,
 })
 
-ad.UIScaleObj=at
+ad.UIScaleObj=as
 
-ad.ScreenGui=ao("ScreenGui",{
+ad.ScreenGui=an("ScreenGui",{
 Name="WindUI",
-Parent=as,
+Parent=ar,
 IgnoreGuiInset=true,
 ScreenInsets="None",
 },{
 
-ao("Folder",{
+an("Folder",{
 Name="Window"
 }),
 
@@ -19930,287 +19039,268 @@ Name="Window"
 
 
 
-ao("Folder",{
+an("Folder",{
 Name="KeySystem"
 }),
-ao("Folder",{
+an("Folder",{
 Name="Popups"
 }),
-ao("Folder",{
+an("Folder",{
 Name="ToolTips"
 })
 })
 
-ad.NotificationGui=ao("ScreenGui",{
+ad.NotificationGui=an("ScreenGui",{
 Name="WindUI/Notifications",
-Parent=as,
+Parent=ar,
 IgnoreGuiInset=true,
 })
-ad.DropdownGui=ao("ScreenGui",{
+ad.DropdownGui=an("ScreenGui",{
 Name="WindUI/Dropdowns",
-Parent=as,
+Parent=ar,
 IgnoreGuiInset=true,
 })
-ad.TooltipGui=ao("ScreenGui",{
+ad.TooltipGui=an("ScreenGui",{
 Name="WindUI/Tooltips",
-Parent=as,
+Parent=ar,
 IgnoreGuiInset=true,
 })
-ar(ad.ScreenGui)
-ar(ad.NotificationGui)
-ar(ad.DropdownGui)
-ar(ad.TooltipGui)
+aq(ad.ScreenGui)
+aq(ad.NotificationGui)
+aq(ad.DropdownGui)
+aq(ad.TooltipGui)
 
-an.Init(ad)
+am.Init(ad)
 
 
-function ad.SetParent(au,av)
-ad.ScreenGui.Parent=av
-ad.NotificationGui.Parent=av
-ad.DropdownGui.Parent=av
-ad.TooltipGui.Parent=av
+function ad.SetParent(at,au)
+ad.ScreenGui.Parent=au
+ad.NotificationGui.Parent=au
+ad.DropdownGui.Parent=au
+ad.TooltipGui.Parent=au
 end
 ad.TransparencyValue=math.clamp(ad.TransparencyValue,0,1)
 
-local au=ad.NotificationModule.Init(ad.NotificationGui)
+local at=ad.NotificationModule.Init(ad.NotificationGui)
 
-function ad.Notify(av,aw)
-aw.Holder=au.Frame
-aw.Window=ad.Window
+function ad.Notify(au,av)
+av.Holder=at.Frame
+av.Window=ad.Window
 
-return ad.NotificationModule.New(aw)
+return ad.NotificationModule.New(av)
 end
 
-function ad.SetNotificationLower(av,aw)
-au.SetLower(aw)
+function ad.SetNotificationLower(au,av)
+at.SetLower(av)
 end
 
-function ad.SetFont(av,aw)
-an.UpdateFont(aw)
+function ad.SetFont(au,av)
+am.UpdateFont(av)
 end
 
-function ad.OnThemeChange(av,aw)
-ad.OnThemeChangeFunction=aw
+function ad.OnThemeChange(au,av)
+ad.OnThemeChangeFunction=av
 end
 
-function ad.AddTheme(av,aw)
-if not ad.ThemeManager or type(aw)~="table"then
+function ad.AddTheme(au,av)
+ad.Themes[av.Name]=av
+return av
+end
+
+function ad.SetTheme(au,av)
+if ad.Themes[av]then
+ad.Theme=ad.Themes[av]
+am.SetTheme(ad.Themes[av])
+
+if ad.OnThemeChangeFunction then
+ad.OnThemeChangeFunction(av)
+end
+
+return ad.Themes[av]
+end
 return nil
 end
 
-local ax=aw.Name
-local ay,az=ad.ThemeManager:CreateTheme(ax,aw,{
-overwrite=true,
-})
-
-if not ay and ad.Window and ad.Window.Debug then
-warn("[ WindUI.ThemeManager ] "..tostring(az))
+function ad.GetThemes(au)
+return ad.Themes
 end
-
-return ay
-end
-
-function ad.SetTheme(av,aw)
-if ad.ThemeManager then
-local ax=ad.ThemeManager:ApplyTheme(aw)
-return ax
-end
-
-return nil
-end
-
-function ad.GetThemes(av)
-if ad.ThemeManager then
-return ad.ThemeManager:GetThemes()
-end
-
-return ad.Themes or{}
-end
-function ad.GetCurrentTheme(av)
-if ad.ThemeManager then
-return ad.ThemeManager:GetCurrentThemeName()
-end
-
+function ad.GetCurrentTheme(au)
 return ad.Theme and ad.Theme.Name or nil
 end
-function ad.GetTransparency(av)
+function ad.GetTransparency(au)
 return ad.Transparent or false
 end
-function ad.GetWindowSize(av)
+function ad.GetWindowSize(au)
 if ad.Window and ad.Window.UIElements and ad.Window.UIElements.Main then
 return ad.Window.UIElements.Main.Size
 end
 return nil
 end
-function ad.Localization(av,aw)
-return ad.LocalizationModule:New(aw,an)
+function ad.Localization(au,av)
+return ad.LocalizationModule:New(av,am)
 end
 
-function ad.SetLanguage(av,aw)
-if an.Localization then
-return an.SetLanguage(aw)
+function ad.SetLanguage(au,av)
+if am.Localization then
+return am.SetLanguage(av)
 end
 return false
 end
 
-function ad.ToggleAcrylic(av,aw)
+function ad.ToggleAcrylic(au,av)
 if ad.Window and ad.Window.AcrylicPaint and ad.Window.AcrylicPaint.Model then
-ad.Window.Acrylic=aw
-ad.Window.AcrylicPaint.Model.Transparency=aw and 0.98 or 1
-if aw then
-aq.Enable()
+ad.Window.Acrylic=av
+ad.Window.AcrylicPaint.Model.Transparency=av and 0.98 or 1
+if av then
+ap.Enable()
 else
-aq.Disable()
+ap.Disable()
 end
 end
 end
 
 
-function ad.Gradient(av,aw,ax)
-if typeof(aw)~="table"then
-aw={}
+function ad.Gradient(au,av,aw)
+if typeof(av)~="table"then
+av={}
 end
 
+local ax={}
 local ay={}
-local az={}
 
-for aA,aB in next,aw do
-local aC=tonumber(aA)
-if aC then
-aC=math.clamp(aC/100,0,1)
+for az,aA in next,av do
+local aB=tonumber(az)
+if aB then
+aB=math.clamp(aB/100,0,1)
 
-local aD=aB.Color
-if typeof(aD)=="string"and string.sub(aD,1,1)=="#"then
-aD=Color3.fromHex(aD)
+local aC=aA.Color
+if typeof(aC)=="string"and string.sub(aC,1,1)=="#"then
+aC=Color3.fromHex(aC)
 end
 
-local aE=aB.Transparency or 0
+local b=aA.Transparency or 0
 
-table.insert(ay,ColorSequenceKeypoint.new(aC,aD))
-table.insert(az,NumberSequenceKeypoint.new(aC,aE))
+table.insert(ax,ColorSequenceKeypoint.new(aB,aC))
+table.insert(ay,NumberSequenceKeypoint.new(aB,b))
 end
 end
 
-table.sort(ay,function(aA,aB)return aA.Time<aB.Time end)
-table.sort(az,function(aA,aB)return aA.Time<aB.Time end)
+table.sort(ax,function(az,aA)return az.Time<aA.Time end)
+table.sort(ay,function(az,aA)return az.Time<aA.Time end)
 
-if#ay==0 then
-table.insert(ay,ColorSequenceKeypoint.new(0,Color3.new(1,1,1)))
-table.insert(ay,ColorSequenceKeypoint.new(1,Color3.new(1,1,1)))
-table.insert(az,NumberSequenceKeypoint.new(0,0))
-table.insert(az,NumberSequenceKeypoint.new(1,0))
-elseif#ay<2 then
-table.insert(ay,ColorSequenceKeypoint.new(1,ay[1].Value))
-table.insert(az,NumberSequenceKeypoint.new(1,az[1].Value))
+if#ax==0 then
+table.insert(ax,ColorSequenceKeypoint.new(0,Color3.new(1,1,1)))
+table.insert(ax,ColorSequenceKeypoint.new(1,Color3.new(1,1,1)))
+table.insert(ay,NumberSequenceKeypoint.new(0,0))
+table.insert(ay,NumberSequenceKeypoint.new(1,0))
+elseif#ax<2 then
+table.insert(ax,ColorSequenceKeypoint.new(1,ax[1].Value))
+table.insert(ay,NumberSequenceKeypoint.new(1,ay[1].Value))
 end
 
-local aA={
-Color=ColorSequence.new(ay),
-Transparency=NumberSequence.new(az),
+local az={
+Color=ColorSequence.new(ax),
+Transparency=NumberSequence.new(ay),
 }
 
-if ax then
-for aB,aC in pairs(ax)do
-aA[aB]=aC
+if aw then
+for aA,aB in pairs(aw)do
+az[aA]=aB
 end
 end
 
-return aA
+return az
 end
 
 
-function ad.Popup(av,aw)
-aw.WindUI=ad
-return a.t().new(aw)
+function ad.Popup(au,av)
+av.WindUI=ad
+return a.s().new(av)
 end
 
 
-ad.ThemeManager=al.Init(
-ad,
-an,a.u()
-(ad)
-)
-ad.Themes=ad.ThemeManager:GetThemes()
-an.Themes=ad.Themes
+ad.Themes=a.t()(ad)
+
+am.Themes=ad.Themes
+
 
 ad:SetTheme"Dark"
-ad:SetLanguage(an.Language)
+ad:SetLanguage(am.Language)
 
 
-function ad.CreateWindow(av,aw)
-aw=aw or{}
+function ad.CreateWindow(au,av)
+av=av or{}
 
-local ax=a.ai()
+local aw=a.ah()
 
 if not aa:IsStudio()and writefile then
 if not isfolder"WindUI"then
 makefolder"WindUI"
 end
-if aw.Folder then
-if not isfolder(aw.Folder)then
-makefolder(aw.Folder)
+if av.Folder then
+if not isfolder(av.Folder)then
+makefolder(av.Folder)
 end
 else
-if aw.Title and not isfolder(aw.Title)then
-makefolder(aw.Title)
+if av.Title and not isfolder(av.Title)then
+makefolder(av.Title)
 end
 end
 end
 
-aw.WindUI=ad
-aw.Parent=ad.ScreenGui.Window
+av.WindUI=ad
+av.Parent=ad.ScreenGui.Window
 
 if ad.Window then
 warn"You cannot create more than one window"
 return
 end
 
-local ay=true
+local ax=true
 
-local az=aw.Theme or ad:GetCurrentTheme()or"Dark"
-local aA=ad:SetTheme(az)
-if not aA and az~="Dark"then
-ad:SetTheme"Dark"
+local ay=ad.Themes[av.Theme or"Dark"]or ad.Theme or ad.Themes.Dark
+if ay then
+am.SetTheme(ay)
 end
 
 
-local aB=gethwid or function()
+local az=gethwid or function()
 return af.LocalPlayer.UserId
 end
 
-local aC=aB()
+local aA=az()
 
-if aw.KeySystem then
-ay=false
+if av.KeySystem then
+ax=false
 
 local function loadKeysystem()
-ak.new(aw,aC,function(aD)ay=aD end)
+ak.new(av,aA,function(aB)ax=aB end)
 end
 
-local aD=(aw.Folder or"Temp").."/"..aC..".key"
+local aB=(av.Folder or"Temp").."/"..aA..".key"
 
-if aw.KeySystem.KeyValidator then
-if aw.KeySystem.SaveKey and isfile(aD)then
-local aE=readfile(aD)
-local aF=aw.KeySystem.KeyValidator(aE)
+if av.KeySystem.KeyValidator then
+if av.KeySystem.SaveKey and isfile(aB)then
+local aC=readfile(aB)
+local b=av.KeySystem.KeyValidator(aC)
 
-if aF then
-ay=true
+if b then
+ax=true
 else
 loadKeysystem()
 end
 else
 loadKeysystem()
 end
-elseif not aw.KeySystem.API then
-if aw.KeySystem.SaveKey and isfile(aD)then
-local aE=readfile(aD)
-local aF=(type(aw.KeySystem.Key)=="table")
-and table.find(aw.KeySystem.Key,aE)
-or tostring(aw.KeySystem.Key)==tostring(aE)
+elseif not av.KeySystem.API then
+if av.KeySystem.SaveKey and isfile(aB)then
+local aC=readfile(aB)
+local b=(type(av.KeySystem.Key)=="table")
+and table.find(av.KeySystem.Key,aC)
+or tostring(av.KeySystem.Key)==tostring(aC)
 
-if aF then
-ay=true
+if b then
+ax=true
 else
 loadKeysystem()
 end
@@ -20218,44 +19308,44 @@ else
 loadKeysystem()
 end
 else
-if isfile(aD)then
-local aE=readfile(aD)
-local aF=false
+if isfile(aB)then
+local aC=readfile(aB)
+local b=false
 
-for aG,b in next,aw.KeySystem.API do
-local d=ad.Services[b.Type]
-if d then
-local f={}
-for g,h in next,d.Args do
-table.insert(f,b[h])
+for d,f in next,av.KeySystem.API do
+local g=ad.Services[f.Type]
+if g then
+local h={}
+for j,l in next,g.Args do
+table.insert(h,f[l])
 end
 
-local g=d.New(table.unpack(f))
-local h=g.Verify(aE)
-if h then
-aF=true
+local j=g.New(table.unpack(h))
+local l=j.Verify(aC)
+if l then
+b=true
 break
 end
 end
 end
 
-ay=aF
-if not aF then loadKeysystem()end
+ax=b
+if not b then loadKeysystem()end
 else
 loadKeysystem()
 end
 end
 
-repeat task.wait()until ay
+repeat task.wait()until ax
 end
 
-local aD=ax(aw)
+local aB=aw(av)
 
-ad.Transparent=aw.Transparent
-ad.Window=aD
+ad.Transparent=av.Transparent
+ad.Window=aB
 
-if aw.Acrylic then
-aq.init()
+if av.Acrylic then
+ap.init()
 end
 
 
@@ -20270,7 +19360,7 @@ end
 
 
 
-return aD
+return aB
 end
 
 return ad
