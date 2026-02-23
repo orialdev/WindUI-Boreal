@@ -13087,7 +13087,7 @@ ao=ao+1
 local d=ao
 
 local f=aB and 0.32 or 1
-local g=aB and 0.26 or 1
+local g=1
 local h=aB and 0.4 or 1
 local j=aB and 0.05 or 1
 
@@ -13947,7 +13947,7 @@ at=at+1
 local u=at
 
 local v=p and 0.32 or 1
-local x=p and 0.26 or 1
+local x=1
 local z=p and 0.4 or 1
 local A=p and 0.05 or 1
 
