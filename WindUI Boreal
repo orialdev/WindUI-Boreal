@@ -1,6 +1,6 @@
 -- WindUI Boreal
 -- Version: v0.0.1
--- BuildDate: 2026-02-22
+-- BuildDate: 2026-02-23
 -- Description: Roblox UI Library for scripts
 -- Repository: https://github.com/orialdev/WindUI-Boreal
 -- Discord: http://discord.gg/B3dEqP2EX6
@@ -5985,8 +5985,30 @@ return Color3.fromHSV(ah/360,0,0.98)
 end
 end
 
+local function ResolveRoundedCorner(af,ag)
+return math.max((tonumber(af)or 0)-(tonumber(ag)or 0),0)
+end
 
-local function getElementPosition(af,ag)
+local function ResolveShapeFrame(af)
+if typeof(af)~="table"then
+return nil
+end
+
+if typeof(af.__ShapeFrame)=="table"and type(af.__ShapeFrame.UpdateShape)=="function"then
+return af.__ShapeFrame
+end
+
+for ag,ah in next,af do
+if typeof(ah)=="table"and ag~="ElementFrame"and ag:match"Frame$"and type(ah.UpdateShape)=="function"then
+return ah
+end
+end
+
+return nil
+end
+
+
+local function getElementPosition(af,ag,ah)
 if type(ag)~="number"or ag~=math.floor(ag)then
 return nil,1
 end
@@ -5996,51 +6018,62 @@ end
 
 
 
-local ah=#af
+local ai=#af
 
 
-if ah==0 or ag<1 or ag>ah then
+if ai==0 or ag<1 or ag>ai then
 return nil,2
 end
 
-local function isDelimiter(ai)
-if ai==nil then return true end
-local aj=ai.__type
-return aj=="Space"or aj=="Divider"or aj=="Section"or aj=="MultiSection"or aj=="Code"
+local function isDelimiter(aj)
+if aj==nil or typeof(aj)~="table"then
+return true
+end
+
+if typeof(ah)=="string"and typeof(aj.ParentType)=="string"and aj.ParentType~=ah then
+return true
+end
+
+local ak=aj.__type
+if ak=="Space"or ak=="Divider"or ak=="Section"or ak=="MultiSection"or ak=="Code"then
+return true
+end
+
+return ResolveShapeFrame(aj)==nil
 end
 
 if isDelimiter(af[ag])then
 return nil,3
 end
 
-local function calculate(ai,aj)
-if aj==1 then return"Squircle"end
-if ai==1 then return"Squircle-TL-TR"end
-if ai==aj then return"Squircle-BL-BR"end
+local function calculate(aj,ak)
+if ak<=1 then return"Squircle"end
+if aj==1 then return"Squircle-TL-TR"end
+if aj==ak then return"Squircle-BL-BR"end
 return"Square"
 end
 
-local ai=1
-local aj=0
+local aj=1
+local ak=0
 
-for ak=1,ah do
-local al=af[ak]
-if isDelimiter(al)then
-if ag>=ai and ag<=ak-1 then
-local am=ag-ai+1
-return calculate(am,aj)
+for al=1,ai do
+local am=af[al]
+if isDelimiter(am)then
+if ag>=aj and ag<=al-1 then
+local an=ag-aj+1
+return calculate(an,ak)
 end
-ai=ak+1
-aj=0
+aj=al+1
+ak=0
 else
-aj=aj+1
+ak=ak+1
 end
 end
 
 
-if ag>=ai and ag<=ah then
-local ak=ag-ai+1
-return calculate(ak,aj)
+if ag>=aj and ag<=ai then
+local al=ag-aj+1
+return calculate(al,ak)
 end
 
 return nil,4
@@ -6085,7 +6118,7 @@ if ag.Thumbnail then
 an=aa.Image(
 ag.Thumbnail,
 ag.Title,
-af.Window.ModernLayout and ag.UICorner-11 or(ag.UICorner-4),
+ResolveRoundedCorner(ag.UICorner,af.Window.ModernLayout and 11 or 4),
 af.Window.Folder,
 "Thumbnail",
 false,
@@ -6097,7 +6130,7 @@ if ag.Image then
 ao=aa.Image(
 ag.Image,
 ag.Title,
-af.Window.ModernLayout and ag.UICorner-11 or(ag.UICorner-4),
+ResolveRoundedCorner(ag.UICorner,af.Window.ModernLayout and 11 or 4),
 af.Window.Folder,
 "Image",
 ag.IconThemed,
@@ -6484,7 +6517,7 @@ an:Destroy()
 an=aa.Image(
 l,
 ag.Title,
-ag.UICorner-3,
+ResolveRoundedCorner(ag.UICorner,3),
 af.Window.Folder,
 "Thumbnail",
 false,
@@ -6504,7 +6537,7 @@ if l then
 an=aa.Image(
 l,
 ag.Title,
-ag.UICorner-3,
+ResolveRoundedCorner(ag.UICorner,3),
 af.Window.Folder,
 "Thumbnail",
 false,
@@ -6536,7 +6569,7 @@ if l then
 ao=aa.Image(
 l,
 ag.Title,
-ag.UICorner-3,
+ResolveRoundedCorner(ag.UICorner,3),
 af.Window.Folder,
 "Image",
 ag.IconThemed,
@@ -6649,10 +6682,10 @@ local l
 if af.ParentConfig.ParentType=="Group"then
 l="Squircle"
 else
-l=getElementPosition(j.Elements,ag.Index)
+l=getElementPosition(j.Elements,ag.Index,j.__type)
 end
 
-if l and f then
+if l and f and aa.Shapes[l]and aa.Shapes[l.."-Outline"]then
 g:SetType(l)
 av:SetType(l)
 az:SetType(l)
@@ -14553,6 +14586,24 @@ Group=a.aa(),
 Video=a.ab(),
 },
 Load=function(aa,ad,ae,af,ag,ai,ak,al,am)
+local function ResolveShapeFrame(an)
+if typeof(an)~="table"then
+return nil
+end
+
+if typeof(an.__ShapeFrame)=="table"and type(an.__ShapeFrame.UpdateShape)=="function"then
+return an.__ShapeFrame
+end
+
+for ao,ap in next,an do
+if typeof(ap)=="table"and ao~="ElementFrame"and ao:match"Frame$"and type(ap.UpdateShape)=="function"then
+return ap
+end
+end
+
+return nil
+end
+
 local function removeFromList(an,ao)
 if not an then
 return
@@ -14581,6 +14632,9 @@ aq.UIScale=al
 aq.ElementsModule=ak local
 
 ar, as=ao:New(aq)
+if typeof(as)=="table"then
+as.ParentType=aq.ParentType
+end
 
 if aq.Flag and typeof(aq.Flag)=="string"then
 af.FlagIndex=af.FlagIndex or{}
@@ -14613,12 +14667,9 @@ af.PendingFlags[aq.Flag]=as
 end
 end
 
-local at
-for au,av in next,as do
-if typeof(av)=="table"and au~="ElementFrame"and au:match"Frame$"then
-at=av
-break
-end
+local at=ResolveShapeFrame(as)
+if typeof(as)=="table"then
+as.__ShapeFrame=at
 end
 
 local au=as.Destroy
@@ -14702,15 +14753,10 @@ end
 end
 function aa.UpdateAllElementShapes(an,ao)
 for ap,aq in next,ao.Elements do
-local ar
-for as,at in pairs(aq)do
-if typeof(at)=="table"and as:match"Frame$"then
-ar=at
-break
-end
-end
+local ar=ResolveShapeFrame(aq)
 
 if ar then
+aq.__ShapeFrame=ar
 
 ar.Index=ap
 if ar.UpdateShape then
@@ -15382,15 +15428,18 @@ local ag=a.u().New
 local ai=a.e().New
 local ak=a.w()
 local al=a.x()
+local am=a.ac()
 
-local am=a.ad()
+local an=a.ad()
 
-function aa.New(an,ao,ap,aq,ar)
-local as={
-Title=an.Title or"Section",
-Icon=an.Icon,
-IconThemed=an.IconThemed,
-Opened=an.Opened or false,
+function aa.New(ao,ap,aq,ar,as,at)
+local au={
+__type="SectionModule",
+Title=ao.Title or"Section",
+Icon=ao.Icon,
+IconThemed=ao.IconThemed,
+Opened=ao.Opened or false,
+Elements={},
 
 HeaderSize=42,
 IconSize=18,
@@ -15398,24 +15447,24 @@ IconSize=18,
 Expandable=false,
 }
 
-local at
-if as.Icon then
-at=ad.Image(
-as.Icon,
-as.Icon,
+local av
+if au.Icon then
+av=ad.Image(
+au.Icon,
+au.Icon,
 0,
-ap,
+aq,
 "Section",
 true,
-as.IconThemed
+au.IconThemed
 )
 
-at.Size=UDim2.new(0,as.IconSize,0,as.IconSize)
-at.ImageLabel.ImageTransparency=.25
+av.Size=UDim2.new(0,au.IconSize,0,au.IconSize)
+av.ImageLabel.ImageTransparency=.25
 end
 
-local au=ae("Frame",{
-Size=UDim2.new(0,as.IconSize,0,as.IconSize),
+local aw=ae("Frame",{
+Size=UDim2.new(0,au.IconSize,0,au.IconSize),
 BackgroundTransparency=1,
 Visible=false
 },{
@@ -15432,26 +15481,26 @@ ImageTransparency=.7,
 })
 })
 
-local av=ae("Frame",{
-Size=UDim2.new(1,0,0,as.HeaderSize),
+local ax=ae("Frame",{
+Size=UDim2.new(1,0,0,au.HeaderSize),
 BackgroundTransparency=1,
-Parent=ao,
+Parent=ap,
 ClipsDescendants=true,
-LayoutOrder=an.LayoutOrder,
+LayoutOrder=ao.LayoutOrder,
 },{
 ae("TextButton",{
-Size=UDim2.new(1,0,0,as.HeaderSize),
+Size=UDim2.new(1,0,0,au.HeaderSize),
 BackgroundTransparency=1,
 Text="",
 },{
-at,
+av,
 ae("TextLabel",{
-Text=as.Title,
+Text=au.Title,
 TextXAlignment="Left",
 Size=UDim2.new(
 1,
-at and(-as.IconSize-10)*2
-or(-as.IconSize-10),
+av and(-au.IconSize-10)*2
+or(-au.IconSize-10),
 
 1,
 0
@@ -15471,7 +15520,7 @@ FillDirection="Horizontal",
 VerticalAlignment="Center",
 Padding=UDim.new(0,10)
 }),
-au,
+aw,
 ae("UIPadding",{
 PaddingLeft=UDim.new(0,11),
 PaddingRight=UDim.new(0,11),
@@ -15483,218 +15532,233 @@ Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 Name="Content",
 Visible=true,
-Position=UDim2.new(0,0,0,as.HeaderSize)
+Position=UDim2.new(0,0,0,au.HeaderSize)
 },{
 ae("UIListLayout",{
 FillDirection="Vertical",
-Padding=UDim.new(0,ar.Gap),
+Padding=UDim.new(0,as.Gap),
 VerticalAlignment="Bottom",
 }),
 })
 })
 
 local function EnsureExpandable()
-if not as.Expandable then
-as.Expandable=true
-au.Visible=true
+if not au.Expandable then
+au.Expandable=true
+aw.Visible=true
 
-if as.Opened and as.Open then
+if au.Opened and au.Open then
 task.defer(function()
-as:Open()
+au:Open()
 end)
 end
 end
 end
 
 local function getUIScale()
-local aw=ar and ar.GetUIScale and ar:GetUIScale()or aq
-aw=tonumber(aw)or 1
-if aw<=0 then
+local ay=as and as.GetUIScale and as:GetUIScale()or ar
+ay=tonumber(ay)or 1
+if ay<=0 then
 return 1
 end
-return aw
+return ay
 end
 
 
-function as.Tab(aw,ax)
-EnsureExpandable()
-ax.Parent=av.Content
-return am.New(ax,aq)
-end
 
-function as.Label(aw,ax)
-ax=ax or{}
+am.Load(
+au,
+ax.Content,
+am.Elements,
+as,
+at,
+function()
 EnsureExpandable()
-
-local ay=ax.Title or ax.Text or"Label"
-local az=ag(
-ay,
-ax.Icon,
-av.Content,
-ax.Placeholder==true,
-ax.Radius
+end,
+am,
+ar
 )
 
-local aA=typeof(ax.Height)=="number"and math.max(ax.Height,18)or 34
-az.Size=ax.Size or UDim2.new(1,-7,0,aA)
-az.Visible=ax.Visible~=false
 
-if typeof(ax.LayoutOrder)=="number"then
-az.LayoutOrder=ax.LayoutOrder
+function au.Tab(ay,az)
+EnsureExpandable()
+az.Parent=ax.Content
+return an.New(az,ar)
 end
 
-return az
-end
-
-function as.Button(aw,ax)
-ax=ax or{}
+function au.Label(ay,az)
+az=az or{}
 EnsureExpandable()
 
-local ay=typeof(ax.Height)=="number"and math.max(ax.Height,20)or 34
-local az=ae("Frame",{
-Name="SectionButton",
-Parent=av.Content,
-BackgroundTransparency=1,
-Size=ax.Size or UDim2.new(1,-7,0,ay),
-Visible=ax.Visible~=false,
-})
+local aA=az.Title or az.Text or"Label"
+local aB=ag(
+aA,
+az.Icon,
+ax.Content,
+az.Placeholder==true,
+az.Radius
+)
 
-if typeof(ax.LayoutOrder)=="number"then
-az.LayoutOrder=ax.LayoutOrder
+local b=typeof(az.Height)=="number"and math.max(az.Height,18)or 34
+aB.Size=az.Size or UDim2.new(1,-7,0,b)
+aB.Visible=az.Visible~=false
+
+if typeof(az.LayoutOrder)=="number"then
+aB.LayoutOrder=az.LayoutOrder
 end
 
-local aA={
+return aB
+end
+
+function au.Button(ay,az)
+az=az or{}
+EnsureExpandable()
+
+local aA=typeof(az.Height)=="number"and math.max(az.Height,20)or 34
+local aB=ae("Frame",{
+Name="SectionButton",
+Parent=ax.Content,
+BackgroundTransparency=1,
+Size=az.Size or UDim2.new(1,-7,0,aA),
+Visible=az.Visible~=false,
+})
+
+if typeof(az.LayoutOrder)=="number"then
+aB.LayoutOrder=az.LayoutOrder
+end
+
+local b={
 __type="SectionButton",
-Title=ax.Title or ax.Text or"Button",
-Callback=ax.Callback,
-ElementFrame=az,
+Title=az.Title or az.Text or"Button",
+Callback=az.Callback,
+ElementFrame=aB,
 ButtonFrame=nil,
 }
 
-local aB=ai(
-aA.Title,
-ax.Icon,
+local d=ai(
+b.Title,
+az.Icon,
 function()
-if aA.Callback then
-ad.SafeCallback(aA.Callback,aA)
+if b.Callback then
+ad.SafeCallback(b.Callback,b)
 end
 end,
-ax.Variant or"Secondary",
-az,
+az.Variant or"Secondary",
+aB,
 nil,
-ax.FullRounded,
-ax.Radius
+az.FullRounded,
+az.Radius
 )
 
-aB.AutomaticSize="None"
-aB.Size=UDim2.new(1,0,1,0)
-aB.Position=UDim2.new(0.5,0,0.5,0)
-aB.AnchorPoint=Vector2.new(0.5,0.5)
+d.AutomaticSize="None"
+d.Size=UDim2.new(1,0,1,0)
+d.Position=UDim2.new(0.5,0,0.5,0)
+d.AnchorPoint=Vector2.new(0.5,0.5)
 
-aA.ButtonFrame=aB
+b.ButtonFrame=d
 
-function aA.SetTitle(b,d)
-b.Title=tostring(d or"")
+function b.SetTitle(f,g)
+f.Title=tostring(g or"")
 
-local f=b.ButtonFrame:FindFirstChild("TextLabel",true)
-if f then
-f.Text=b.Title
+local h=f.ButtonFrame:FindFirstChild("TextLabel",true)
+if h then
+h.Text=f.Title
+end
+
+return f
+end
+
+function b.SetCallback(f,g)
+f.Callback=g
+return f
+end
+
+function b.SetVisible(f,g)
+f.ElementFrame.Visible=g~=false
+return f
+end
+
+function b.Destroy(f)
+if f.ElementFrame then
+f.ElementFrame:Destroy()
+f.ElementFrame=nil
+f.ButtonFrame=nil
+end
 end
 
 return b
 end
 
-function aA.SetCallback(b,d)
-b.Callback=d
-return b
-end
-
-function aA.SetVisible(b,d)
-b.ElementFrame.Visible=d~=false
-return b
-end
-
-function aA.Destroy(b)
-if b.ElementFrame then
-b.ElementFrame:Destroy()
-b.ElementFrame=nil
-b.ButtonFrame=nil
-end
-end
-
-return aA
-end
-
-function as.Space(aw,ax)
-ax=ax or{}
+function au.Space(ay,az)
+az=az or{}
 EnsureExpandable()
 
-local ay=table.clone(ax)
-ay.Parent=av.Content
-ay.ParentType=ay.ParentType or"Section"local
+local aA=table.clone(az)
+aA.Parent=ax.Content
+aA.ParentType=aA.ParentType or"Section"local
 
-az, aA=ak:New(ay)
-return aA.ElementFrame
+aB, b=ak:New(aA)
+return b.ElementFrame
 end
 
-function as.Divider(aw,ax)
-ax=ax or{}
+function au.Divider(ay,az)
+az=az or{}
 EnsureExpandable()
 
-local ay=table.clone(ax)
-ay.Parent=av.Content
-ay.ParentType=ay.ParentType or"Section"local
+local aA=table.clone(az)
+aA.Parent=ax.Content
+aA.ParentType=aA.ParentType or"Section"local
 
-az, aA=al:New(ay)
-return aA.ElementFrame
+aB, b=al:New(aA)
+return b.ElementFrame
 end
 
-function as.Open(aw)
-if as.Expandable then
-as.Opened=true
-af(av,0.33,{
-Size=UDim2.new(1,0,0,as.HeaderSize+(av.Content.AbsoluteSize.Y/getUIScale()))
+function au.Open(ay)
+if au.Expandable then
+au.Opened=true
+af(ax,0.33,{
+Size=UDim2.new(1,0,0,au.HeaderSize+(ax.Content.AbsoluteSize.Y/getUIScale()))
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
-af(au.ImageLabel,0.1,{Rotation=180},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+af(aw.ImageLabel,0.1,{Rotation=180},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 end
 end
-function as.Close(aw)
-if as.Expandable then
-as.Opened=false
-af(av,0.26,{
-Size=UDim2.new(1,0,0,as.HeaderSize)
+function au.Close(ay)
+if au.Expandable then
+au.Opened=false
+af(ax,0.26,{
+Size=UDim2.new(1,0,0,au.HeaderSize)
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-af(au.ImageLabel,0.1,{Rotation=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+af(aw.ImageLabel,0.1,{Rotation=0},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 end
 end
 
-ad.AddSignal(av.TextButton.MouseButton1Click,function()
-if as.Expandable then
-if as.Opened then
-as:Close()
+ad.AddSignal(ax.TextButton.MouseButton1Click,function()
+if au.Expandable then
+if au.Opened then
+au:Close()
 else
-as:Open()
+au:Open()
 end
 end
 end)
 
-ad.AddSignal(av.Content.UIListLayout:GetPropertyChangedSignal"AbsoluteContentSize",function()
-if as.Opened then
-as:Open()
+ad.AddSignal(ax.Content.UIListLayout:GetPropertyChangedSignal"AbsoluteContentSize",function()
+if au.Opened then
+au:Open()
 end
 end)
 
-if as.Opened then
+if au.Opened then
 task.spawn(function()
 task.wait()
-as:Open()
+au:Open()
 end)
 end
 
 
 
-return as
+return au
 end
 
 
@@ -18414,7 +18478,7 @@ return J
 end
 
 function av.Section(H,J)
-return F.New(J,av.UIElements.SideBar.Frame,av.Folder,au.WindUI.UIScale,av)
+return F.New(J,av.UIElements.SideBar.Frame,av.Folder,au.WindUI.UIScale,av,au.WindUI)
 end
 
 function av.SideBarLabel(H,J)
