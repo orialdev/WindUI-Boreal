@@ -13807,7 +13807,9 @@ Parent=am,
 Elements={},
 UIElements={},
 Index=#am.Tabs+1,
-Gap=al.Tab and al.Tab.Gap or(al.Window.ModernLayout and 1 or 6),
+Gap=al.Tab
+and al.Tab.Gap
+or(al.Window.ModernLayout and(al.Window.ModernLayoutMergeElements==false and 4 or 1)or 6),
 }
 
 local l
@@ -14340,7 +14342,12 @@ ad("UIListLayout",{
 FillDirection="Horizontal",
 HorizontalAlignment="Center",
 
-Padding=UDim.new(0,ag.Tab and ag.Tab.Gap or(ag.Window.ModernLayout and 1 or 6))
+Padding=UDim.new(
+0,
+ag.Tab
+and ag.Tab.Gap
+or(ag.Window.ModernLayout and(ag.Window.ModernLayoutMergeElements==false and 4 or 1)or 6)
+)
 }),
 })
 
@@ -14352,7 +14359,9 @@ al.Elements,
 ag.Window,
 ag.WindUI,
 function(am,an)
-local ao=ag.Tab and ag.Tab.Gap or(ag.Window.ModernLayout and 1 or 6)
+local ao=ag.Tab
+and ag.Tab.Gap
+or(ag.Window.ModernLayout and(ag.Window.ModernLayoutMergeElements==false and 4 or 1)or 6)
 
 local ap={}
 local aq=0
@@ -14834,7 +14843,7 @@ Elements={},
 ContainerFrame=nil,
 UICorner=Window.UICorner-(Window.UIPadding/2),
 
-Gap=Window.ModernLayout and 1 or 6,
+Gap=Window.ModernLayout and(Window.ModernLayoutMergeElements==false and 4 or 1)or 6,
 
 TabPaddingX=4+(Window.UIPadding/2),
 TabPaddingY=3+(Window.UIPadding/2),
