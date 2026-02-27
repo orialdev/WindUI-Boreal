@@ -15822,6 +15822,7 @@ Name="Indicator",
 Size=UDim2.new(0,2,1,-8),
 Position=UDim2.new(0,4,0.5,0),
 AnchorPoint=Vector2.new(0,0.5),
+Visible=false,
 ThemeTag={
 ImageColor3="TabIndicator",
 ImageTransparency="TabIndicatorTransparency",
