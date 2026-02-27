@@ -12922,7 +12922,7 @@ ImageColor3="SectionBoxBackground",
 }or nil,
 ImageTransparency=not ak.Box and 1 or nil,
 },{
-aa.NewRoundFrame(ai.Window.ElementConfig.UICorner,ai.Window.ModernLayout and"Glass-1"or"SquircleOutline",{
+aa.NewRoundFrame(ai.Window.ElementConfig.UICorner,"Glass-1",{
 BackgroundTransparency=1,
 Size=UDim2.new(1,0,1,0),
 ThemeTag={
@@ -13546,7 +13546,7 @@ ImageColor3="SectionBoxBackground",
 }or nil,
 ImageTransparency=not an.Box and 1 or nil,
 },{
-aa.NewRoundFrame(am.Window.ElementConfig.UICorner,am.Window.ModernLayout and"Glass-1"or"SquircleOutline",{
+aa.NewRoundFrame(am.Window.ElementConfig.UICorner,"Glass-1",{
 BackgroundTransparency=1,
 Size=UDim2.new(1,0,1,0),
 ThemeTag={
@@ -14270,7 +14270,7 @@ ImageTransparency=1,
 Parent=an.UIElements.TabsScroll,
 Visible=m.Visible,
 },{
-aa.NewRoundFrame(math.max(am.Window.ElementConfig.UICorner-2,6),am.Window.ModernLayout and"Glass-1.4"or"SquircleOutline",{
+aa.NewRoundFrame(math.max(am.Window.ElementConfig.UICorner-2,6),"Glass-1.4",{
 Size=UDim2.new(1,0,1,0),
 BackgroundTransparency=1,
 ThemeTag={
@@ -14998,7 +14998,7 @@ CornerRadius=UDim.new(0,ai.Radius),
 }),
 })
 
-local ao=aa.NewRoundFrame(ai.Radius,ag.Window.ModernLayout and"Glass-1"or"SquircleOutline",{
+local ao=aa.NewRoundFrame(ai.Radius,"Glass-1",{
 Name="Outline",
 Parent=am,
 Size=UDim2.new(1,0,1,0),
