@@ -1,6 +1,6 @@
 -- WindUI Boreal
 -- Version: v0.0.1
--- BuildDate: 2026-03-11
+-- BuildDate: 2026-03-13
 -- Description: Roblox UI Library for scripts
 -- Repository: https://github.com/orialdev/WindUI-Boreal
 -- Discord: http://discord.gg/B3dEqP2EX6
@@ -3361,11 +3361,51 @@ local ac=ab.New
 
 
 local ad,ae=unpack(a.o())
-local af=Instance.new("Folder",aa(game:GetService"Workspace").CurrentCamera)
+local af=aa(game:GetService"Workspace")
+
+local ag
+local ah=0
+
+local function cleanupConnections(ai)
+for aj,ak in ipairs(ai)do
+pcall(function()
+ak:Disconnect()
+end)
+ai[aj]=nil
+end
+end
+
+local function cleanupBlurFolder()
+if ag and ah<=0 then
+ag:Destroy()
+ag=nil
+end
+end
+
+local function getBlurFolder()
+local ai=af.CurrentCamera
+if not ai then
+if ag then
+ag.Parent=nil
+end
+return nil
+end
+
+if not ag then
+ag=Instance.new"Folder"
+ag.Archivable=false
+end
+
+if ag.Parent~=ai then
+ag.Parent=ai
+end
+
+return ag
+end
 
 
 local function createAcrylic()
-local ag=ac("Part",{
+local ai=ac("Part",{
 Name="Body",
 Color=Color3.new(0,0,0),
 Material=Enum.Material.Glass,
@@ -3382,120 +3422,133 @@ Offset=Vector3.new(0,0,-1E-6),
 }),
 })
 
-return ag
+return ai
 end
 
 
-local function createAcrylicBlur(ag)
-local ah={}
+local function createAcrylicBlur(ai)
+local aj={}
+local ak={}
 
-ag=ag or 0.001
-local ai={
+ai=ai or 0.001
+local al={
 topLeft=Vector2.new(),
 topRight=Vector2.new(),
 bottomRight=Vector2.new(),
 }
-local aj=createAcrylic()
-aj.Parent=af
+local am=createAcrylic()
+ah=ah+1
 
-local function updatePositions(ak,al)
-ai.topLeft=al
-ai.topRight=al+Vector2.new(ak.X,0)
-ai.bottomRight=al+ak
+local function updatePositions(an,ao)
+al.topLeft=ao
+al.topRight=ao+Vector2.new(an.X,0)
+al.bottomRight=ao+an
 end
 
 local function render()
-local ak=aa(game:GetService"Workspace").CurrentCamera
-if ak then
-ak=ak.CFrame
-end
-local al=ak
-if not al then
-al=CFrame.new()
-end
-
-local am=al
-local an=ai.topLeft
-local ao=ai.topRight
-local ap=ai.bottomRight
-
-local aq=ad(an,ag)
-local ar=ad(ao,ag)
-local as=ad(ap,ag)
-
-local at=(ar-aq).Magnitude
-local au=(ar-as).Magnitude
-
-aj.CFrame=
-CFrame.fromMatrix((aq+as)/2,am.XVector,am.YVector,am.ZVector)
-aj.Mesh.Scale=Vector3.new(at,au,0)
-end
-
-local function onChange(ak)
-local al=ae()
-local am=ak.AbsoluteSize-Vector2.new(al,al)
-local an=ak.AbsolutePosition+Vector2.new(al/2,al/2)
-
-updatePositions(am,an)
-task.spawn(render)
-end
-
-local function renderOnChange()
-local ak=aa(game:GetService"Workspace").CurrentCamera
-if not ak then
+local an=af.CurrentCamera
+if not an then
+am.Parent=nil
 return
 end
 
-table.insert(ah,ak:GetPropertyChangedSignal"CFrame":Connect(render))
-table.insert(ah,ak:GetPropertyChangedSignal"ViewportSize":Connect(render))
-table.insert(ah,ak:GetPropertyChangedSignal"FieldOfView":Connect(render))
+local ao=getBlurFolder()
+if ao and am.Parent~=ao then
+am.Parent=ao
+end
+
+local ap=an.CFrame
+local aq=al.topLeft
+local ar=al.topRight
+local as=al.bottomRight
+
+local at=ad(aq,ai)
+local au=ad(ar,ai)
+local av=ad(as,ai)
+
+local aw=(au-at).Magnitude
+local ax=(au-av).Magnitude
+
+am.CFrame=
+CFrame.fromMatrix((at+av)/2,ap.XVector,ap.YVector,ap.ZVector)
+am.Mesh.Scale=Vector3.new(aw,ax,0)
+end
+
+local function onChange(an)
+if not af.CurrentCamera then
+return
+end
+
+local ao=ae()
+local ap=an.AbsoluteSize-Vector2.new(ao,ao)
+local aq=an.AbsolutePosition+Vector2.new(ao/2,ao/2)
+
+updatePositions(ap,aq)
 task.spawn(render)
 end
 
-aj.Destroying:Connect(function()
-for ak,al in ah do
-pcall(function()
-al:Disconnect()
-end)
-end
-end)
+local function bindToCurrentCamera()
+cleanupConnections(ak)
 
-renderOnChange()
+local an=af.CurrentCamera
+local ao=getBlurFolder()
+am.Parent=ao
 
-return onChange,aj
+if not an then
+return
 end
 
-return function(ag)
-local ah={}
-local ai,aj=createAcrylicBlur(ag)
+table.insert(ak,an:GetPropertyChangedSignal"CFrame":Connect(render))
+table.insert(ak,an:GetPropertyChangedSignal"ViewportSize":Connect(render))
+table.insert(ak,an:GetPropertyChangedSignal"FieldOfView":Connect(render))
+task.spawn(render)
+end
 
-local ak=ac("Frame",{
+am.Destroying:Connect(function()
+cleanupConnections(ak)
+cleanupConnections(aj)
+
+ah=math.max(0,ah-1)
+task.defer(cleanupBlurFolder)
+end)
+
+table.insert(aj,af:GetPropertyChangedSignal"CurrentCamera":Connect(bindToCurrentCamera))
+bindToCurrentCamera()
+
+return onChange,am
+end
+
+return function(ai)
+local aj={}
+local ak,al=createAcrylicBlur(ai)
+
+local am=ac("Frame",{
 BackgroundTransparency=1,
 Size=UDim2.fromScale(1,1),
 })
 
-ab.AddSignal(ak:GetPropertyChangedSignal"AbsolutePosition",function()
-ai(ak)
+ab.AddSignal(am:GetPropertyChangedSignal"AbsolutePosition",function()
+ak(am)
 end)
 
-ab.AddSignal(ak:GetPropertyChangedSignal"AbsoluteSize",function()
-ai(ak)
+ab.AddSignal(am:GetPropertyChangedSignal"AbsoluteSize",function()
+ak(am)
 end)
 
-ah.AddParent=function(al)
-ab.AddSignal(al:GetPropertyChangedSignal"Visible",function()
-ah.SetVisibility(al.Visible)
+aj.AddParent=function(an)
+ab.AddSignal(an:GetPropertyChangedSignal"Visible",function()
+aj.SetVisibility(an.Visible)
 end)
 end
 
-ah.SetVisibility=function(al)
-aj.Transparency=al and 0.98 or 1
+aj.SetVisibility=function(an)
+al.Transparency=an and 0.98 or 1
 end
 
-ah.Frame=ak
-ah.Model=aj
+aj.Frame=am
+aj.Model=al
 
-return ah
+return aj
 end end function a.p():typeof(__modImpl())local aa=a.cache.p if not aa then aa={c=__modImpl()}a.cache.p=aa end return aa.c end end do local function __modImpl()
 
 
@@ -5030,20 +5083,7 @@ value=af.Value,
 end,
 Load=function(af,ag)
 if af and af.Select then
-af:Select(ag.value,true)
-end
-end
-},
-Segmented={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Get and af:Get()or af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Set then
-af:Set(ag.value,true)
+af:Select(ag.value)
 end
 end
 },
@@ -5073,19 +5113,6 @@ af:Set(ag.value)
 end
 end
 },
-ButtonKeybind={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Set and ag.value~=nil then
-af:Set(ag.value)
-end
-end
-},
 Slider={
 Save=function(af)
 return{
@@ -5099,62 +5126,6 @@ af:Set(tonumber(ag.value))
 end
 end
 },
-Stepper={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-min=af.Min,
-max=af.Max,
-step=af.Step,
-}
-end,
-Load=function(af,ag)
-if af and af.SetRange and ag.min~=nil and ag.max~=nil then
-af:SetRange(tonumber(ag.min),tonumber(ag.max),false)
-end
-
-if af and af.SetStep and ag.step~=nil then
-af:SetStep(tonumber(ag.step))
-end
-
-if af and af.Set and ag.value~=nil then
-af:Set(tonumber(ag.value),false)
-end
-end
-},
-Progress={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-min=af.Min,
-max=af.Max,
-}
-end,
-Load=function(af,ag)
-if af and af.SetRange and ag.min~=nil and ag.max~=nil then
-af:SetRange(tonumber(ag.min),tonumber(ag.max),false)
-end
-
-if af and af.Set then
-af:Set(tonumber(ag.value),false,false)
-end
-end
-},
-Stats={
-Save=function(af)
-return{
-__type=af.__type,
-items=af.Items,
-}
-end,
-Load=function(af,ag)
-if af and af.Set and typeof(ag.items)=="table"then
-af:Set(ag.items,true)
-end
-end
-},
 Toggle={
 Save=function(af)
 return{
@@ -5165,24 +5136,6 @@ end,
 Load=function(af,ag)
 if af and af.Set then
 af:Set(ag.value)
-end
-end
-},
-ToggleKeybind={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-keybind=af.Keybind,
-}
-end,
-Load=function(af,ag)
-if af and af.Set and ag.value~=nil then
-af:Set(ag.value)
-end
-
-if af and af.SetKeybind and ag.keybind then
-af:SetKeybind(ag.keybind)
 end
 end
 },
@@ -5210,9 +5163,8 @@ end
 local ah=ae:AllConfigs()
 
 for ai,aj in next,ah do
-local ak=ae.Path..aj..".json"
-if isfile and readfile and isfile(ak)then
-ae.Configs[aj]=readfile(ak)
+if isfile and readfile and isfile(aj..".json")then
+ae.Configs[aj]=readfile(aj..".json")
 end
 end
 
@@ -5258,10 +5210,6 @@ function ai.Register(aj,ak,al)
 ai.Elements[ak]=al
 end
 
-function ai.Unregister(aj,ak)
-ai.Elements[ak]=nil
-end
-
 function ai.Set(aj,ak,al)
 ai.CustomData[ak]=al
 end
@@ -5289,20 +5237,8 @@ __custom=ai.CustomData
 }
 
 for al,am in next,ai.Elements do
-if not am then
-ai.Elements[al]=nil
-else
-local an=ae.Parser[am.__type]
-if an and an.Save then
-local ao,ap=pcall(function()
-return an.Save(am)
-end)
-if ao and ap~=nil then
-ak.__elements[tostring(al)]=ap
-elseif not ao then
-warn("[ WindUI.ConfigManager ] Failed to save flag '"..tostring(al).."': "..tostring(ap))
-end
-end
+if ae.Parser[am.__type]then
+ak.__elements[tostring(al)]=ae.Parser[am.__type].Save(am)
 end
 end
 
@@ -5346,24 +5282,11 @@ ai:Register(am,an)
 end
 end
 
-ad.PendingConfigData=ad.PendingConfigData or{}
-
 for am,an in next,(al.__elements or{})do
-local ao=an and an.__type and ae.Parser[an.__type]or nil
-local ap=ai.Elements[am]
-
-if ap and ao then
+if ai.Elements[am]and ae.Parser[an.__type]then
 task.spawn(function()
-local aq,ar=pcall(function()
-ao.Load(ap,an)
+ae.Parser[an.__type].Load(ai.Elements[am],an)
 end)
-
-if not aq then
-warn("[ WindUI.ConfigManager ] Failed to load flag '"..tostring(am).."': "..tostring(ar))
-end
-end)
-elseif ao then
-ad.PendingConfigData[am]=an
 end
 end
 
@@ -5503,7 +5426,6 @@ return ae.Configs[ag]
 end
 
 return ae end function a.A():typeof(__modImpl())local aa=a.cache.A if not aa then aa={c=__modImpl()}a.cache.A=aa end return aa.c end end do local function __modImpl()
-
 local aa={}
 
 local ab=a.c()
@@ -19121,7 +19043,19 @@ local ap=a.r()
 
 local aq=protectgui or(syn and syn.protect_gui)or function()end
 
-local ar=gethui and gethui()or(ag or game.Players.LocalPlayer:WaitForChild"PlayerGui")
+local function ResolveGuiParent()
+if type(gethui)=="function"then
+local ar,as=pcall(gethui)
+if ar and as then
+return as
+end
+end
+
+return ag or game.Players.LocalPlayer:WaitForChild"PlayerGui"
+end
+
+local ar=ResolveGuiParent()
+ad.ResolveGuiParent=ResolveGuiParent
 
 local as=an("UIScale",{
 Scale=ad.UIScale,
