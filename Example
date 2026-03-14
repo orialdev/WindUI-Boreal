@@ -1,215 +1,442 @@
+
 local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/orialdev/WindUI-Boreal/main/WindUI%20Boreal"))()
 
 local Window = WindUI:CreateWindow({
     Title = "WindUI Boreal",
-    Size = UDim2.fromOffset(740, 560),
+    Author = "WindUI Boreal Showcase",
+    Folder = "WindUI_Boreal_Example",
     Icon = "sparkles",
+    IconThemed = true,
+
+    Theme = "Midnight",
+    Size = UDim2.fromOffset(720, 540),
+    Transparent = false,
+    Acrylic = false,
+    SideBarWidth = 210,
+    ScrollBarEnabled = true,
+    HideSearchBar = false,
+    Resizable = true,
     ModernLayout = true,
+    ModernLayoutMergeElements = false,
+
+    User = {
+        Enabled = true,
+        Anonymous = false,
+        Callback = function()
+            WindUI:Notify({
+                Title = "User Card",
+                Content = "You clicked the user panel.",
+                Icon = "user",
+                Duration = 3
+            })
+        end
+    },
+
+    Topbar = {
+        Height = 52,
+        ButtonsType = "Default"
+    },
+
+    OpenButton = {
+        Enabled = true,
+        Title = "Open UI",
+        Icon = "panel-left-open",
+        Position = UDim2.new(0, 120, 0, 120),
+        Draggable = true,
+        OnlyMobile = false,
+        Scale = 1
+    },
+
     Watermark = {
         Enabled = true,
-        Text = "WindUI Boreal | Example",
-        Opacity = 0.45,
-        Position = "bottom-right", -- top-left/top-center/top-right/center/.../bottom-right
-        Size = 14,
-        Padding = 12,
-        Offset = Vector2.new(0, 0),
-        -- Color = Color3.fromRGB(255, 255, 255), -- optional
-        -- RichText = false, -- optional
-    },
+        Text = "WindUI Boreal Example",
+        Position = "bottom-right",
+        Opacity = 0.5,
+        Size = 14
+    }
+})
+
+local function notify(title, content, icon, duration)
+    WindUI:Notify({
+        Title = title,
+        Content = content,
+        Icon = icon,
+        Duration = duration or 4
+    })
+end
+
+Window:OnOpen(function()
+    notify("Window", "Opened successfully.", "check", 2)
+end)
+
+Window:OnClose(function()
+    notify("Window", "Closed.", "panel-left-close", 2)
+end)
+
+Window:OnDestroy(function()
+    print("Window destroyed")
+end)
+
+Window:BindShortcut("RightShift", function()
+    Window:Toggle()
+end, {
+    Description = "Toggle window",
+    EnabledWhenClosed = true
+})
+
+Window:BindShortcut("F5", function()
+    notify("Shortcut", "Pressed F5.", "keyboard", 2)
+end)
+
+Window:Tag({
+    Title = "v" .. tostring(WindUI.Version or "0.0.0"),
+    Color = Color3.fromRGB(49, 93, 255),
+    Icon = "badge-check"
 })
 
 Window:SideBarLabel({
-    Title = "Example",
+    Title = "Quick Actions",
+    Icon = "zap"
 })
 
 Window:SideBarButton({
-    Title = "Button",
-    Icon = "refresh-ccw",
+    Title = "Notify",
+    Icon = "bell",
+    Variant = "Secondary",
     Callback = function()
-        print("Sidebar button clicked")
+        notify("Notification", "Sidebar button pressed.", "bell")
     end
 })
 
-local Tab_MultiSection = Window:Tab({
-    Title = "MultiSection",
-    Icon = "layers",
+Window:SideBarButton({
+    Title = "Popup",
+    Icon = "message-square-more",
+    Variant = "Secondary",
+    Callback = function()
+        WindUI:Popup({
+            WindUI = WindUI,
+            Title = "Popup Example",
+            Content = "This popup is created from the sidebar button.",
+            Icon = "sparkles",
+            Buttons = {
+                {
+                    Title = "Cancel",
+                    Variant = "Secondary",
+                    Callback = function()
+                        notify("Popup", "Cancelled.", "x", 2)
+                    end
+                },
+                {
+                    Title = "Confirm",
+                    Icon = "check",
+                    Variant = "Primary",
+                    Callback = function()
+                        notify("Popup", "Confirmed.", "check", 2)
+                    end
+                }
+            }
+        })
+    end
 })
 
-Tab_MultiSection:Space({})
+Window:SideBarDivider({})
 
-local MultiSection_Element = Tab_MultiSection:MultiSection({
-    Title = "MultiSection",
-    Desc = "MultiSection",
-    Icon = "layout-grid",
-    Box = true,
-    BoxBorder = true,
-    Opened = true,
+local MainTab = Window:Tab({
+    Title = "Main",
+    Icon = "layout-dashboard",
+    ShowTabTitle = true,
+    Border = true
 })
 
-Tab_MultiSection:Space({})
-
-local MultiSection_TabA = MultiSection_Element:Tab({
-    Title = "Tab A",
-    Desc = "Tab A",
-    Icon = "square",
-    Selected = true,
+local InputsTab = Window:Tab({
+    Title = "Inputs",
+    Icon = "sliders-horizontal",
+    ShowTabTitle = true,
+    Border = true
 })
 
-local MultiSection_TabB = MultiSection_Element:Tab({
-    Title = "Tab B",
-    Desc = "Tab B",
-    Icon = "square-check",
+local OthersTab = Window:Tab({
+    Title = "Others",
+    Icon = "blocks",
+    ShowTabTitle = true,
+    Border = true
 })
 
-MultiSection_TabA:Space({})
+Window:SelectTab(MainTab)
 
-MultiSection_TabA:Paragraph({
-    Title = "Info",
-    Desc = "MultiSection Tab A",
-    Text = "This is Tab A content.",
+MainTab:Paragraph({
+    Title = "Welcome",
+    Desc = "This script demonstrates every public element currently exposed by WindUI Boreal.",
+    Buttons = {
+        {
+            Title = "Notify",
+            Icon = "bell",
+            Callback = function()
+                notify("Paragraph", "Paragraph button clicked.", "bell")
+            end
+        }
+    }
 })
 
-MultiSection_TabA:Space({})
+MainTab:Divider({})
 
-MultiSection_TabA:Toggle({
-    Title = "Enable Feature",
-    Desc = "Toggle",
-    Value = false,
-    Callback = function(v)
-        print("Enable Feature:", v)
-    end,
+local demoProgress = MainTab:Progress({
+    Title = "Loading Progress",
+    Desc = "Controlled by buttons and slider below.",
+    Value = {Min = 0, Max = 100, Default = 35},
+    Prefix = "",
+    Suffix = "%",
+    ShowValue = true,
+    Color = "Slider"
 })
 
-MultiSection_TabA:Space({})
+local stats = MainTab:Stats({
+    Title = "Live Stats",
+    Desc = "Runtime-updated statistics block.",
+    Items = {
+        {Key = "Kills", Value = 3},
+        {Key = "Coins", Value = 240},
+        {Key = "Region", Value = "EU"},
+        {Key = "Status", Value = "Ready"},
+    }
+})
 
-MultiSection_TabA:Button({
-    Title = "Print Action",
-    Desc = "Button",
+MainTab:Button({
+    Title = "Simple Button",
+    Desc = "Runs a plain callback.",
     Icon = "mouse-pointer-click",
     Callback = function()
-        print("Print Action clicked")
-    end,
+        notify("Button", "Simple button fired.", "mouse-pointer-click")
+        stats:Update("Status", "Clicked")
+    end
 })
 
-MultiSection_TabA:Space({})
-
-MultiSection_TabB:Space({})
-
-MultiSection_TabB:Slider({
-    Title = "Adjust Value",
-    Desc = "Slider",
-    Value = { Min = 0, Max = 100, Default = 50 },
-    Callback = function(v)
-        print("Adjust Value:", v)
-    end,
+MainTab:ButtonKeybind({
+    Title = "Button + Keybind",
+    Desc = "Click the row or press the bound key.",
+    Icon = "rocket",
+    Value = "G",
+    CanChange = true,
+    Callback = function(trigger)
+        notify("ButtonKeybind", "Triggered with bound key/button: " .. tostring(trigger or "click"), "rocket")
+    end
 })
 
-MultiSection_TabB:Space({})
-
-MultiSection_TabB:Input({
-    Title = "Set Text",
-    Desc = "Input",
-    Value = "",
-    Placeholder = "Type here",
-    Callback = function(v)
-        print("Set Text:", v)
-    end,
+local godToggle = MainTab:Toggle({
+    Title = "God Mode",
+    Desc = "Regular toggle example.",
+    Type = "Toggle",
+    Value = false,
+    Icon = "shield",
+    Callback = function(state)
+        stats:Update("Status", state and "GodMode ON" or "GodMode OFF")
+        notify("Toggle", "God Mode = " .. tostring(state), state and "shield-check" or "shield-off")
+    end
 })
 
-MultiSection_TabB:Space({})
-
-MultiSection_TabB:Dropdown({
-    Title = "Select Option",
-    Desc = "Dropdown",
-    Values = { "Option 1", "Option 2", "Option 3" },
-    Value = "Option 1",
-    Callback = function(v)
-        print("Select Option:", v)
-    end,
+local checkboxToggle = MainTab:Toggle({
+    Title = "ESP",
+    Desc = "Checkbox style toggle.",
+    Type = "Checkbox",
+    Value = true,
+    Icon = "eye",
+    Callback = function(state)
+        notify("Checkbox", "ESP = " .. tostring(state), "eye")
+    end
 })
 
-MultiSection_TabB:Space({})
+MainTab:ToggleKeybind({
+    Title = "Fly Toggle Keybind",
+    Desc = "Toggle state from row click or keyboard.",
+    Type = "Toggle",
+    Value = false,
+    Keybind = "F",
+    Icon = "bird",
+    Callback = function(state)
+        notify("ToggleKeybind", "Fly = " .. tostring(state), "bird")
+    end
+})
 
-MultiSection_Element:SetIcon("layers-2")
-MultiSection_Element:SetTitle("MultiSection")
-MultiSection_Element:SetDesc("MultiSection")
+local speedSlider = MainTab:Slider({
+    Title = "WalkSpeed",
+    Desc = "Slider with textbox and tooltip.",
+    Value = {Min = 16, Max = 100, Default = 32},
+    Step = 1,
+    IsTooltip = true,
+    IsTextbox = true,
+    Icons = {
+        From = "turtle",
+        To = "rabbit"
+    },
+    Callback = function(value)
+        demoProgress:Set(math.floor(value))
+        stats:Update("Status", "Speed " .. tostring(value))
+    end
+})
 
-Tab_MultiSection:Space({})
+local stepper = MainTab:Stepper({
+    Title = "JumpPower Stepper",
+    Desc = "Increment/decrement element.",
+    Value = {Min = 25, Max = 200, Default = 50},
+    Step = 5,
+    Suffix = " JP",
+    Callback = function(value)
+        stats:Update("JumpPower", value)
+    end
+})
 
-Tab_MultiSection:Button({
-    Title = "Select Tab A",
-    Desc = "SelectTab",
-    Icon = "arrow-left",
+MainTab:Keybind({
+    Title = "Action Keybind",
+    Desc = "Press the selected key to run callback.",
+    Value = "K",
+    CanChange = true,
+    Callback = function(keyName)
+        notify("Keybind", "Pressed: " .. tostring(keyName), "keyboard")
+    end
+})
+
+MainTab:Button({
+    Title = "Progress +10",
+    Desc = "Demonstrates programmatic progress control.",
+    Icon = "plus",
     Callback = function()
-        MultiSection_Element:SelectTab(1, true)
-    end,
+        demoProgress:Add(10)
+    end
 })
 
-Tab_MultiSection:Space({})
-
-Tab_MultiSection:Button({
-    Title = "Select Tab B",
-    Desc = "SelectTab",
-    Icon = "arrow-right",
+MainTab:Button({
+    Title = "Progress -10",
+    Desc = "Decreases progress.",
+    Icon = "minus",
     Callback = function()
-        MultiSection_Element:SelectTab(2, true)
-    end,
+        demoProgress:Add(-10)
+    end
 })
 
-Tab_MultiSection:Space({})
-
-Tab_MultiSection:Button({
-    Title = "Open MultiSection",
-    Desc = "Open",
-    Icon = "chevron-down",
-    Callback = function()
-        MultiSection_Element:Open(true)
-    end,
+local textInput = InputsTab:Input({
+    Title = "Input",
+    Desc = "Single-line text input.",
+    Placeholder = "Type something...",
+    Value = "hello",
+    Callback = function(text)
+        stats:Update("LastInput", text)
+    end
 })
 
-Tab_MultiSection:Space({})
-
-Tab_MultiSection:Button({
-    Title = "Close MultiSection",
-    Desc = "Close",
-    Icon = "chevron-left",
-    Callback = function()
-        MultiSection_Element:Close(false)
-    end,
+local textArea = InputsTab:Input({
+    Title = "Textarea",
+    Desc = "Multi-line input example.",
+    Type = "Textarea",
+    Placeholder = "Write a longer message...",
+    Value = "Line 1\nLine 2",
+    Callback = function(text)
+        print("Textarea changed:", text)
+    end
 })
 
-Tab_MultiSection:Space({})
-
-Tab_MultiSection:Button({
-    Title = "Lock MultiSection",
-    Desc = "Lock",
-    Icon = "lock",
-    Callback = function()
-        MultiSection_Element:Lock()
-    end,
+local mapDropdown = InputsTab:Dropdown({
+    Title = "Map Selection",
+    Desc = "Regular single dropdown.",
+    Values = {
+        {Title = "Forest", Desc = "Green map", Icon = "trees"},
+        {Title = "Desert", Desc = "Dry map", Icon = "sun-medium"},
+        {Title = "Snow", Desc = "Cold map", Icon = "snowflake"},
+    },
+    Value = "Forest",
+    SearchBarEnabled = true,
+    Callback = function(selected)
+        local name = typeof(selected) == "table" and selected.Title or tostring(selected)
+        notify("Dropdown", "Selected: " .. name, "map")
+        stats:Update("Map", name)
+    end
 })
 
-Tab_MultiSection:Space({})
-
-Tab_MultiSection:Button({
-    Title = "Unlock MultiSection",
-    Desc = "Unlock",
-    Icon = "lock-open",
-    Callback = function()
-        MultiSection_Element:Unlock()
-    end,
+local multiDropdown = InputsTab:Dropdown({
+    Title = "Multi Dropdown",
+    Desc = "Multi-select values.",
+    Multi = true,
+    AllowNone = true,
+    SearchBarEnabled = true,
+    Values = {
+        "Sword",
+        "Bow",
+        "Potion",
+        "Shield",
+        "Boots",
+    },
+    Value = {"Sword", "Potion"},
+    Callback = function(selected)
+        print("MultiDropdown:", selected)
+    end
 })
 
-Tab_MultiSection:Space({})
-
-local Tab_Video = Window:Tab({
-    Title = "Video",
-    Icon = "video",
+local playerDropdown = InputsTab:Dropdown({
+    Title = "Players",
+    Desc = "SpecialType = Player",
+    SpecialType = "Player",
+    ExcludeLocalPlayer = true,
+    SearchBarEnabled = true,
+    Callback = function(selected)
+        local name = typeof(selected) == "table" and selected.Title or tostring(selected)
+        notify("Player Dropdown", "Selected: " .. name, "users")
+    end
 })
 
-Tab_Video:Space({})
+local segmented = InputsTab:Segmented({
+    Title = "Difficulty",
+    Desc = "Single segmented selector.",
+    Options = {
+        {Title = "Easy", Value = "easy", Icon = "smile"},
+        {Title = "Medium", Value = "medium", Icon = "meh"},
+        {Title = "Hard", Value = "hard", Icon = "flame"},
+    },
+    Value = "medium",
+    Callback = function(value)
+        stats:Update("Difficulty", tostring(value))
+    end
+})
 
-local Video_Element = Tab_Video:Video({
+local multiSegmented = InputsTab:Segmented({
+    Title = "Enabled Modules",
+    Desc = "Multi segmented selector.",
+    Multi = true,
+    AllowNone = true,
+    Options = {
+        {Title = "Aim", Value = "aim"},
+        {Title = "ESP", Value = "esp"},
+        {Title = "Radar", Value = "radar"},
+        {Title = "Trigger", Value = "trigger"},
+    },
+    Value = {"esp", "radar"},
+    Callback = function(values)
+        print("Segmented Multi:", values)
+    end
+})
+
+local colorPicker = InputsTab:Colorpicker({
+    Title = "Accent Color",
+    Desc = "Colorpicker with transparency support.",
+    Default = Color3.fromRGB(0, 145, 255),
+    Transparency = 0.15,
+    Callback = function(color, transparency)
+        demoProgress:SetColor(color)
+        print("Color changed:", color, transparency)
+    end
+})
+
+OthersTab:Code({
+    Title = "Loader",
+    Code = [[
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/orialdev/WindUI-Boreal/main/WindUI%20Boreal"))()
+]],
+    OnCopy = function()
+        notify("Code", "Loader copied to clipboard.", "copy")
+    end
+})
+
+OthersTab:Divider({})
+
+local VideoElement = OthersTab:Video({
     Video = "5608321996",
     Height = 220,
     Looped = true,
@@ -220,544 +447,212 @@ local Video_Element = Tab_Video:Video({
     Padding = 6,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Button({
+OthersTab:Button({
     Title = "Play",
     Desc = "Video:Play",
     Icon = "play",
     Callback = function()
-        Video_Element:Play()
+        VideoElement:Play()
     end,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Button({
+OthersTab:Button({
     Title = "Pause",
     Desc = "Video:Pause",
     Icon = "pause",
     Callback = function()
-        Video_Element:Pause()
+        VideoElement:Pause()
     end,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Toggle({
+OthersTab:Toggle({
     Title = "Looped",
     Desc = "Video:SetLooped",
     Value = true,
     Callback = function(v)
-        Video_Element:SetLooped(v)
+        VideoElement:SetLooped(v)
     end,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Slider({
+OthersTab:Slider({
     Title = "Volume",
     Desc = "Video:SetVolume",
     Value = { Min = 0, Max = 10, Default = 0.5 },
     Callback = function(v)
-        Video_Element:SetVolume(v)
+        VideoElement:SetVolume(v)
     end,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Slider({
+OthersTab:Slider({
     Title = "Height",
     Desc = "Video:SetHeight",
     Value = { Min = 24, Max = 360, Default = 220 },
     Callback = function(v)
-        Video_Element:SetHeight(math.floor(v + 0.5))
+        VideoElement:SetHeight(math.floor(v + 0.5))
     end,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Toggle({
+OthersTab:Toggle({
     Title = "Visible",
     Desc = "Video:SetVisible",
     Value = true,
     Callback = function(v)
-        Video_Element:SetVisible(v)
+        VideoElement:SetVisible(v)
     end,
 })
 
-Tab_Video:Space({})
-
-Tab_Video:Button({
-    Title = "Set Video Source",
-    Desc = "Video:SetVideo",
-    Icon = "film",
+local group = OthersTab:Group({})
+group:Button({
+    Title = "Left Group Button",
+    Desc = "Inside Group element.",
+    Icon = "box",
     Callback = function()
-        Video_Element:SetVideo("rbxassetid://5608403837")
-    end,
+        notify("Group", "Left button clicked.", "box")
+    end
 })
-
-Tab_Video:Space({})
-
-local Tab_BackgroundVideo = Window:Tab({
-    Title = "Background Video",
-    Icon = "tv",
-})
-
-Tab_BackgroundVideo:Space({})
-
-Tab_BackgroundVideo:Button({
-    Title = "Set Background Video",
-    Desc = "Window:SetBackgroundVideo",
-    Icon = "image",
-    Callback = function()
-        Window:SetBackgroundVideo("5608403837")
-    end,
-})
-
-Tab_BackgroundVideo:Space({})
-
-Tab_BackgroundVideo:Button({
-    Title = "Set Background Image",
-    Desc = "Window:SetBackgroundImage",
-    Icon = "image",
-    Callback = function()
-        Window:SetBackgroundImage("rbxassetid://8508980527")
-        Window:SetBackgroundImageTransparency(0.35)
-    end,
-})
-
-Tab_BackgroundVideo:Space({})
-
-Tab_BackgroundVideo:Slider({
-    Title = "Background Transparency",
-    Desc = "Window:SetBackgroundTransparency",
-    Value = { Min = 0, Max = 1, Default = 0.2 },
+group:Toggle({
+    Title = "Right Group Toggle",
+    Desc = "Inside Group element.",
+    Value = false,
+    Icon = "toggle-right",
     Callback = function(v)
-        Window:SetBackgroundTransparency(v)
-    end,
+        notify("Group Toggle", tostring(v), "toggle-right")
+    end
 })
 
-Tab_BackgroundVideo:Space({})
-
-local Tab_ButtonKeybind = Window:Tab({
-    Title = "Button Keybind",
-    Icon = "mouse-pointer-click",
+local nestedSection = OthersTab:Section({
+    Title = "Nested Section",
+    Desc = "Expandable section inside a tab.",
+    Icon = "folder-tree",
+    Opened = true,
+    Box = true,
+    BoxBorder = true
 })
 
-Tab_ButtonKeybind:Space({})
-
-local ButtonKeybind_Element = Tab_ButtonKeybind:ButtonKeybind({
-    Title = "ButtonKeybind",
-    Desc = "Press key or click row",
-    Icon = "mouse-pointer-click",
-    IconThemed = true,
-    Color = Color3.fromRGB(0, 170, 255),
-    Justify = "Between",
-    IconAlign = "Right",
-    Value = Enum.KeyCode.F,
-    CanChange = true,
-    Locked = false,
-    LockedTitle = "ButtonKeybind",
-    Callback = function(trigger)
-        print("ButtonKeybind:", trigger or "MouseClick")
-    end,
+nestedSection:Paragraph({
+    Title = "Section Paragraph",
+    Desc = "Sections can contain regular elements."
 })
 
-Tab_ButtonKeybind:Space({})
-
-local ButtonKeybind_Locked = Tab_ButtonKeybind:ButtonKeybind({
-    Title = "ButtonKeybind (Locked)",
-    Desc = "LockedTitle enabled",
-    Icon = "mouse-pointer-click",
-    IconThemed = true,
-    Color = Color3.fromRGB(0, 170, 255),
-    Justify = "Between",
-    IconAlign = "Right",
-    Value = Enum.KeyCode.F,
-    CanChange = true,
-    Locked = true,
-    LockedTitle = "ButtonKeybind",
-    Callback = function(trigger)
-        print("ButtonKeybind (Locked):", trigger or "MouseClick")
-    end,
-})
-
-Tab_ButtonKeybind:Space({})
-
-Tab_ButtonKeybind:Button({
-    Title = "Highlight",
-    Desc = "ButtonKeybind:Highlight",
-    Icon = "highlighter",
-    Callback = function()
-        ButtonKeybind_Element:Highlight()
-    end,
-})
-
-Tab_ButtonKeybind:Space({})
-
-Tab_ButtonKeybind:Button({
-    Title = "Set Key: MouseRight",
-    Desc = "ButtonKeybind:Set",
-    Icon = "mouse",
-    Callback = function()
-        ButtonKeybind_Element:Set("MouseRight")
-    end,
-})
-
-Tab_ButtonKeybind:Space({})
-
-Tab_ButtonKeybind:Button({
-    Title = "Lock",
-    Desc = "ButtonKeybind:Lock",
-    Icon = "lock",
-    Callback = function()
-        ButtonKeybind_Element:Lock()
-    end,
-})
-
-Tab_ButtonKeybind:Space({})
-
-Tab_ButtonKeybind:Button({
-    Title = "Unlock",
-    Desc = "ButtonKeybind:Unlock",
-    Icon = "lock-open",
-    Callback = function()
-        ButtonKeybind_Element:Unlock()
-    end,
-})
-
-Tab_ButtonKeybind:Space({})
-
-local Tab_ToggleKeybind = Window:Tab({
-    Title = "Toggle Keybind",
-    Icon = "toggle-left",
-})
-
-Tab_ToggleKeybind:Space({})
-
-local ToggleKeybind_Element = Tab_ToggleKeybind:ToggleKeybind({
-    Title = "ToggleKeybind",
-    Desc = "Press keybind to toggle",
-    Type = "Toggle",
-    Value = false,
-    Keybind = Enum.KeyCode.G,
-    CanChange = true,
-    Locked = false,
-    LockedTitle = "ToggleKeybind",
-    Callback = function(state)
-        print("ToggleKeybind:", state)
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-local ToggleKeybind_Locked = Tab_ToggleKeybind:ToggleKeybind({
-    Title = "ToggleKeybind (Locked)",
-    Desc = "LockedTitle enabled",
-    Type = "Toggle",
-    Value = false,
-    Keybind = Enum.KeyCode.G,
-    CanChange = true,
-    Locked = true,
-    LockedTitle = "ToggleKeybind",
-    Callback = function(state)
-        print("ToggleKeybind (Locked):", state)
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-Tab_ToggleKeybind:Button({
-    Title = "Set Keybind: MouseLeft",
-    Desc = "ToggleKeybind:SetKeybind",
-    Icon = "mouse-pointer-click",
-    Callback = function()
-        ToggleKeybind_Element:SetKeybind("MouseLeft")
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-Tab_ToggleKeybind:Button({
-    Title = "Set On",
-    Desc = "ToggleKeybind:Set(true)",
-    Icon = "check",
-    Callback = function()
-        ToggleKeybind_Element:Set(true, true, false)
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-Tab_ToggleKeybind:Button({
-    Title = "Set Off",
-    Desc = "ToggleKeybind:Set(false)",
-    Icon = "x",
-    Callback = function()
-        ToggleKeybind_Element:Set(false, true, false)
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-Tab_ToggleKeybind:Button({
-    Title = "Highlight",
-    Desc = "ToggleKeybind:Highlight",
+nestedSection:Button({
+    Title = "Section Button",
     Icon = "sparkles",
     Callback = function()
-        ToggleKeybind_Element:Highlight()
-    end,
+        notify("Section", "Section button clicked.", "sparkles")
+    end
 })
 
-Tab_ToggleKeybind:Space({})
-
-Tab_ToggleKeybind:Button({
-    Title = "Lock",
-    Desc = "ToggleKeybind:Lock",
-    Icon = "lock",
-    Callback = function()
-        ToggleKeybind_Element:Lock()
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-Tab_ToggleKeybind:Button({
-    Title = "Unlock",
-    Desc = "ToggleKeybind:Unlock",
-    Icon = "lock-open",
-    Callback = function()
-        ToggleKeybind_Element:Unlock()
-    end,
-})
-
-Tab_ToggleKeybind:Space({})
-
-local Tab_MultiSectionLocked = Window:Tab({
-    Title = "Multi Section",
-    Icon = "shield",
-})
-
-Tab_MultiSectionLocked:Space({})
-
-local MultiSectionLocked_Element = Tab_MultiSectionLocked:MultiSection({
+local multiSection = OthersTab:MultiSection({
     Title = "MultiSection",
-    Desc = "Locked",
-    Icon = "shield",
-    Box = true,
-    BoxBorder = true,
+    Desc = "Tabbed content area inside one section.",
+    Icon = "rows-3",
     Opened = true,
-    Locked = true,
-    LockedTitle = "MultiSection",
-})
-
-Tab_MultiSectionLocked:Space({})
-
-local Locked_Tab1 = MultiSectionLocked_Element:Tab({
-    Title = "Tab A",
-    Desc = "Tab A",
-    Icon = "square",
-    Selected = true,
-})
-
-Locked_Tab1:Space({})
-
-Locked_Tab1:Toggle({
-    Title = "Enable Feature",
-    Desc = "Toggle",
-    Value = true,
-})
-
-Locked_Tab1:Space({})
-
-local Locked_Tab2 = MultiSectionLocked_Element:Tab({
-    Title = "Tab B",
-    Desc = "Tab B",
-    Icon = "square-check",
-})
-
-Locked_Tab2:Space({})
-
-Locked_Tab2:Slider({
-    Title = "Adjust Value",
-    Desc = "Slider",
-    Value = { Min = 0, Max = 100, Default = 50 },
-})
-
-Locked_Tab2:Space({})
-
-Tab_MultiSectionLocked:Space({})
-
-Tab_MultiSectionLocked:Button({
-    Title = "Unlock",
-    Desc = "MultiSection:Unlock",
-    Icon = "key-round",
-    Callback = function()
-        MultiSectionLocked_Element:Unlock()
-        MultiSectionLocked_Element:SelectTab(2, true)
-        MultiSectionLocked_Element:Open(true)
-    end,
-})
-
-Tab_MultiSectionLocked:Space({})
-
-Tab_MultiSectionLocked:Button({
-    Title = "Lock",
-    Desc = "MultiSection:Lock",
-    Icon = "lock",
-    Callback = function()
-        MultiSectionLocked_Element:Lock()
-    end,
-})
-
-Tab_MultiSectionLocked:Space({})
-
-local Tab_SectionLocked = Window:Tab({
-    Title = "Section",
-    Icon = "lock",
-})
-
-Tab_SectionLocked:Space({})
-
-local SectionLocked_Element = Tab_SectionLocked:Section({
-    Title = "Section",
-    Desc = "Locked",
-    Icon = "lock",
     Box = true,
-    BoxBorder = true,
-    Opened = true,
-    Locked = true,
-    LockedTitle = "Section",
+    BoxBorder = true
 })
 
-Tab_SectionLocked:Space({})
+local combatTab = multiSection:Tab({
+    Title = "Combat",
+    Icon = "swords",
+    Selected = true
+})
 
-SectionLocked_Element:Toggle({
-    Title = "Enable Feature",
-    Desc = "Toggle",
+combatTab:Toggle({
+    Title = "Silent Aim",
+    Desc = "Inside MultiSection > Combat",
     Value = false,
-})
-
-Tab_SectionLocked:Space({})
-
-Tab_SectionLocked:Button({
-    Title = "Unlock",
-    Desc = "Section:Unlock",
-    Icon = "lock-open",
-    Callback = function()
-        SectionLocked_Element:Unlock()
-        SectionLocked_Element:Open(true)
-    end,
-})
-
-Tab_SectionLocked:Space({})
-
-Tab_SectionLocked:Button({
-    Title = "Lock",
-    Desc = "Section:Lock",
-    Icon = "lock",
-    Callback = function()
-        SectionLocked_Element:Lock()
-    end,
-})
-
-Tab_SectionLocked:Space({})
-
-local Tab_BottomDrag = Window:Tab({
-    Title = "Bottom Drag Bar",
-    Icon = "grip-horizontal",
-})
-
-Tab_BottomDrag:Space({})
-
-Tab_BottomDrag:Toggle({
-    Title = "BottomDragBarEnabled",
-    Desc = "Window:SetBottomDragBarEnabled",
-    Value = true,
     Callback = function(v)
-        Window:SetBottomDragBarEnabled(v)
-    end,
+        notify("Combat", "Silent Aim = " .. tostring(v), "crosshair")
+    end
 })
 
-local Tab_Notify = Window:Tab({
-    Title = "Notify",
-    Icon = "bell",
+combatTab:Slider({
+    Title = "FOV",
+    Desc = "Combat FOV slider.",
+    Value = {Min = 10, Max = 300, Default = 90},
+    Step = 1,
+    IsTextbox = true,
+    Callback = function(v)
+        print("Combat FOV:", v)
+    end
 })
 
-Tab_Notify:Space({})
-
-local Notify_Section = Tab_Notify:Section({
-    Title = "Notification Tester",
-    Desc = "Test various notification types",
-    Icon = "bell-ring",
-    Box = true,
-    BoxBorder = true,
-    Opened = true,
+local visualsTab = multiSection:Tab({
+    Title = "Visuals",
+    Icon = "eye"
 })
 
-Notify_Section:Space({})
-
-Notify_Section:Button({
-    Title = "Send Basic Notify",
-    Desc = "Standard Info",
-    Icon = "info",
-    Callback = function()
-        WindUI:Notify({
-            Title = "Information",
-            Content = "This is a standard notification message.",
-            Icon = "info",
-            Duration = 5,
-        })
-    end,
+visualsTab:Toggle({
+    Title = "Chams",
+    Desc = "Inside MultiSection > Visuals",
+    Value = true,
+    Type = "Checkbox",
+    Callback = function(v)
+        print("Chams:", v)
+    end
 })
 
-Notify_Section:Space({})
-
-Notify_Section:Button({
-    Title = "Send Warning Notify",
-    Desc = "Alert/Warning",
-    Icon = "triangle-alert",
-    Callback = function()
-        WindUI:Notify({
-            Title = "Warning System",
-            Content = "Something requires your attention.",
-            Icon = "triangle-alert",
-            Duration = 5,
-        })
-    end,
+visualsTab:Colorpicker({
+    Title = "Glow Color",
+    Desc = "MultiSection colorpicker",
+    Default = Color3.fromRGB(255, 0, 170),
+    Callback = function(color)
+        print("Glow Color:", color)
+    end
 })
 
-Notify_Section:Space({})
+local miscTab = multiSection:Tab({
+    Title = "Misc",
+    Icon = "wrench"
+})
 
-Notify_Section:Button({
-    Title = "Interactive Notify",
-    Desc = "With Buttons",
-    Icon = "mouse-pointer-click",
-    Callback = function()
-        WindUI:Notify({
-            Title = "Confirmation",
-            Content = "Do you want to enable the feature?",
-            Icon = "info",
-            Duration = 8,
-            Buttons = {
-                {
-                    Title = "Yes",
-                    Callback = function()
-                        WindUI:Notify({
-                            Title = "Success",
-                            Content = "Feature enabled!",
-                            Icon = "check",
-                        })
-                    end,
-                },
-                {
-                    Title = "No",
-                    Callback = function()
-                        print("User clicked No")
-                    end,
-                }
+miscTab:Input({
+    Title = "Chat Message",
+    Desc = "Inside MultiSection > Misc",
+    Placeholder = "Type message...",
+    Callback = function(text)
+        print("Misc Input:", text)
+    end
+})
+
+miscTab:Dropdown({
+    Title = "Pet",
+    Desc = "Inside MultiSection > Misc",
+    Values = {"Dog", "Cat", "Bird"},
+    Value = "Dog",
+    Callback = function(v)
+        print("Pet:", v)
+    end
+})
+
+task.delay(1, function()
+    notify("Loaded", "Full example loaded successfully.", "check-circle", 3)
+end)
+
+task.delay(2, function()
+    stats:Update("Version", tostring(WindUI.Version or "unknown"))
+    stats:Update("Theme", WindUI:GetCurrentTheme())
+end)
+
+task.delay(3, function()
+    Window:Dialog({
+        Title = "Welcome",
+        Content = "This example uses all currently exposed elements in WindUI Boreal.",
+        Icon = "sparkles",
+        Buttons = {
+            {
+                Title = "Close",
+                Variant = "Secondary",
+                Callback = function() end
+            },
+            {
+                Title = "Notify Me",
+                Icon = "bell",
+                Variant = "Primary",
+                Callback = function()
+                    notify("Dialog", "Thanks for testing the example.", "heart")
+                end
             }
-        })
-    end,
-})
+        }
+    })
+end)
