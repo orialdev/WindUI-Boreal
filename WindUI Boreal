@@ -2271,63 +2271,73 @@ return X end function a.g():typeof(__modImpl())local aa=a.cache.g if not aa then
 
 
 
-
-
-
-local aa=(cloneref or clonereference or function(aa)return aa end)
+local aa=(cloneref or clonereference or function(aa)
+return aa
+end)
 
 local ab=aa(game:GetService"HttpService")
 local ac={}
 
-
-
 function ac.New(ad)
-local ae=gethwid or function()return aa(game:GetService"Players").LocalPlayer.UserId end
+local ae=gethwid or function()
+return aa(game:GetService"Players").LocalPlayer.UserId
+end
 local af,ag=request or http_request or syn_request,setclipboard or toclipboard
 
 function ValidateKey(ah)
-local ai="https://pandadevelopment.net/v2_validation?key="..tostring(ah).."&service="..tostring(ad).."&hwid="..tostring(ae())
+local ai="https://new.pandadevelopment.net/api/v1/keys/validate"
 
+local aj={
+ServiceID=ad,
+HWID=tostring(ae()),
+Key=tostring(ah),
+}
 
-local aj,ak=pcall(function()
+local ak=ab:JSONEncode(aj)
+local al,am=pcall(function()
 return af{
 Url=ai,
-Method="GET",
-Headers={["User-Agent"]="Roblox/Exploit"}
+Method="POST",
+Headers={
+["User-Agent"]="Roblox/Exploit",
+["Content-Type"]="application/json",
+},
+Body=ak,
 }
 end)
 
-if aj and ak then
-if ak.Success then
-local al,am=pcall(function()
-return ab:JSONDecode(ak.Body)
+if al and am then
+if am.Success then
+local an,ao=pcall(function()
+return ab:JSONDecode(am.Body)
 end)
 
-if al and am then
-if am.V2_Authentication and am.V2_Authentication=="success"then
-
+if an and ao then
+if ao.Authenticated_Status and ao.Authenticated_Status=="Success"then
 return true,"Authenticated"
 else
-local an=am.Key_Information.Notes or"Unknown reason"
-
-return false,"Authentication failed: "..an
+local ap=ao.Note or"Unknown reason"
+return false,"Authentication failed: "..ap
 end
 else
-
 return false,"JSON decode error"
 end
 else
-warn("[Pelinda Ov2.5] HTTP request was not successful. Code: "..tostring(ak.StatusCode).." Message: "..ak.StatusMessage)
-return false,"HTTP request failed: "..ak.StatusMessage
+warn(
+" HTTP request was not successful. Code: "
+..tostring(am.StatusCode)
+.." Message: "
+..am.StatusMessage
+)
+return false,"HTTP request failed: "..am.StatusMessage
 end
 else
-
 return false,"Request pcall error"
 end
 end
 
 function GetKeyLink()
-return"https://pandadevelopment.net/getkey?service="..tostring(ad).."&hwid="..tostring(ae())
+return"https://new.pandadevelopment.net/getkey/"..tostring(ad).."?hwid="..tostring(ae())
 end
 
 function CopyLink()
@@ -2336,7 +2346,7 @@ end
 
 return{
 Verify=ValidateKey,
-Copy=CopyLink
+Copy=CopyLink,
 }
 end
 
@@ -2455,7 +2465,6 @@ end
 return aa end function a.j():typeof(__modImpl())local aa=a.cache.j if not aa then aa={c=__modImpl()}a.cache.j=aa end return aa.c end end do local function __modImpl()
 
 
-
 return{
 platoboost={
 Name="Platoboost",
@@ -2488,6 +2497,40 @@ New=a.j().New
 
 
 }end function a.k():typeof(__modImpl())local aa=a.cache.k if not aa then aa={c=__modImpl()}a.cache.k=aa end return aa.c end end do local function __modImpl()
+
+
+return[[
+{
+    "name": "windui-boreal",
+    "version": "v0.0.1",
+    "main": "./dist/main.lua",
+    "repository": "https://github.com/orialdev/WindUI-Boreal",
+    "discord": "http://discord.gg/B3dEqP2EX6",
+    "author": "by Footagesus | Forked by orialdev",
+    "description": "Roblox UI Library for scripts",
+    "license": "MIT",
+    "scripts": {
+        "dev": "node build/build.js dev",
+        "build": "node build/build.js build",
+        "live": "python -m http.server 8642",
+        "watch": "chokidar . -i 'node_modules' -i 'dist' -i 'build' -c 'npm run dev --'",
+        "live-build": "concurrently \"npm run live\" \"npm run watch --\"",
+        "example-live-build": "npm run live-build -- --input-file=main_example.lua",
+        "updater": "python updater/main.py"
+    },
+    "keywords": [
+        "ui-library",
+        "ui-design",
+        "script",
+        "script-hub",
+        "exploiting"
+    ],
+    "devDependencies": {
+        "chokidar-cli": "^3.0.0",
+        "concurrently": "^9.2.0"
+    }
+}
+]]end function a.l():typeof(__modImpl())local aa=a.cache.l if not aa then aa={c=__modImpl()}a.cache.l=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -2622,7 +2665,7 @@ return aq
 end
 
 
-return aa end function a.l():typeof(__modImpl())local aa=a.cache.l if not aa then aa={c=__modImpl()}a.cache.l=aa end return aa.c end end do local function __modImpl()
+return aa end function a.m():typeof(__modImpl())local aa=a.cache.m if not aa then aa={c=__modImpl()}a.cache.m=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 local ac=aa.Tween
@@ -2806,7 +2849,7 @@ end
 return ag
 end
 
-return ad end function a.m():typeof(__modImpl())local aa=a.cache.m if not aa then aa={c=__modImpl()}a.cache.m=aa end return aa.c end end do local function __modImpl()
+return ad end function a.n():typeof(__modImpl())local aa=a.cache.n if not aa then aa={c=__modImpl()}a.cache.n=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -2816,11 +2859,11 @@ local ac=ab.New
 local ad=ab.Tween
 
 local ae=a.e().New
-local af=a.l().New
+local af=a.m().New
 local ag=setclipboard or toclipboard
 
 function aa.new(ah,ai,aj,ak)
-local al=a.m().Init(nil,ah.WindUI.ScreenGui.KeySystem)
+local al=a.n().Init(nil,ah.WindUI.ScreenGui.KeySystem)
 local am=al.Create(true)
 
 local an={}
@@ -3327,7 +3370,7 @@ aB.Position=UDim2.new(1,0,0.5,0)
 am:Open()
 end
 
-return aa end function a.n():typeof(__modImpl())local aa=a.cache.n if not aa then aa={c=__modImpl()}a.cache.n=aa end return aa.c end end do local function __modImpl()
+return aa end function a.o():typeof(__modImpl())local aa=a.cache.o if not aa then aa={c=__modImpl()}a.cache.o=aa end return aa.c end end do local function __modImpl()
 
 
 
@@ -3349,8 +3392,7 @@ local ab=aa(game:GetService"Workspace").CurrentCamera.ViewportSize.Y
 return map(ab,0,2560,8,56)
 end
 
-return{viewportPointToWorld,getOffset}end function a.o():typeof(__modImpl())local aa=a.cache.o if not aa then aa={c=__modImpl()}a.cache.o=aa end return aa.c end end do local function __modImpl()
-
+return{viewportPointToWorld,getOffset}end function a.p():typeof(__modImpl())local aa=a.cache.p if not aa then aa={c=__modImpl()}a.cache.p=aa end return aa.c end end do local function __modImpl()
 
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
@@ -3360,7 +3402,7 @@ local ab=a.c()
 local ac=ab.New
 
 
-local ad,ae=unpack(a.o())
+local ad,ae=unpack(a.p())
 local af=Instance.new("Folder",aa(game:GetService"Workspace").CurrentCamera)
 
 
@@ -3484,7 +3526,7 @@ end)
 
 ah.AddParent=function(al)
 ab.AddSignal(al:GetPropertyChangedSignal"Visible",function()
-ah.SetVisibility(al.Visible)
+
 end)
 end
 
@@ -3496,12 +3538,11 @@ ah.Frame=ak
 ah.Model=aj
 
 return ah
-end end function a.p():typeof(__modImpl())local aa=a.cache.p if not aa then aa={c=__modImpl()}a.cache.p=aa end return aa.c end end do local function __modImpl()
-
+end end function a.q():typeof(__modImpl())local aa=a.cache.q if not aa then aa={c=__modImpl()}a.cache.q=aa end return aa.c end end do local function __modImpl()
 
 
 local aa=a.c()
-local ab=a.p()
+local ab=a.q()
 
 local ac=aa.New
 
@@ -3621,17 +3662,16 @@ ae.SetVisibility=af.SetVisibility
 end
 
 return ae,af
-end end function a.q():typeof(__modImpl())local aa=a.cache.q if not aa then aa={c=__modImpl()}a.cache.q=aa end return aa.c end end do local function __modImpl()
-
+end end function a.r():typeof(__modImpl())local aa=a.cache.r if not aa then aa={c=__modImpl()}a.cache.r=aa end return aa.c end end do local function __modImpl()
 
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
 
 local ab={
-AcrylicBlur=a.p(),
+AcrylicBlur=a.q(),
 
-AcrylicPaint=a.q(),
+AcrylicPaint=a.r(),
 }
 
 function ab.init()
@@ -3678,8 +3718,7 @@ registerDefaults()
 ab.Enable()
 end
 
-return ab end function a.r():typeof(__modImpl())local aa=a.cache.r if not aa then aa={c=__modImpl()}a.cache.r=aa end return aa.c end end do local function __modImpl()
-
+return ab end function a.s():typeof(__modImpl())local aa=a.cache.s if not aa then aa={c=__modImpl()}a.cache.s=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ab=a.c()
@@ -3699,7 +3738,7 @@ Buttons=ae.Buttons,
 IconSize=22,
 }
 
-local ag=a.m().Init(nil,ae.WindUI.ScreenGui.Popups)
+local ag=a.n().Init(nil,ae.WindUI.ScreenGui.Popups)
 local ah=ag.Create(true,"Popup")
 
 local ai=200
@@ -3872,7 +3911,7 @@ ah:Open()
 return af
 end
 
-return aa end function a.s():typeof(__modImpl())local aa=a.cache.s if not aa then aa={c=__modImpl()}a.cache.s=aa end return aa.c end end do local function __modImpl()
+return aa end function a.t():typeof(__modImpl())local aa=a.cache.t if not aa then aa={c=__modImpl()}a.cache.t=aa end return aa.c end end do local function __modImpl()
 return function(aa)
 return{
 Dark={
@@ -4200,7 +4239,7 @@ Button=aa:Gradient({
 Icon=Color3.fromHex"#ffffff",
 },
 }
-end end function a.t():typeof(__modImpl())local aa=a.cache.t if not aa then aa={c=__modImpl()}a.cache.t=aa end return aa.c end end do local function __modImpl()
+end end function a.u():typeof(__modImpl())local aa=a.cache.u if not aa then aa={c=__modImpl()}a.cache.u=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -4305,7 +4344,7 @@ return am
 end
 
 
-return aa end function a.u():typeof(__modImpl())local aa=a.cache.u if not aa then aa={c=__modImpl()}a.cache.u=aa end return aa.c end end do local function __modImpl()
+return aa end function a.v():typeof(__modImpl())local aa=a.cache.v if not aa then aa={c=__modImpl()}a.cache.v=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ab=(cloneref or clonereference or function(ab)return ab end)
@@ -4481,7 +4520,7 @@ return ak
 end
 
 
-return aa end function a.v():typeof(__modImpl())local aa=a.cache.v if not aa then aa={c=__modImpl()}a.cache.v=aa end return aa.c end end do local function __modImpl()
+return aa end function a.w():typeof(__modImpl())local aa=a.cache.w if not aa then aa={c=__modImpl()}a.cache.w=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 
@@ -4497,7 +4536,7 @@ BackgroundTransparency=1,
 return"Space",{__type="Space",ElementFrame=af}
 end
 
-return ac end function a.w():typeof(__modImpl())local aa=a.cache.w if not aa then aa={c=__modImpl()}a.cache.w=aa end return aa.c end end do local function __modImpl()
+return ac end function a.x():typeof(__modImpl())local aa=a.cache.x if not aa then aa={c=__modImpl()}a.cache.x=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 
@@ -4656,7 +4695,7 @@ end
 return ah.__type,ah
 end
 
-return ac end function a.x():typeof(__modImpl())local aa=a.cache.x if not aa then aa={c=__modImpl()}a.cache.x=aa end return aa.c end end do local function __modImpl()
+return ac end function a.y():typeof(__modImpl())local aa=a.cache.y if not aa then aa={c=__modImpl()}a.cache.y=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -4825,7 +4864,7 @@ return ah
 end
 
 
-return aa end function a.y():typeof(__modImpl())local aa=a.cache.y if not aa then aa={c=__modImpl()}a.cache.y=aa end return aa.c end end do local function __modImpl()
+return aa end function a.z():typeof(__modImpl())local aa=a.cache.z if not aa then aa={c=__modImpl()}a.cache.z=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ab=a.c()
@@ -4991,518 +5030,841 @@ ah.Label=aj
 return ah
 end
 
-return aa end function a.z():typeof(__modImpl())local aa=a.cache.z if not aa then aa={c=__modImpl()}a.cache.z=aa end return aa.c end end do local function __modImpl()
+return aa end function a.A():typeof(__modImpl())local aa=a.cache.A if not aa then aa={c=__modImpl()}a.cache.A=aa end return aa.c end end do local function __modImpl()
 
-local aa=(cloneref or clonereference or function(aa)return aa end)
+local aa=(cloneref or clonereference or function(aa)
+return aa
+end)
 
+local ab=aa(game:GetService"HttpService")
 
-local ab=aa(game:GetService"RunService")
-local ac=aa(game:GetService"HttpService")
+local ac=a.c()
 
-local ad
+local ad={}
+ad.__index=ad
 
-local ae
-ae={
-Folder=nil,
-Path=nil,
-Configs={},
-Parser={
-Colorpicker={
-Save=function(af)
+local ae={}
+ae.__index=ae
+
+local function DeepCopy(af)
+if typeof(af)~="table"then
+return af
+end
+
+local ag={}
+for ah,ai in next,af do
+ag[DeepCopy(ah)]=DeepCopy(ai)
+end
+return ag
+end
+
+local function SerializeValue(af)
+local ag=typeof(af)
+
+if af==nil or ag=="string"or ag=="number"or ag=="boolean"then
+return af
+end
+
+if ag=="Color3"then
 return{
-__type=af.__type,
-value=af.Default:ToHex(),
-transparency=af.Transparency or nil,
+__kind="Color3",
+R=af.R,
+G=af.G,
+B=af.B,
+}
+end
+
+if ag=="Vector2"then
+return{
+__kind="Vector2",
+X=af.X,
+Y=af.Y,
+}
+end
+
+if ag=="Vector3"then
+return{
+__kind="Vector3",
+X=af.X,
+Y=af.Y,
+Z=af.Z,
+}
+end
+
+if ag=="UDim"then
+return{
+__kind="UDim",
+Scale=af.Scale,
+Offset=af.Offset,
+}
+end
+
+if ag=="UDim2"then
+return{
+__kind="UDim2",
+X=SerializeValue(af.X),
+Y=SerializeValue(af.Y),
+}
+end
+
+if ag=="EnumItem"then
+return{
+__kind="EnumItem",
+EnumType=af.EnumType.Name,
+Name=af.Name,
+}
+end
+
+if ag~="table"then
+return nil
+end
+
+local ah={}
+local ai=#af>0
+
+if ai then
+for aj,ak in ipairs(af)do
+ah[aj]=SerializeValue(ak)
+end
+return ah
+end
+
+for aj,ak in next,af do
+local al=typeof(aj)
+if al=="string"or al=="number"then
+ah[tostring(aj)]=SerializeValue(ak)
+end
+end
+
+return ah
+end
+
+local function DeserializeValue(af)
+if typeof(af)~="table"then
+return af
+end
+
+local ag=af.__kind
+if ag=="Color3"then
+return Color3.new(af.R or 0,af.G or 0,af.B or 0)
+end
+
+if ag=="Vector2"then
+return Vector2.new(af.X or 0,af.Y or 0)
+end
+
+if ag=="Vector3"then
+return Vector3.new(af.X or 0,af.Y or 0,af.Z or 0)
+end
+
+if ag=="UDim"then
+return UDim.new(af.Scale or 0,af.Offset or 0)
+end
+
+if ag=="UDim2"then
+return UDim2.new(
+(af.X and af.X.Scale)or 0,
+(af.X and af.X.Offset)or 0,
+(af.Y and af.Y.Scale)or 0,
+(af.Y and af.Y.Offset)or 0
+)
+end
+
+if ag=="EnumItem"then
+local ah=af.EnumType
+local ai=af.Name
+
+if ah and ai then
+local aj,ak=pcall(function()
+local aj=Enum[ah]
+return aj and aj[ai]or nil
+end)
+
+if aj and ak~=nil then
+return ak
+end
+end
+
+return nil
+end
+
+local ah={}
+for ai,aj in next,af do
+if ai~="__kind"then
+ah[ai]=DeserializeValue(aj)
+end
+end
+
+return ah
+end
+
+local function NormalizeConfigName(af)
+if af==nil then
+return nil
+end
+
+local ag=tostring(af)
+ag=ag:gsub("^%s+","")
+ag=ag:gsub("%s+$","")
+ag=ag:gsub("[\\/:*?\"<>|]","_")
+
+if ag==""then
+return nil
+end
+
+return ag
+end
+
+local function EnsureFolderPath(af)
+if type(makefolder)~="function"or type(isfolder)~="function"or typeof(af)~="string"or af==""then
+return
+end
+
+local ag=""
+for ah in string.gmatch(af,"[^/]+")do
+ag=ag==""and ah or(ag.."/"..ah)
+
+if not isfolder(ag)then
+pcall(makefolder,ag)
+end
+end
+end
+
+local function NormalizeSelectionValue(af)
+if typeof(af)=="table"then
+if af.Title~=nil then
+return af.Title
+end
+if af.Value~=nil then
+return af.Value
+end
+if af.Name~=nil then
+return af.Name
+end
+end
+
+return af
+end
+
+local function NormalizeSegmentedSelection(af)
+if af.Multi then
+local ag={}
+local ah={}
+
+if typeof(af.Value)=="table"then
+for ai,aj in ipairs(af.Value)do
+ah[tostring(aj)]=true
+end
+end
+
+for ai,aj in ipairs(af.Options or{})do
+if ah[tostring(aj.Value)]then
+table.insert(ag,aj.Title)
+end
+end
+
+return ag
+end
+
+local ag=af.Value
+for ah,ai in ipairs(af.Options or{})do
+if tostring(ai.Value)==tostring(ag)then
+return ai.Title
+end
+end
+
+return ag
+end
+
+local function CreateParserTable()
+local af={}
+
+af.Generic={
+Save=function(ag)
+local ah
+
+if typeof(ag.Get)=="function"then
+ah=ag:Get()
+elseif typeof(ag.GetValue)=="function"then
+ah=ag:GetValue()
+elseif ag.Value~=nil then
+ah=ag.Value
+elseif ag.Default~=nil then
+ah=ag.Default
+end
+
+return{
+__type="Generic",
+HasValue=ah~=nil,
+Value=SerializeValue(ah),
 }
 end,
-Load=function(af,ag)
-if af and af.Update then
-af:Update(Color3.fromHex(ag.value),ag.transparency or nil)
-end
-end
-},
-Dropdown={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Select then
-af:Select(ag.value,true)
-end
-end
-},
-Segmented={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Get and af:Get()or af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Set then
-af:Set(ag.value,true)
-end
-end
-},
-Input={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Set then
-af:Set(ag.value)
-end
-end
-},
-Keybind={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Set then
-af:Set(ag.value)
-end
-end
-},
-ButtonKeybind={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-}
-end,
-Load=function(af,ag)
-if af and af.Set and ag.value~=nil then
-af:Set(ag.value)
-end
-end
-},
-Slider={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value.Default,
-}
-end,
-Load=function(af,ag)
-if af and af.Set then
-af:Set(tonumber(ag.value))
-end
-end
-},
-Stepper={
-Save=function(af)
-return{
-__type=af.__type,
-value=af.Value,
-min=af.Min,
-max=af.Max,
-step=af.Step,
-}
-end,
-Load=function(af,ag)
-if af and af.SetRange and ag.min~=nil and ag.max~=nil then
-af:SetRange(tonumber(ag.min),tonumber(ag.max),false)
+Load=function(ag,ah)
+if typeof(ah)~="table"or ah.HasValue==false then
+return
 end
 
-if af and af.SetStep and ag.step~=nil then
-af:SetStep(tonumber(ag.step))
+local ai=DeserializeValue(ah.Value)
+
+if typeof(ag.Set)=="function"then
+ag:Set(ai)
+return
 end
 
-if af and af.Set and ag.value~=nil then
-af:Set(tonumber(ag.value),false)
+if typeof(ag.Update)=="function"then
+ag:Update(ai)
+return
 end
+
+if typeof(ag.Select)=="function"then
+ag:Select(ai)
 end
-},
-Progress={
-Save=function(af)
+end,
+}
+
+af.Toggle={
+Save=function(ag)
 return{
-__type=af.__type,
-value=af.Value,
-min=af.Min,
-max=af.Max,
+__type="Toggle",
+Value=ag.Value==true,
 }
 end,
-Load=function(af,ag)
-if af and af.SetRange and ag.min~=nil and ag.max~=nil then
-af:SetRange(tonumber(ag.min),tonumber(ag.max),false)
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(ah.Value)
 end
+end,
+}
 
-if af and af.Set then
-af:Set(tonumber(ag.value),false,false)
-end
-end
-},
-Stats={
-Save=function(af)
+af.ToggleKeybind={
+Save=function(ag)
 return{
-__type=af.__type,
-items=af.Items,
+__type="ToggleKeybind",
+Value=ag.Value==true,
+Keybind=SerializeValue(ag.Keybind),
 }
 end,
-Load=function(af,ag)
-if af and af.Set and typeof(ag.items)=="table"then
-af:Set(ag.items,true)
+Load=function(ag,ah)
+if ah.Keybind~=nil and typeof(ag.SetKeybind)=="function"then
+ag:SetKeybind(DeserializeValue(ah.Keybind))
 end
+
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(ah.Value)
 end
-},
-Toggle={
-Save=function(af)
+end,
+}
+
+af.Slider={
+Save=function(ag)
+local ah=ag.Value
+if typeof(ah)=="table"then
+ah=ah.Default
+end
+
 return{
-__type=af.__type,
-value=af.Value,
+__type="Slider",
+Value=SerializeValue(ah),
 }
 end,
-Load=function(af,ag)
-if af and af.Set then
-af:Set(ag.value)
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
 end
-end
-},
-ToggleKeybind={
-Save=function(af)
+end,
+}
+
+af.Stepper={
+Save=function(ag)
 return{
-__type=af.__type,
-value=af.Value,
-keybind=af.Keybind,
+__type="Stepper",
+Value=SerializeValue(ag.Value),
 }
 end,
-Load=function(af,ag)
-if af and af.Set and ag.value~=nil then
-af:Set(ag.value)
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
 end
-
-if af and af.SetKeybind and ag.keybind then
-af:SetKeybind(ag.keybind)
-end
-end
-},
-}
+end,
 }
 
-function ae.Init(af,ag)
-if not ag.Folder then
-warn"[ WindUI.ConfigManager ] Window.Folder is not specified."
-return false
+af.Progress={
+Save=function(ag)
+return{
+__type="Progress",
+Value=SerializeValue(ag.Value),
+}
+end,
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
 end
-if ab:IsStudio()or not writefile then
-warn"[ WindUI.ConfigManager ] The config system doesn't work in the studio."
-return false
+end,
+}
+
+af.Input={
+Save=function(ag)
+return{
+__type="Input",
+Value=SerializeValue(ag.Value),
+}
+end,
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
 end
+end,
+}
 
-ad=ag
-ae.Folder=ad.Folder
-ae.Path="WindUI/"..tostring(ae.Folder).."/config/"
+af.Dropdown={
+Save=function(ag)
+local ah=ag.Value
 
-if not isfolder(ae.Path)then
-makefolder(ae.Path)
-end
-
-local ah=ae:AllConfigs()
-
-for ai,aj in next,ah do
-local ak=ae.Path..aj..".json"
-if isfile and readfile and isfile(ak)then
-ae.Configs[aj]=readfile(ak)
+if ag.Multi then
+local ai={}
+if typeof(ah)=="table"then
+for aj,ak in ipairs(ah)do
+table.insert(ai,SerializeValue(NormalizeSelectionValue(ak)))
 end
 end
 
-return ae
+return{
+__type="Dropdown",
+Multi=true,
+Value=ai,
+}
 end
 
-function ae.SetPath(af,ag)
+local ai=NormalizeSelectionValue(ah)
+
+return{
+__type="Dropdown",
+Multi=false,
+HasValue=ai~=nil,
+Value=SerializeValue(ai),
+}
+end,
+Load=function(ag,ah)
+if typeof(ag.Select)~="function"then
+return
+end
+
+if ah.Multi then
+local ai={}
+for aj,ak in ipairs(ah.Value or{})do
+table.insert(ai,DeserializeValue(ak))
+end
+
+ag:Select(ai)
+return
+end
+
+if ah.HasValue==false then
+ag:Select(nil)
+return
+end
+
+ag:Select(DeserializeValue(ah.Value))
+end,
+}
+
+af.Segmented={
+Save=function(ag)
+local ah=NormalizeSegmentedSelection(ag)
+
+return{
+__type="Segmented",
+Multi=ag.Multi==true,
+HasValue=ah~=nil,
+Value=SerializeValue(ah),
+}
+end,
+Load=function(ag,ah)
+if ag.Multi then
+if typeof(ag.Set)=="function"then
+ag:Set({},true)
+end
+
+for ai,aj in ipairs(ah.Value or{})do
+if typeof(ag.Select)=="function"then
+ag:Select(DeserializeValue(aj),true)
+end
+end
+
+if typeof(ag.Get)=="function"and typeof(ag.Set)=="function"then
+ag:Set(ag:Get())
+end
+return
+end
+
+if ah.HasValue==false then
+if typeof(ag.Set)=="function"then
+ag:Set(nil)
+end
+return
+end
+
+if typeof(ag.Select)=="function"then
+ag:Select(DeserializeValue(ah.Value))
+end
+end,
+}
+
+af.Keybind={
+Save=function(ag)
+return{
+__type="Keybind",
+Value=SerializeValue(ag.Value),
+}
+end,
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
+end
+end,
+}
+
+af.ButtonKeybind={
+Save=function(ag)
+return{
+__type="ButtonKeybind",
+Value=SerializeValue(ag.Value),
+}
+end,
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
+end
+end,
+}
+
+af.Colorpicker={
+Save=function(ag)
+return{
+__type="Colorpicker",
+Color=SerializeValue(ag.Default),
+HasTransparency=typeof(ag.Transparency)=="number",
+Transparency=SerializeValue(ag.Transparency),
+}
+end,
+Load=function(ag,ah)
+local ai=DeserializeValue(ah.Color)
+local aj=ah.HasTransparency and DeserializeValue(ah.Transparency)or nil
+
+if ai and typeof(ag.Set)=="function"then
+ag:Set(ai,aj)
+elseif ai and typeof(ag.Update)=="function"then
+ag:Update(ai,aj)
+end
+
+if ai~=nil then
+ac.SafeCallback(ag.Callback,ai,aj)
+end
+end,
+}
+
+af.Stats={
+Save=function(ag)
+local ah
+
+if typeof(ag.GetItems)=="function"then
+ah=ag:GetItems()
+else
+ah=ag.Items
+end
+
+return{
+__type="Stats",
+Value=SerializeValue(ah),
+}
+end,
+Load=function(ag,ah)
+if ah.Value~=nil and typeof(ag.Set)=="function"then
+ag:Set(DeserializeValue(ah.Value))
+end
+end,
+}
+
+return af
+end
+
+function ad.CanUseFilesystem(af)
+return type(readfile)=="function"
+and type(writefile)=="function"
+and type(isfile)=="function"
+end
+
+function ad.ResolvePath(af,ag)
+local ah=NormalizeConfigName(ag)
+if not ah then
+return nil,nil
+end
+
+return ah,af.Path..ah..".json"
+end
+
+function ad.CreateConfig(af,ag)
+local ah,ai=af:ResolvePath(ag)
+if not ah then
+return nil
+end
+
+local aj=af.Configs[ah]
+if aj then
+return aj
+end
+
+local ak=setmetatable({
+Name=ah,
+Path=ai,
+Elements={},
+Manager=af,
+Window=af.Window,
+Data=nil,
+},ae)
+
+af.Configs[ah]=ak
+return ak
+end
+
+function ad.GetConfig(af,ag)
+return af:CreateConfig(ag)
+end
+
+function ad.ReadConfigData(af,ag)
+local ah,ai=af:ResolvePath(ag)
+if not ah or not ai then
+return false,"Invalid config name"
+end
+
+if not af:CanUseFilesystem()then
+return false,"Filesystem APIs are unavailable"
+end
+
+if not isfile(ai)then
+return false,"Config does not exist"
+end
+
+local aj,ak=pcall(readfile,ai)
+if not aj then
+return false,ak
+end
+
+local al,am=pcall(function()
+return ab:JSONDecode(ak)
+end)
+
+if not al then
+return false,am
+end
+
+if typeof(am)~="table"then
+return false,"Config data is not a table"
+end
+
+return true,am
+end
+
+function ad.AllConfigs(af)
+local ag={}
+
+for ah in next,af.Configs do
+ag[ah]=true
+end
+
+if af:CanUseFilesystem()and type(listfiles)=="function"then
+local ah,ai=pcall(listfiles,af.Path)
+if ah and typeof(ai)=="table"then
+for aj,ak in ipairs(ai)do
+local al=tostring(ak):gsub("\\","/")
+local am=al:match"([^/]+)%.json$"
+if am then
+ag[am]=true
+end
+end
+end
+end
+
+local ah={}
+for ai in next,ag do
+table.insert(ah,ai)
+end
+
+table.sort(ah,function(ai,aj)
+return string.lower(ai)<string.lower(aj)
+end)
+
+for ai,aj in ipairs(ah)do
+af:CreateConfig(aj)
+end
+
+return ah
+end
+
+function ad.DeleteConfig(af,ag)
+local ah=af:GetConfig(ag)
+if not ah then
+return false,"Invalid config name"
+end
+
+return ah:Delete()
+end
+
+function ad.Save(af,ag)
+local ah=af:GetConfig(ag)
+if not ah then
+return false,"Invalid config name"
+end
+
+return ah:Save()
+end
+
+function ad.Load(af,ag)
+local ah=af:GetConfig(ag)
+if not ah then
+return false,"Invalid config name"
+end
+
+return ah:Load()
+end
+
+function ae.Register(af,ag,ah)
+if typeof(ag)~="string"then
+return
+end
+
+af.Elements[ag]=ah
+end
+
+function ae.Unregister(af,ag)
+if typeof(ag)~="string"then
+return
+end
+
+af.Elements[ag]=nil
+end
+
+function ae.Serialize(af)
+local ag={}
+local ah={}
+
+for ai,aj in next,af.Window.FlagIndex or{}do
+if typeof(ai)=="string"and typeof(aj)=="table"then
+local ak=aj.__type
+local al=af.Manager.Parser[ak]or af.Manager.Parser.Generic
+
+if al and al.Save then
+local am,an=pcall(al.Save,aj)
+if am and typeof(an)=="table"then
+ag[ai]=an
+else
+ah[ai]=am and"Parser returned invalid data"or tostring(an)
+end
+else
+ah[ai]="No parser available"
+end
+end
+end
+
+return ag,ah
+end
+
+function ae.Save(af)
+local ag,ah=af:Serialize()
+
+af.Window.PendingConfigData={}
+af.Window:SetCurrentConfig(af)
+
+af.Data=DeepCopy(ag)
+af.Window.PendingConfigData=DeepCopy(ag)
+
+if af.Manager:CanUseFilesystem()then
+EnsureFolderPath(af.Manager.Path)
+
+local ai,aj=pcall(function()
+return ab:JSONEncode(ag)
+end)
+
+if not ai then
+return false,aj
+end
+
+local ak,al=pcall(writefile,af.Path,aj)
+if not ak then
+return false,al
+end
+end
+
+return true,ag,ah
+end
+
+function ae.Read(af)
+local ag,ah=af.Manager:ReadConfigData(af.Name)
+if ag then
+af.Data=DeepCopy(ah)
+return true,ah
+end
+
+if typeof(af.Data)=="table"then
+return true,DeepCopy(af.Data)
+end
+
+return false,ah
+end
+
+function ae.Load(af)
+local ag,ah=af:Read()
 if not ag then
-warn"[ WindUI.ConfigManager ] Custom path is not specified."
-return false
+return false,ah
 end
 
-ae.Path=ag
-if not ag:match"/$"then
-ae.Path=ag.."/"
+af.Data=DeepCopy(ah)
+af.Window.PendingConfigData=DeepCopy(ah)
+af.Window:SetCurrentConfig(af)
+
+return true,DeepCopy(ah)
 end
 
-if not isfolder(ae.Path)then
-makefolder(ae.Path)
+function ae.Delete(af)
+af.Data=nil
+
+if af.Window.CurrentConfig==af then
+af.Window.PendingConfigData={}
+af.Window:SetCurrentConfig(nil)
+end
+
+af.Manager.Configs[af.Name]=nil
+
+if af.Manager:CanUseFilesystem()and type(delfile)=="function"and isfile(af.Path)then
+local ag,ah=pcall(delfile,af.Path)
+if not ag then
+return false,ah
+end
 end
 
 return true
 end
 
-function ae.CreateConfig(af,ag,ah)
-local ai={
-Path=ae.Path..ag..".json",
-Elements={},
-CustomData={},
-AutoLoad=ah or false,
-Version=1.2,
-}
+function ad.Init(af,ag)
+local ah=ag and ag.Folder
+local ai="WindUI/"..tostring(ah or"Default").."/config/"
 
-if not ag then
-return false,"No config file is selected"
+EnsureFolderPath(ai)
+
+local aj=setmetatable({
+Window=ag,
+Folder=ah,
+Path=ai,
+Configs={},
+Parser=CreateParserTable(),
+},ad)
+
+aj:AllConfigs()
+
+return aj
 end
 
-function ai.SetAsCurrent(aj)
-ad:SetCurrentConfig(ai)
-end
-
-function ai.Register(aj,ak,al)
-ai.Elements[ak]=al
-end
-
-function ai.Unregister(aj,ak)
-ai.Elements[ak]=nil
-end
-
-function ai.Set(aj,ak,al)
-ai.CustomData[ak]=al
-end
-
-function ai.Get(aj,ak)
-return ai.CustomData[ak]
-end
-
-function ai.SetAutoLoad(aj,ak)
-ai.AutoLoad=ak
-end
-
-function ai.Save(aj)
-if ad.PendingFlags then
-for ak,al in next,ad.PendingFlags do
-ai:Register(ak,al)
-end
-end
-
-local ak={
-__version=ai.Version,
-__elements={},
-__autoload=ai.AutoLoad,
-__custom=ai.CustomData
-}
-
-for al,am in next,ai.Elements do
-if not am then
-ai.Elements[al]=nil
-else
-local an=ae.Parser[am.__type]
-if an and an.Save then
-local ao,ap=pcall(function()
-return an.Save(am)
-end)
-if ao and ap~=nil then
-ak.__elements[tostring(al)]=ap
-elseif not ao then
-warn("[ WindUI.ConfigManager ] Failed to save flag '"..tostring(al).."': "..tostring(ap))
-end
-end
-end
-end
-
-local al=ac:JSONEncode(ak)
-if writefile then
-writefile(ai.Path,al)
-end
-
-return ak
-end
-
-function ai.Load(aj)
-if isfile and not isfile(ai.Path)then
-return false,"Config file does not exist"
-end
-
-local ak,al=pcall(function()
-local ak=readfile or function()
-warn"[ WindUI.ConfigManager ] The config system doesn't work in the studio."
-return nil
-end
-return ac:JSONDecode(ak(ai.Path))
-end)
-
-if not ak then
-return false,"Failed to parse config file"
-end
-
-if not al.__version then
-local am={
-__version=ai.Version,
-__elements=al,
-__custom={}
-}
-al=am
-end
-
-if ad.PendingFlags then
-for am,an in next,ad.PendingFlags do
-ai:Register(am,an)
-end
-end
-
-ad.PendingConfigData=ad.PendingConfigData or{}
-
-for am,an in next,(al.__elements or{})do
-local ao=an and an.__type and ae.Parser[an.__type]or nil
-local ap=ai.Elements[am]
-
-if ap and ao then
-task.spawn(function()
-local aq,ar=pcall(function()
-ao.Load(ap,an)
-end)
-
-if not aq then
-warn("[ WindUI.ConfigManager ] Failed to load flag '"..tostring(am).."': "..tostring(ar))
-end
-end)
-elseif ao then
-ad.PendingConfigData[am]=an
-end
-end
-
-ai.CustomData=al.__custom or{}
-
-return ai.CustomData
-end
-
-function ai.Delete(aj)
-if not delfile then
-return false,"delfile function is not available"
-end
-
-if not isfile(ai.Path)then
-return false,"Config file does not exist"
-end
-
-local ak,al=pcall(function()
-delfile(ai.Path)
-end)
-
-if not ak then
-return false,"Failed to delete config file: "..tostring(al)
-end
-
-ae.Configs[ag]=nil
-
-if ad.CurrentConfig==ai then
-ad.CurrentConfig=nil
-end
-
-return true,"Config deleted successfully"
-end
-
-function ai.GetData(aj)
-return{
-elements=ai.Elements,
-custom=ai.CustomData,
-autoload=ai.AutoLoad
-}
-end
-
-
-if isfile(ai.Path)then
-local aj,ak=pcall(function()
-return ac:JSONDecode(readfile(ai.Path))
-end)
-
-if aj and ak and ak.__autoload then
-ai.AutoLoad=true
-
-task.spawn(function()
-task.wait(0.5)
-local al,am=pcall(function()
-return ai:Load()
-end)
-if al then
-if ad.Debug then print("[ WindUI.ConfigManager ] AutoLoaded config: "..ag)end
-else
-warn("[ WindUI.ConfigManager ] Failed to AutoLoad config: "..ag.." - "..tostring(am))
-end
-end)
-end
-end
-
-
-ai:SetAsCurrent()
-ae.Configs[ag]=ai
-return ai
-end
-
-function ae.Config(af,ag,ah)
-return ae:CreateConfig(ag,ah)
-end
-
-function ae.GetAutoLoadConfigs(af)
-local ag={}
-
-for ah,ai in pairs(ae.Configs)do
-if ai.AutoLoad then
-table.insert(ag,ah)
-end
-end
-
-return ag
-end
-
-function ae.DeleteConfig(af,ag)
-if not delfile then
-return false,"delfile function is not available"
-end
-
-local ah=ae.Path..ag..".json"
-
-if not isfile(ah)then
-return false,"Config file does not exist"
-end
-
-local ai,aj=pcall(function()
-delfile(ah)
-end)
-
-if not ai then
-return false,"Failed to delete config file: "..tostring(aj)
-end
-
-ae.Configs[ag]=nil
-
-if ad.CurrentConfig and ad.CurrentConfig.Path==ah then
-ad.CurrentConfig=nil
-end
-
-return true,"Config deleted successfully"
-end
-
-function ae.AllConfigs(af)
-if not listfiles then return{}end
-
-local ag={}
-if not isfolder(ae.Path)then
-makefolder(ae.Path)
-return ag
-end
-
-for ah,ai in next,listfiles(ae.Path)do
-local aj=ai:match"([^\\/]+)%.json$"
-if aj then
-table.insert(ag,aj)
-end
-end
-
-return ag
-end
-
-function ae.GetConfig(af,ag)
-return ae.Configs[ag]
-end
-
-return ae end function a.A():typeof(__modImpl())local aa=a.cache.A if not aa then aa={c=__modImpl()}a.cache.A=aa end return aa.c end end do local function __modImpl()
+return ad end function a.B():typeof(__modImpl())local aa=a.cache.B if not aa then aa={c=__modImpl()}a.cache.B=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -5789,7 +6151,7 @@ end
 
 
 
-return aa end function a.B():typeof(__modImpl())local aa=a.cache.B if not aa then aa={c=__modImpl()}a.cache.B=aa end return aa.c end end do local function __modImpl()
+return aa end function a.C():typeof(__modImpl())local aa=a.cache.C if not aa then aa={c=__modImpl()}a.cache.C=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -5952,7 +6314,7 @@ end
 
 
 
-return aa end function a.C():typeof(__modImpl())local aa=a.cache.C if not aa then aa={c=__modImpl()}a.cache.C=aa end return aa.c end end do local function __modImpl()
+return aa end function a.D():typeof(__modImpl())local aa=a.cache.D if not aa then aa={c=__modImpl()}a.cache.D=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ab=aa.New
 local ac=aa.NewRoundFrame
@@ -6729,7 +7091,7 @@ end
 
 
 return ag
-end end function a.D():typeof(__modImpl())local aa=a.cache.D if not aa then aa={c=__modImpl()}a.cache.D=aa end return aa.c end end do local function __modImpl()
+end end function a.E():typeof(__modImpl())local aa=a.cache.E if not aa then aa={c=__modImpl()}a.cache.E=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ab=aa.New
@@ -6751,7 +7113,7 @@ Desc=af.Desc or nil,
 
 Locked=af.Locked or false,
 }
-local ah=a.D()(af)
+local ah=a.E()(af)
 
 ag.ParagraphFrame=ah
 if af.Buttons and#af.Buttons>0 then
@@ -6779,7 +7141,7 @@ return ag.__type,ag
 
 end
 
-return ac end function a.E():typeof(__modImpl())local aa=a.cache.E if not aa then aa={c=__modImpl()}a.cache.E=aa end return aa.c end end do local function __modImpl()
+return ac end function a.F():typeof(__modImpl())local aa=a.cache.F if not aa then aa={c=__modImpl()}a.cache.F=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()local ab=
 aa.New
@@ -6804,7 +7166,7 @@ UIElements={}
 
 local ag=true
 
-af.ButtonFrame=a.D(){
+af.ButtonFrame=a.E(){
 Title=af.Title,
 Desc=af.Desc,
 Parent=ae.Parent,
@@ -6881,7 +7243,7 @@ end)
 return af.__type,af
 end
 
-return ac end function a.F():typeof(__modImpl())local aa=a.cache.F if not aa then aa={c=__modImpl()}a.cache.F=aa end return aa.c end end do local function __modImpl()
+return ac end function a.G():typeof(__modImpl())local aa=a.cache.G if not aa then aa={c=__modImpl()}a.cache.G=aa end return aa.c end end do local function __modImpl()
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
 local ab=aa(game:GetService"UserInputService")
@@ -6889,7 +7251,7 @@ local ab=aa(game:GetService"UserInputService")
 local ac=a.c()
 local ad=ac.New
 
-local ae=a.u().New
+local ae=a.v().New
 
 local af={}
 
@@ -6925,7 +7287,7 @@ UIElements={}
 local aj=true
 local ak=false
 
-ai.ButtonKeybindFrame=a.D(){
+ai.ButtonKeybindFrame=a.E(){
 Title=ai.Title,
 Desc=ai.Desc,
 Parent=ah.Parent,
@@ -7112,7 +7474,7 @@ end)
 return ai.__type,ai
 end
 
-return af end function a.G():typeof(__modImpl())local aa=a.cache.G if not aa then aa={c=__modImpl()}a.cache.G=aa end return aa.c end end do local function __modImpl()
+return af end function a.H():typeof(__modImpl())local aa=a.cache.H if not aa then aa={c=__modImpl()}a.cache.H=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -7391,7 +7753,7 @@ end
 return ao,al
 end
 
-return aa end function a.H():typeof(__modImpl())local aa=a.cache.H if not aa then aa={c=__modImpl()}a.cache.H=aa end return aa.c end end do local function __modImpl()
+return aa end function a.I():typeof(__modImpl())local aa=a.cache.I if not aa then aa={c=__modImpl()}a.cache.I=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -7492,11 +7854,11 @@ return an,ak
 end
 
 
-return aa end function a.I():typeof(__modImpl())local aa=a.cache.I if not aa then aa={c=__modImpl()}a.cache.I=aa end return aa.c end end do local function __modImpl()
+return aa end function a.J():typeof(__modImpl())local aa=a.cache.J if not aa then aa={c=__modImpl()}a.cache.J=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 
-local ab=a.H().New
-local ac=a.I().New
+local ab=a.I().New
+local ac=a.J().New
 
 local ad={}
 
@@ -7514,7 +7876,7 @@ Type=af.Type or"Toggle",
 Callback=af.Callback or function()end,
 UIElements={}
 }
-ag.ToggleFrame=a.D(){
+ag.ToggleFrame=a.E(){
 Title=ag.Title,
 Desc=ag.Desc,
 
@@ -7585,7 +7947,7 @@ end)
 return ag.__type,ag
 end
 
-return ad end function a.J():typeof(__modImpl())local aa=a.cache.J if not aa then aa={c=__modImpl()}a.cache.J=aa end return aa.c end end do local function __modImpl()
+return ad end function a.K():typeof(__modImpl())local aa=a.cache.K if not aa then aa={c=__modImpl()}a.cache.K=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -7594,9 +7956,9 @@ local ab=aa(game:GetService"UserInputService")
 local ac=a.c()
 local ad=ac.New
 
-local ae=a.H().New
-local af=a.I().New
-local ag=a.u().New
+local ae=a.I().New
+local af=a.J().New
+local ag=a.v().New
 
 local ah={}
 
@@ -7637,7 +7999,7 @@ end
 
 local an=(40.8)
 
-ak.ToggleKeybindFrame=a.D(){
+ak.ToggleKeybindFrame=a.E(){
 Title=ak.Title,
 Desc=ak.Desc,
 Window=aj.Window,
@@ -7805,7 +8167,7 @@ end)
 return ak.__type,ak
 end
 
-return ah end function a.K():typeof(__modImpl())local aa=a.cache.K if not aa then aa={c=__modImpl()}a.cache.K=aa end return aa.c end end do local function __modImpl()
+return ah end function a.L():typeof(__modImpl())local aa=a.cache.L if not aa then aa={c=__modImpl()}a.cache.L=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -7929,7 +8291,7 @@ au.Size=UDim2.new(0,ak.IconSize,0,ak.IconSize)
 av=av+ak.IconSize-2
 end
 end
-ak.SliderFrame=a.D(){
+ak.SliderFrame=a.E(){
 Title=ak.Title,
 Desc=ak.Desc,
 Parent=aj.Parent,
@@ -8030,7 +8392,7 @@ Visible=ak.IsTextbox,
 
 local aw
 if ak.IsTooltip then
-aw=a.C().New(ao,ak.UIElements.SliderIcon.Frame.Thumb,true,"Secondary","Small",false)
+aw=a.D().New(ao,ak.UIElements.SliderIcon.Frame.Thumb,true,"Secondary","Small",false)
 aw.Container.AnchorPoint=Vector2.new(0.5,1)
 aw.Container.Position=UDim2.new(0.5,0,0,-8)
 end
@@ -8182,7 +8544,7 @@ end)
 return ak.__type,ak
 end
 
-return ag end function a.L():typeof(__modImpl())local aa=a.cache.L if not aa then aa={c=__modImpl()}a.cache.L=aa end return aa.c end end do local function __modImpl()
+return ag end function a.M():typeof(__modImpl())local aa=a.cache.M if not aa then aa={c=__modImpl()}a.cache.M=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -8279,7 +8641,7 @@ local as=typeof(ai.Width)=="number"and math.max(math.floor(ai.Width),168)or 182
 local at=typeof(ai.ButtonSize)=="number"and math.max(math.floor(ai.ButtonSize),28)or 34
 local au=math.max(ai.Window.ElementConfig.UICorner-4,8)
 
-ao.StepperFrame=a.D(){
+ao.StepperFrame=a.E(){
 Title=ao.Title,
 Desc=ao.Desc,
 Parent=ai.Parent,
@@ -8648,7 +9010,7 @@ end
 return ao.__type,ao
 end
 
-return ag end function a.M():typeof(__modImpl())local aa=a.cache.M if not aa then aa={c=__modImpl()}a.cache.M=aa end return aa.c end end do local function __modImpl()
+return ag end function a.N():typeof(__modImpl())local aa=a.cache.N if not aa then aa={c=__modImpl()}a.cache.N=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -8663,7 +9025,7 @@ UICorner=6,
 UIPadding=8,
 }
 
-local ag=a.u().New
+local ag=a.v().New
 
 function af.New(ah,ai)
 local function NormalizeKeyCode(aj)
@@ -8691,7 +9053,7 @@ UIElements={},
 
 local ak=true
 
-aj.KeybindFrame=a.D(){
+aj.KeybindFrame=a.E(){
 Title=aj.Title,
 Desc=aj.Desc,
 Parent=ai.Parent,
@@ -8810,7 +9172,7 @@ end)
 return aj.__type,aj
 end
 
-return af end function a.N():typeof(__modImpl())local aa=a.cache.N if not aa then aa={c=__modImpl()}a.cache.N=aa end return aa.c end end do local function __modImpl()
+return af end function a.O():typeof(__modImpl())local aa=a.cache.O if not aa then aa={c=__modImpl()}a.cache.O=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ab=aa.New local ac=
@@ -8823,7 +9185,7 @@ UIPadding=8,
 
 
 .New
-local af=a.l().New
+local af=a.m().New
 
 function ad.New(ag,ah)
 local ai={
@@ -8845,7 +9207,7 @@ Width=150,
 
 local aj=true
 
-ai.InputFrame=a.D(){
+ai.InputFrame=a.E(){
 Title=ai.Title,
 Desc=ai.Desc,
 Parent=ah.Parent,
@@ -8921,7 +9283,7 @@ end
 return ai.__type,ai
 end
 
-return ad end function a.O():typeof(__modImpl())local aa=a.cache.O if not aa then aa={c=__modImpl()}a.cache.O=aa end return aa.c end end do local function __modImpl()
+return ad end function a.P():typeof(__modImpl())local aa=a.cache.P if not aa then aa={c=__modImpl()}a.cache.P=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -8933,7 +9295,7 @@ local af=ab(game:GetService"Workspace").CurrentCamera
 
 local ag=workspace.CurrentCamera
 
-local ah=a.l().New
+local ah=a.m().New
 
 local ai=a.c()
 local aj=ai.New
@@ -9587,7 +9949,7 @@ UpdatePosition
 return aq
 end
 
-return aa end function a.P():typeof(__modImpl())local aa=a.cache.P if not aa then aa={c=__modImpl()}a.cache.P=aa end return aa.c end end do local function __modImpl()
+return aa end function a.Q():typeof(__modImpl())local aa=a.cache.Q if not aa then aa={c=__modImpl()}a.cache.Q=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -9601,9 +9963,9 @@ local af=a.c()
 local ag=af.New local ah=
 af.Tween
 
-local ai=a.u().New local aj=a.l()
+local ai=a.v().New local aj=a.m()
 .New
-local ak=a.P().New local al=
+local ak=a.Q().New local al=
 
 workspace.CurrentCamera
 
@@ -9814,7 +10176,7 @@ end
 
 local as=true
 
-ap.DropdownFrame=a.D(){
+ap.DropdownFrame=a.E(){
 Title=ap.Title,
 Desc=ap.Desc,
 Parent=ao.Parent,
@@ -9993,7 +10355,7 @@ end
 return ap.__type,ap
 end
 
-return am end function a.Q():typeof(__modImpl())local aa=a.cache.Q if not aa then aa={c=__modImpl()}a.cache.Q=aa end return aa.c end end do local function __modImpl()
+return am end function a.R():typeof(__modImpl())local aa=a.cache.R if not aa then aa={c=__modImpl()}a.cache.R=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -10137,7 +10499,7 @@ local ap=typeof(ai.SegmentPaddingX)=="number"and math.max(math.floor(ai.SegmentP
 local aq=typeof(ai.SegmentGap)=="number"and math.max(math.floor(ai.SegmentGap),4)or 6
 local ar=math.max(ai.Window.ElementConfig.UICorner-5,8)
 
-ak.SegmentedFrame=a.D(){
+ak.SegmentedFrame=a.E(){
 Title=ak.Title,
 Desc=ak.Desc,
 Parent=ai.Parent,
@@ -10650,7 +11012,7 @@ end
 return ak.__type,ak
 end
 
-return af end function a.R():typeof(__modImpl())local aa=a.cache.R if not aa then aa={c=__modImpl()}a.cache.R=aa end return aa.c end end do local function __modImpl()
+return af end function a.S():typeof(__modImpl())local aa=a.cache.S if not aa then aa={c=__modImpl()}a.cache.S=aa end return aa.c end end do local function __modImpl()
 
 
 
@@ -10823,14 +11185,14 @@ end
 return table.concat(aq)
 end
 
-return aa end function a.S():typeof(__modImpl())local aa=a.cache.S if not aa then aa={c=__modImpl()}a.cache.S=aa end return aa.c end end do local function __modImpl()
+return aa end function a.T():typeof(__modImpl())local aa=a.cache.T if not aa then aa={c=__modImpl()}a.cache.T=aa end return aa.c end end do local function __modImpl()
 local aa={}
 
 local ad=a.c()
 local ae=ad.New
 local af=ad.Tween
 
-local ag=a.S()
+local ag=a.T()
 
 function aa.New(ai,ak,al,am,an)
 local ao={
@@ -11033,12 +11395,12 @@ return ao
 end
 
 
-return aa end function a.T():typeof(__modImpl())local aa=a.cache.T if not aa then aa={c=__modImpl()}a.cache.T=aa end return aa.c end end do local function __modImpl()
+return aa end function a.U():typeof(__modImpl())local aa=a.cache.U if not aa then aa={c=__modImpl()}a.cache.U=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()local ad=
 aa.New
 
 
-local ae=a.T()
+local ae=a.U()
 
 local af={}
 
@@ -11105,7 +11467,7 @@ ak.ElementFrame=am.CodeFrame
 return ak.__type,ak
 end
 
-return af end function a.U():typeof(__modImpl())local aa=a.cache.U if not aa then aa={c=__modImpl()}a.cache.U=aa end return aa.c end end do local function __modImpl()
+return af end function a.V():typeof(__modImpl())local aa=a.cache.V if not aa then aa={c=__modImpl()}a.cache.V=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New local ae=
@@ -11123,7 +11485,7 @@ local am=ak.LocalPlayer
 local an=am:GetMouse()
 
 local ao=a.e().New
-local ap=a.l().New
+local ap=a.m().New
 
 local aq={
 UICorner=9,
@@ -11152,7 +11514,7 @@ end
 
 av:SetHSVFromRGB(av.Default)
 
-local aw=a.m().Init(at)
+local aw=a.n().Init(at)
 local ax=aw.Create()
 
 av.ColorpickerFrame=ax
@@ -11762,7 +12124,7 @@ local au=true
 
 
 
-at.ColorpickerFrame=a.D(){
+at.ColorpickerFrame=a.E(){
 Title=at.Title,
 Desc=at.Desc,
 Parent=as.Parent,
@@ -11830,7 +12192,7 @@ end)
 return at.__type,at
 end
 
-return aq end function a.V():typeof(__modImpl())local aa=a.cache.V if not aa then aa={c=__modImpl()}a.cache.V=aa end return aa.c end end do local function __modImpl()
+return aq end function a.W():typeof(__modImpl())local aa=a.cache.W if not aa then aa={c=__modImpl()}a.cache.W=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -11912,7 +12274,7 @@ UIElements={},
 
 local ap=true
 
-ao.ProgressFrame=a.D(){
+ao.ProgressFrame=a.E(){
 Title=ao.Title,
 Desc=ao.Desc,
 Parent=ai.Parent,
@@ -12184,7 +12546,7 @@ ao:Set(ao.Value,false,false)
 return ao.__type,ao
 end
 
-return af end function a.W():typeof(__modImpl())local aa=a.cache.W if not aa then aa={c=__modImpl()}a.cache.W=aa end return aa.c end end do local function __modImpl()
+return af end function a.X():typeof(__modImpl())local aa=a.cache.X if not aa then aa={c=__modImpl()}a.cache.X=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -12278,7 +12640,7 @@ UIElements={},
 local an=true
 local ao={}
 
-am.StatsFrame=a.D(){
+am.StatsFrame=a.E(){
 Title=am.Title,
 Desc=am.Desc,
 Parent=ag.Parent,
@@ -12502,7 +12864,7 @@ RenderRows()
 return am.__type,am
 end
 
-return ae end function a.X():typeof(__modImpl())local aa=a.cache.X if not aa then aa={c=__modImpl()}a.cache.X=aa end return aa.c end end do local function __modImpl()
+return ae end function a.Y():typeof(__modImpl())local aa=a.cache.Y if not aa then aa={c=__modImpl()}a.cache.Y=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -12532,8 +12894,6 @@ TextTransparency=ai.TextTransparency or 0.05,
 DescTextTransparency=ai.DescTextTransparency or 0.4,
 HoverFeedback=ai.Hover~=false,
 Opened=ai.Opened or false,
-Locked=ai.Locked or false,
-LockedTitle=ai.LockedTitle,
 UIElements={},
 
 HeaderSize=ai.HeaderSize or 42,
@@ -12830,7 +13190,7 @@ end
 
 ak.Expandable=true
 as.Visible=true
-av.Top.Active=not ak.Locked
+av.Top.Active=true
 av.Content.Visible=true
 av.AutomaticSize="None"
 
@@ -12904,37 +13264,10 @@ end
 end
 
 function ak.Lock(aw)
-ak.Locked=true
-am=false
-an=false
-SetHoverState(true)
-
-if ak.Expandable then
-av.Top.Active=false
-end
-
-for ax,ay in next,ak.Elements do
-if ay and ay.Lock then
-ay:Lock()
-end
-end
-
 return ak
 end
 
 function ak.Unlock(aw)
-ak.Locked=false
-
-if ak.Expandable then
-av.Top.Active=true
-end
-
-for ax,ay in next,ak.Elements do
-if ay and ay.Unlock then
-ay:Unlock()
-end
-end
-
 return ak
 end
 
@@ -12975,10 +13308,6 @@ local aw=ai.ElementsModule
 aw.Load(ak,av.Content,aw.Elements,ai.Window,ai.WindUI,function(ax)
 EnsureExpandable()
 
-if ak.Locked and ax and ax.Lock then
-ax:Lock()
-end
-
 if ak.Opened then
 ak:Open(true)
 else
@@ -13006,7 +13335,7 @@ end
 end)
 
 aa.AddSignal(av.Top.MouseEnter,function()
-if not ak.HoverFeedback or ak.Locked then
+if not ak.HoverFeedback then
 return
 end
 
@@ -13021,7 +13350,7 @@ SetHoverState(false)
 end)
 
 aa.AddSignal(av.Top.InputBegan,function(ax)
-if not ak.HoverFeedback or ak.Locked or not IsPressInput(ax)then
+if not ak.HoverFeedback or not IsPressInput(ax)then
 return
 end
 
@@ -13030,7 +13359,7 @@ SetHoverState(false)
 end)
 
 aa.AddSignal(av.Top.InputEnded,function(ax)
-if not ak.HoverFeedback or ak.Locked or not IsPressInput(ax)then
+if not ak.HoverFeedback or not IsPressInput(ax)then
 return
 end
 
@@ -13039,10 +13368,6 @@ SetHoverState(false)
 end)
 
 aa.AddSignal(av.Top.Activated,function()
-if ak.Locked then
-return
-end
-
 if ak.Expandable then
 if ak.Opened then
 ak:Close()
@@ -13074,16 +13399,12 @@ else
 ak:Close(true)
 end
 end
-
-if ak.Locked then
-ak:Lock()
-end
 end)
 
 return ak.__type,ak
 end
 
-return af end function a.Y():typeof(__modImpl())local aa=a.cache.Y if not aa then aa={c=__modImpl()}a.cache.Y=aa end return aa.c end end do local function __modImpl()
+return af end function a.Z():typeof(__modImpl())local aa=a.cache.Z if not aa then aa={c=__modImpl()}a.cache.Z=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -13124,8 +13445,6 @@ TextTransparency=al.TextTransparency or 0.05,
 DescTextTransparency=al.DescTextTransparency or 0.4,
 HoverFeedback=al.Hover~=false,
 Opened=al.Opened or false,
-Locked=al.Locked or false,
-LockedTitle=al.LockedTitle,
 UIElements={},
 
 HeaderSize=al.HeaderSize or 42,
@@ -13440,7 +13759,7 @@ end
 end
 
 local function UpdateWindowScrollLock()
-local g=aq and ar and am.Opened and not am.Locked
+local g=aq and ar and am.Opened
 SetWindowScrollLock(g)
 end
 
@@ -13566,7 +13885,7 @@ end
 
 am.Expandable=true
 aA.Visible=true
-d.Top.Active=not am.Locked
+d.Top.Active=true
 d.Content.Visible=true
 d.AutomaticSize="None"
 
@@ -13684,24 +14003,6 @@ end
 end
 end
 
-local function SetTabElementsLocked(g)
-for h,j in next,am.Tabs do
-if j and j.Elements then
-for l,m in next,j.Elements do
-if g then
-if m and m.Lock then
-m:Lock()
-end
-else
-if m and m.Unlock then
-m:Unlock()
-end
-end
-end
-end
-end
-end
-
 function am.SetIcon(g,h)
 am.Icon=h or nil
 
@@ -13760,32 +14061,10 @@ end
 end
 
 function am.Lock(g)
-am.Locked=true
-ao=false
-ap=false
-aq=false
-SetHoverState(true)
-
-if am.Expandable then
-d.Top.Active=false
-end
-
-SetTabElementsLocked(true)
-SetWindowScrollLock(false)
-
 return am
 end
 
 function am.Unlock(g)
-am.Locked=false
-
-if am.Expandable then
-d.Top.Active=true
-end
-
-SetTabElementsLocked(false)
-UpdateWindowScrollLock()
-
 return am
 end
 
@@ -13984,10 +14263,6 @@ z.Elements,
 al.Window,
 al.WindUI,
 function(A)
-if am.Locked and A and A.Lock then
-A:Lock()
-end
-
 if am.SelectedTab==j and am.Expandable then
 SyncHeight(true)
 end
@@ -14004,30 +14279,18 @@ end
 end)
 
 aa.AddSignal(v.MouseEnter,function()
-if am.Locked then
-return
-end
-
 if am.SelectedTab~=j then
 SetTabState(j,"Hover",false)
 end
 end)
 
 aa.AddSignal(v.InputEnded,function()
-if am.Locked then
-return
-end
-
 if am.SelectedTab~=j then
 SetTabState(j,"Default",false)
 end
 end)
 
 aa.AddSignal(v.MouseButton1Click,function()
-if am.Locked then
-return
-end
-
 am:SelectTab(j)
 end)
 
@@ -14162,10 +14425,6 @@ UpdateTabsAlignment()
 end)
 
 aa.AddSignal(am.UIElements.TabsScroll.MouseEnter,function()
-if am.Locked then
-return
-end
-
 aq=true
 UpdateWindowScrollLock()
 end)
@@ -14176,10 +14435,6 @@ UpdateWindowScrollLock()
 end)
 
 aa.AddSignal(ag.InputChanged,function(g)
-if am.Locked then
-return
-end
-
 if not aq then
 return
 end
@@ -14200,7 +14455,7 @@ h.CanvasPosition=Vector2.new(m,0)
 end)
 
 aa.AddSignal(d.Top.MouseEnter,function()
-if not am.HoverFeedback or am.Locked then
+if not am.HoverFeedback then
 return
 end
 
@@ -14215,7 +14470,7 @@ SetHoverState(false)
 end)
 
 aa.AddSignal(d.Top.InputBegan,function(g)
-if not am.HoverFeedback or am.Locked or not IsPressInput(g)then
+if not am.HoverFeedback or not IsPressInput(g)then
 return
 end
 
@@ -14224,7 +14479,7 @@ SetHoverState(false)
 end)
 
 aa.AddSignal(d.Top.InputEnded,function(g)
-if not am.HoverFeedback or am.Locked or not IsPressInput(g)then
+if not am.HoverFeedback or not IsPressInput(g)then
 return
 end
 
@@ -14233,10 +14488,6 @@ SetHoverState(false)
 end)
 
 aa.AddSignal(d.Top.Activated,function()
-if am.Locked then
-return
-end
-
 if am.Expandable then
 if am.Opened then
 am:Close()
@@ -14270,17 +14521,13 @@ am:Close(true)
 end
 end
 
-if am.Locked then
-am:Lock()
-end
-
 UpdateWindowScrollLock()
 end)
 
 return am.__type,am
 end
 
-return ai end function a.Z():typeof(__modImpl())local aa=a.cache.Z if not aa then aa={c=__modImpl()}a.cache.Z=aa end return aa.c end end do local function __modImpl()
+return ai end function a._():typeof(__modImpl())local aa=a.cache._ if not aa then aa={c=__modImpl()}a.cache._=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -14350,7 +14597,7 @@ end
 return ai.__type,ai
 end
 
-return ae end function a._():typeof(__modImpl())local aa=a.cache._ if not aa then aa={c=__modImpl()}a.cache._=aa end return aa.c end end do local function __modImpl()
+return ae end function a.aa():typeof(__modImpl())local aa=a.cache.aa if not aa then aa={c=__modImpl()}a.cache.aa=aa end return aa.c end end do local function __modImpl()
 local aa=a.c()
 local ad=aa.New
 
@@ -14437,7 +14684,7 @@ ag.Tab
 return ai.__type,ai
 end
 
-return ae end function a.aa():typeof(__modImpl())local aa=a.cache.aa if not aa then aa={c=__modImpl()}a.cache.aa=aa end return aa.c end end do local function __modImpl()
+return ae end function a.ab():typeof(__modImpl())local aa=a.cache.ab if not aa then aa={c=__modImpl()}a.cache.ab=aa end return aa.c end end do local function __modImpl()
 
 local aa=a.c()
 local ad=aa.New
@@ -14599,32 +14846,32 @@ end
 return ai.__type,ai
 end
 
-return ae end function a.ab():typeof(__modImpl())local aa=a.cache.ab if not aa then aa={c=__modImpl()}a.cache.ab=aa end return aa.c end end do local function __modImpl()
+return ae end function a.ac():typeof(__modImpl())local aa=a.cache.ac if not aa then aa={c=__modImpl()}a.cache.ac=aa end return aa.c end end do local function __modImpl()
 
 return{
 Elements={
-Paragraph=a.E(),
-Button=a.F(),
-ButtonKeybind=a.G(),
-Toggle=a.J(),
-ToggleKeybind=a.K(),
-Slider=a.L(),
-Stepper=a.M(),
-Keybind=a.N(),
-Input=a.O(),
-Dropdown=a.Q(),
-Segmented=a.R(),
-Code=a.U(),
-Colorpicker=a.V(),
-Progress=a.W(),
-Stats=a.X(),
-Section=a.Y(),
-MultiSection=a.Z(),
-Space=a.w(),
-Divider=a.x(),
-Image=a._(),
-Group=a.aa(),
-Video=a.ab(),
+Paragraph=a.F(),
+Button=a.G(),
+ButtonKeybind=a.H(),
+Toggle=a.K(),
+ToggleKeybind=a.L(),
+Slider=a.M(),
+Stepper=a.N(),
+Keybind=a.O(),
+Input=a.P(),
+Dropdown=a.R(),
+Segmented=a.S(),
+Code=a.V(),
+Colorpicker=a.W(),
+Progress=a.X(),
+Stats=a.Y(),
+Section=a.Z(),
+MultiSection=a._(),
+Space=a.x(),
+Divider=a.y(),
+Image=a.aa(),
+Group=a.ab(),
+Video=a.ac(),
 },
 Load=function(aa,ad,ae,af,ag,ai,ak,al,am)
 local function ResolveShapeFrame(an)
@@ -14809,7 +15056,7 @@ end
 end
 end,
 
-}end function a.ac():typeof(__modImpl())local aa=a.cache.ac if not aa then aa={c=__modImpl()}a.cache.ac=aa end return aa.c end end do local function __modImpl()
+}end function a.ad():typeof(__modImpl())local aa=a.cache.ad if not aa then aa={c=__modImpl()}a.cache.ad=aa end return aa.c end end do local function __modImpl()
 
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
@@ -14819,8 +15066,8 @@ local ad=game.Players.LocalPlayer:GetMouse()
 local ae=a.c()
 local af=ae.New
 
-local ag=a.C().New
-local ai=a.v().New
+local ag=a.D().New
+local ai=a.w().New
 
 
 
@@ -15249,7 +15496,7 @@ end
 
 
 
-local aw=a.ac()
+local aw=a.ad()
 
 aw.Load(an,an.UIElements.ContainerFrame,aw.Elements,Window,WindUI,nil,aw,am)
 
@@ -15456,7 +15703,7 @@ end
 return nil
 end
 
-return ak end function a.ad():typeof(__modImpl())local aa=a.cache.ad if not aa then aa={c=__modImpl()}a.cache.ad=aa end return aa.c end end do local function __modImpl()
+return ak end function a.ae():typeof(__modImpl())local aa=a.cache.ae if not aa then aa={c=__modImpl()}a.cache.ae=aa end return aa.c end end do local function __modImpl()
 
 local aa={}
 
@@ -15465,13 +15712,13 @@ local ad=a.c()
 local ae=ad.New
 local af=ad.Tween
 
-local ag=a.u().New
+local ag=a.v().New
 local ai=a.e().New
-local ak=a.w()
-local al=a.x()
-local am=a.ac()
+local ak=a.x()
+local al=a.y()
+local am=a.ad()
 
-local an=a.ad()
+local an=a.ae()
 
 function aa.New(ao,ap,aq,ar,as,at)
 local au={
@@ -15803,26 +16050,23 @@ return au
 end
 
 
-return aa end function a.ae():typeof(__modImpl())local aa=a.cache.ae if not aa then aa={c=__modImpl()}a.cache.ae=aa end return aa.c end end do local function __modImpl()
+return aa end function a.af():typeof(__modImpl())local aa=a.cache.af if not aa then aa={c=__modImpl()}a.cache.af=aa end return aa.c end end do local function __modImpl()
 
 return{
 Tab="table-of-contents",
 Paragraph="type",
 Button="square-mouse-pointer",
-ButtonKeybind="square-mouse-pointer",
 Toggle="toggle-right",
-ToggleKeybind="toggle-right",
 Slider="sliders-horizontal",
 Keybind="command",
 Input="text-cursor-input",
 Dropdown="chevrons-up-down",
 Code="terminal",
 Colorpicker="palette",
-Divider="minus",
-Video="video",
-}end function a.af():typeof(__modImpl())local aa=a.cache.af if not aa then aa={c=__modImpl()}a.cache.af=aa end return aa.c end end do local function __modImpl()
-
-local aa=(cloneref or clonereference or function(aa)return aa end)
+}end function a.ag():typeof(__modImpl())local aa=a.cache.ag if not aa then aa={c=__modImpl()}a.cache.ag=aa end return aa.c end end do local function __modImpl()
+local aa=(cloneref or clonereference or function(aa)
+return aa
+end)
 
 aa(game:GetService"UserInputService")
 
@@ -15831,11 +16075,9 @@ Margin=8,
 Padding=9,
 }
 
-
 local ae=a.c()
 local af=ae.New
 local ag=ae.Tween
-
 
 function ad.new(ai,ak,al)
 local am={
@@ -15845,9 +16087,8 @@ Radius=22,
 Width=400,
 MaxHeight=380,
 
-Icons=a.af()
+Icons=a.ag(),
 }
-
 
 local an=af("TextBox",{
 Text="",
@@ -15856,12 +16097,7 @@ ThemeTag={
 PlaceholderColor3="Placeholder",
 TextColor3="Text",
 },
-Size=UDim2.new(
-1,
--((am.IconSize*2)+(am.Padding*2)),
-0,
-0
-),
+Size=UDim2.new(1,-((am.IconSize*2)+(am.Padding*2)),0,0),
 AutomaticSize="Y",
 ClipsDescendants=true,
 ClearTextOnFocus=false,
@@ -15879,8 +16115,8 @@ BackgroundTransparency=1,
 ThemeTag={
 ImageColor3="Icon",
 },
-ImageTransparency=.1,
-Size=UDim2.new(0,am.IconSize,0,am.IconSize)
+ImageTransparency=0.1,
+Size=UDim2.new(0,am.IconSize,0,am.IconSize),
 },{
 af("TextButton",{
 Size=UDim2.new(1,8,1,8),
@@ -15890,7 +16126,7 @@ ZIndex=999999999,
 AnchorPoint=Vector2.new(0.5,0.5),
 Position=UDim2.new(0.5,0,0.5,0),
 Text="",
-})
+}),
 })
 
 local ap=af("ScrollingFrame",{
@@ -15901,7 +16137,7 @@ ElasticBehavior="Never",
 ScrollBarThickness=0,
 CanvasSize=UDim2.new(0,0,0,0),
 BackgroundTransparency=1,
-Visible=false
+Visible=false,
 },{
 af("UIListLayout",{
 Padding=UDim.new(0,0),
@@ -15912,7 +16148,7 @@ PaddingTop=UDim.new(0,am.Padding),
 PaddingLeft=UDim.new(0,am.Padding),
 PaddingRight=UDim.new(0,am.Padding),
 PaddingBottom=UDim.new(0,am.Padding),
-})
+}),
 })
 
 local aq=ae.NewRoundFrame(am.Radius,"Squircle",{
@@ -15957,8 +16193,8 @@ BackgroundTransparency=1,
 ThemeTag={
 ImageColor3="Icon",
 },
-ImageTransparency=.1,
-Size=UDim2.new(0,am.IconSize,0,am.IconSize)
+ImageTransparency=0.1,
+Size=UDim2.new(0,am.IconSize,0,am.IconSize),
 }),
 an,
 ao,
@@ -15970,8 +16206,8 @@ VerticalAlignment="Center",
 af("UIPadding",{
 PaddingLeft=UDim.new(0,am.Padding),
 PaddingRight=UDim.new(0,am.Padding),
-})
-})
+}),
+}),
 }),
 af("Frame",{
 BackgroundTransparency=1,
@@ -15984,7 +16220,7 @@ Size=UDim2.new(1,0,0,1),
 ThemeTag={
 BackgroundColor3="Outline",
 },
-BackgroundTransparency=.9,
+BackgroundTransparency=0.9,
 Visible=false,
 }),
 ap,
@@ -15996,7 +16232,7 @@ af("UIListLayout",{
 Padding=UDim.new(0,0),
 FillDirection="Vertical",
 }),
-})
+}),
 })
 
 local ar=af("Frame",{
@@ -16011,7 +16247,7 @@ Visible=false,
 ZIndex=99999999,
 },{
 af("UIScale",{
-Scale=.9,
+Scale=0.9,
 }),
 aq,
 ae.NewRoundFrame(am.Radius,"Glass-0.7",{
@@ -16032,7 +16268,7 @@ local ay=af("TextButton",{
 Size=UDim2.new(1,0,0,0),
 AutomaticSize="Y",
 BackgroundTransparency=1,
-Parent=av or nil
+Parent=av or nil,
 },{
 ae.NewRoundFrame(am.Radius-11,"Squircle",{
 Size=UDim2.new(1,0,0,0),
@@ -16043,7 +16279,7 @@ ThemeTag={
 ImageColor3="Text",
 },
 ImageTransparency=1,
-Name="Main"
+Name="Main",
 },{
 ae.NewRoundFrame(am.Radius-11,"Glass-1",{
 Size=UDim2.new(1,0,1,0),
@@ -16077,8 +16313,8 @@ BackgroundTransparency=1,
 ThemeTag={
 ImageColor3="Icon",
 },
-ImageTransparency=.1,
-Size=UDim2.new(0,am.IconSize,0,am.IconSize)
+ImageTransparency=0.1,
+Size=UDim2.new(0,am.IconSize,0,am.IconSize),
 }),
 af("Frame",{
 Size=UDim2.new(1,-am.IconSize-am.Padding,0,0),
@@ -16096,7 +16332,7 @@ FontFace=Font.new(ae.Font,Enum.FontWeight.Medium),
 Size=UDim2.new(1,0,0,0),
 TextTruncate="AtEnd",
 AutomaticSize="Y",
-Name="Title"
+Name="Title",
 }),
 af("TextLabel",{
 Text=at or"",
@@ -16105,24 +16341,24 @@ ThemeTag={
 TextColor3="Text",
 },
 TextSize=15,
-TextTransparency=.3,
+TextTransparency=0.3,
 BackgroundTransparency=1,
 TextXAlignment="Left",
 FontFace=Font.new(ae.Font,Enum.FontWeight.Medium),
 Size=UDim2.new(1,0,0,0),
 TextTruncate="AtEnd",
 AutomaticSize="Y",
-Name="Desc"
+Name="Desc",
 })or nil,
 af("UIListLayout",{
 Padding=UDim.new(0,6),
 FillDirection="Vertical",
-})
+}),
 }),
 af("UIListLayout",{
 Padding=UDim.new(0,am.Padding),
 FillDirection="Horizontal",
-})
+}),
 }),
 },true),
 af("Frame",{
@@ -16137,9 +16373,9 @@ ae.NewRoundFrame(99,"Squircle",{
 Size=UDim2.new(0,2,1,0),
 BackgroundTransparency=1,
 ThemeTag={
-ImageColor3="Text"
+ImageColor3="Text",
 },
-ImageTransparency=.9,
+ImageTransparency=0.9,
 }),
 af("Frame",{
 Size=UDim2.new(1,-am.Padding-2,0,0),
@@ -16155,8 +16391,8 @@ FillDirection="Vertical",
 af("UIListLayout",{
 Padding=UDim.new(0,0),
 FillDirection="Vertical",
-HorizontalAlignment="Right"
-})
+HorizontalAlignment="Right",
+}),
 })
 
 
@@ -16165,17 +16401,18 @@ ay.Main.Size=UDim2.new(
 1,
 0,
 0,
-ay.Main.Outline.Frame.Desc.Visible and(((am.Padding-2)*2)+ay.Main.Outline.Frame.Title.TextBounds.Y+6+ay.Main.Outline.Frame.Desc.TextBounds.Y)
+ay.Main.Outline.Frame.Desc.Visible
+and(((am.Padding-2)*2)+ay.Main.Outline.Frame.Title.TextBounds.Y+6+ay.Main.Outline.Frame.Desc.TextBounds.Y)
 or(((am.Padding-2)*2)+ay.Main.Outline.Frame.Title.TextBounds.Y)
 )
 
 ae.AddSignal(ay.Main.MouseEnter,function()
-ag(ay.Main,.04,{ImageTransparency=.95}):Play()
-ag(ay.Main.Outline,.04,{ImageTransparency=.75}):Play()
+ag(ay.Main,0.04,{ImageTransparency=0.95}):Play()
+ag(ay.Main.Outline,0.04,{ImageTransparency=0.75}):Play()
 end)
 ae.AddSignal(ay.Main.InputEnded,function()
-ag(ay.Main,.08,{ImageTransparency=1}):Play()
-ag(ay.Main.Outline,.08,{ImageTransparency=1}):Play()
+ag(ay.Main,0.08,{ImageTransparency=1}):Play()
+ag(ay.Main.Outline,0.08,{ImageTransparency=1}):Play()
 end)
 ae.AddSignal(ay.Main.MouseButton1Click,function()
 if ax then
@@ -16212,7 +16449,7 @@ local aw=ContainsText(av.Title or"",as)
 local ax={}
 
 for ay,az in next,av.Elements do
-if az.__type~="Section"and az.__type~="MultiSection"then
+if az.__type~="Section"then
 local aA=ContainsText(az.Title or"",as)
 local aB=ContainsText(az.Desc or"",as)
 
@@ -16240,6 +16477,56 @@ end
 return at
 end
 
+ae.AddSignal(ap.UIListLayout:GetPropertyChangedSignal"AbsoluteContentSize",function()
+
+ag(ap,0.06,{
+Size=UDim2.new(
+1,
+0,
+0,
+math.clamp(
+ap.UIListLayout.AbsoluteContentSize.Y+(am.Padding*2),
+0,
+am.MaxHeight
+)
+),
+},Enum.EasingStyle.Quint,Enum.EasingDirection.InOut):Play()
+
+
+
+
+
+
+end)
+
+function am.Open(as)
+task.spawn(function()
+aq.Frame.Visible=true
+ar.Visible=true
+ag(ar.UIScale,0.12,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+end)
+end
+
+function am.Close(as,at)
+task.spawn(function()
+al()
+aq.Frame.Visible=false
+ag(ar.UIScale,0.12,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+
+task.wait(0.12)
+ar.Visible=false
+if at then
+ar:Destroy()
+end
+end)
+end
+
+ae.AddSignal(ao.TextButton.MouseButton1Click,function()
+am:Close(true)
+end)
+
+am:Open()
+
 function am.Search(as,at)
 at=at or""
 
@@ -16263,7 +16550,14 @@ end)
 if aw.Elements and next(aw.Elements)~=nil then
 for az,aA in next,aw.Elements do
 local aB=am.Icons[aA.__type]
-CreateSearchTab(aA.Title,aA.Desc,aB,ay:FindFirstChild"ParentContainer"and ay.ParentContainer.Frame or nil,false,function()
+CreateSearchTab(
+aA.Title,
+aA.Desc,
+aB,
+ay:FindFirstChild"ParentContainer"and ay.ParentContainer.Frame
+or nil,
+false,
+function()
 am:Close()
 ai:SelectTab(av)
 if aw.Tab.ScrollToTheElement then
@@ -16271,7 +16565,8 @@ if aw.Tab.ScrollToTheElement then
 aw.Tab:ScrollToTheElement(aA.Index)
 end
 
-end)
+end
+)
 
 end
 end
@@ -16279,13 +16574,12 @@ end
 elseif at~=""then
 af("TextLabel",{
 Size=UDim2.new(1,0,0,70),
-BackgroundTransparency=1,
 Text="No results found",
 TextSize=16,
 ThemeTag={
 TextColor3="Text",
 },
-TextTransparency=.2,
+TextTransparency=0.2,
 BackgroundTransparency=1,
 FontFace=Font.new(ae.Font,Enum.FontWeight.Medium),
 Parent=ap,
@@ -16301,60 +16595,17 @@ ae.AddSignal(an:GetPropertyChangedSignal"Text",function()
 am:Search(an.Text)
 end)
 
-ae.AddSignal(ap.UIListLayout:GetPropertyChangedSignal"AbsoluteContentSize",function()
-
-ag(ap,.06,{Size=UDim2.new(
-1,
-0,
-0,
-math.clamp(ap.UIListLayout.AbsoluteContentSize.Y+(am.Padding*2),0,am.MaxHeight)
-)},Enum.EasingStyle.Quint,Enum.EasingDirection.InOut):Play()
-
-
-
-
-
-
-end)
-
-function am.Open(as)
-task.spawn(function()
-aq.Frame.Visible=true
-ar.Visible=true
-ag(ar.UIScale,.12,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-end)
-end
-
-function am.Close(as,at)
-task.spawn(function()
-al()
-aq.Frame.Visible=false
-ag(ar.UIScale,.12,{Scale=1},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
-
-task.wait(.12)
-ar.Visible=false
-if at then ar:Destroy()end
-end)
-end
-
-ae.AddSignal(ao.TextButton.MouseButton1Click,function()
-am:Close(true)
-end)
-
-am:Open()
-
 return am
 end
 
-return ad end function a.ag():typeof(__modImpl())local aa=a.cache.ag if not aa then aa={c=__modImpl()}a.cache.ag=aa end return aa.c end end do local function __modImpl()
-
+return ad end function a.ah():typeof(__modImpl())local aa=a.cache.ah if not aa then aa={c=__modImpl()}a.cache.ah=aa end return aa.c end end do local function __modImpl()
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
 local ad=aa(game:GetService"UserInputService")
 local ae=aa(game:GetService"RunService")
 local af=aa(game:GetService"Players")
 
-local ag=a.r()
+local ag=a.s()
 
 local ai=a.c()
 local ak=ai.New
@@ -16440,15 +16691,15 @@ return as and at or nil
 end
 
 
-local am=a.u().New
+local am=a.v().New
 local an=a.e().New
-local ao=a.v().New
-local ap=a.w()
-local aq=a.x()
-local ar=a.y()
-local as=a.z()
+local ao=a.w().New
+local ap=a.x()
+local aq=a.y()
+local ar=a.z()
+local as=a.A()
 
-local at=a.A()
+local at=a.B()
 
 
 
@@ -17540,7 +17791,7 @@ end
 
 
 
-av.OpenButtonMain=a.B().New(av)
+av.OpenButtonMain=a.C().New(av)
 
 
 task.spawn(function()
@@ -18338,8 +18589,8 @@ av:EditOpenButton(av.OpenButton)
 end
 
 
-local C=a.ad()
-local F=a.ae()
+local C=a.ae()
+local F=a.af()
 local G=C.Init(av,au.WindUI,au.WindUI.TooltipGui)
 G:OnChange(function(H)av.CurrentTab=H end)
 
@@ -18590,7 +18841,7 @@ end
 return av
 end
 
-local H=a.m().Init(av,nil)
+local H=a.n().Init(av,nil)
 function av.Dialog(J,L)
 local M={
 Title=L.Title or"Dialog",
@@ -18978,7 +19229,7 @@ end)
 
 
 if not av.HideSearchBar then
-local R=a.ag()
+local R=a.ah()
 local S=false
 
 
@@ -19067,10 +19318,9 @@ end
 
 
 return av
-end end function a.ah():typeof(__modImpl())local aa=a.cache.ah if not aa then aa={c=__modImpl()}a.cache.ah=aa end return aa.c end end end
+end end function a.ai():typeof(__modImpl())local aa=a.cache.ai if not aa then aa={c=__modImpl()}a.cache.ai=aa end return aa.c end end end
 
-local aa=game:GetService"RunService"
-local ad={
+local aa={
 Window=nil,
 Theme=nil,
 Creator=a.c(),
@@ -19079,7 +19329,7 @@ NotificationModule=a.f(),
 Themes=nil,
 Transparent=false,
 
-TransparencyValue=.15,
+TransparencyValue=0.15,
 
 UIScale=1,
 
@@ -19094,50 +19344,54 @@ cloneref=nil,
 UIScaleObj=nil,
 }
 
+local ad=(cloneref or clonereference or function(ad)
+return ad
+end)
 
-local ae=(cloneref or clonereference or function(ae)return ae end)
+aa.cloneref=ad
 
-ad.cloneref=ae
+local ae=ad(game:GetService"HttpService")
+local af=ad(game:GetService"Players")
+local ag=ad(game:GetService"CoreGui")
+local ai=ad(game:GetService"RunService")
 
-ae(game:GetService"HttpService")
-local af=ae(game:GetService"Players")
-local ag=ae(game:GetService"CoreGui")local ai=
+local ak=af.LocalPlayer or nil
 
-af.LocalPlayer or nil
+local al=ae:JSONDecode(a.l())
+if al then
+aa.Version=al.version
+end
 
-local ak=a.n()local al=
+local am=a.o()
 
-ad.Services
+local an=aa.Creator
 
-
-local am=ad.Creator
-
-local an=am.New local ao=
-am.Tween
+local ao=an.New
 
 
-local ap=a.r()
 
+
+local ap=a.s()
 
 local aq=protectgui or(syn and syn.protect_gui)or function()end
 
-local ar=gethui and gethui()or(ag or game.Players.LocalPlayer:WaitForChild"PlayerGui")
+local ar=gethui and gethui()or(ag or ak:WaitForChild"PlayerGui")
 
-local as=an("UIScale",{
-Scale=ad.UIScale,
+local as=ao("UIScale",{
+Scale=aa.UIScale,
 })
 
-ad.UIScaleObj=as
+aa.UIScaleObj=as
 
-ad.ScreenGui=an("ScreenGui",{
+aa.ScreenGui=ao("ScreenGui",{
 Name="WindUI",
 Parent=ar,
 IgnoreGuiInset=true,
 ScreenInsets="None",
 },{
 
-an("Folder",{
-Name="Window"
+ao("Folder",{
+Name="Window",
 }),
 
 
@@ -19145,118 +19399,122 @@ Name="Window"
 
 
 
-an("Folder",{
-Name="KeySystem"
+ao("Folder",{
+Name="KeySystem",
 }),
-an("Folder",{
-Name="Popups"
+ao("Folder",{
+Name="Popups",
 }),
-an("Folder",{
-Name="ToolTips"
+ao("Folder",{
+Name="ToolTips",
+}),
 })
-})
 
-ad.NotificationGui=an("ScreenGui",{
+aa.NotificationGui=ao("ScreenGui",{
 Name="WindUI/Notifications",
 Parent=ar,
 IgnoreGuiInset=true,
 })
-ad.DropdownGui=an("ScreenGui",{
+aa.DropdownGui=ao("ScreenGui",{
 Name="WindUI/Dropdowns",
 Parent=ar,
 IgnoreGuiInset=true,
 })
-ad.TooltipGui=an("ScreenGui",{
+aa.TooltipGui=ao("ScreenGui",{
 Name="WindUI/Tooltips",
 Parent=ar,
 IgnoreGuiInset=true,
 })
-aq(ad.ScreenGui)
-aq(ad.NotificationGui)
-aq(ad.DropdownGui)
-aq(ad.TooltipGui)
+aq(aa.ScreenGui)
+aq(aa.NotificationGui)
+aq(aa.DropdownGui)
+aq(aa.TooltipGui)
 
-am.Init(ad)
+an.Init(aa)
 
-
-function ad.SetParent(at,au)
-ad.ScreenGui.Parent=au
-ad.NotificationGui.Parent=au
-ad.DropdownGui.Parent=au
-ad.TooltipGui.Parent=au
+function aa.SetParent(at,au)
+if aa.ScreenGui then
+aa.ScreenGui.Parent=au
 end
-ad.TransparencyValue=math.clamp(ad.TransparencyValue,0,1)
+if aa.NotificationGui then
+aa.NotificationGui.Parent=au
+end
+if aa.DropdownGui then
+aa.DropdownGui.Parent=au
+end
+if aa.TooltipGui then
+aa.TooltipGui.Parent=au
+end
+end
+math.clamp(aa.TransparencyValue,0,1)
 
-local at=ad.NotificationModule.Init(ad.NotificationGui)
+local at=aa.NotificationModule.Init(aa.NotificationGui)
 
-function ad.Notify(au,av)
+function aa.Notify(au,av)
 av.Holder=at.Frame
-av.Window=ad.Window
+av.Window=aa.Window
 
-return ad.NotificationModule.New(av)
+return aa.NotificationModule.New(av)
 end
 
-function ad.SetNotificationLower(au,av)
+function aa.SetNotificationLower(au,av)
 at.SetLower(av)
 end
 
-function ad.SetFont(au,av)
-am.UpdateFont(av)
+function aa.SetFont(au,av)
+an.UpdateFont(av)
 end
 
-function ad.OnThemeChange(au,av)
-ad.OnThemeChangeFunction=av
+function aa.OnThemeChange(au,av)
+aa.OnThemeChangeFunction=av
 end
 
-function ad.AddTheme(au,av)
-ad.Themes[av.Name]=av
+function aa.AddTheme(au,av)
+aa.Themes[av.Name]=av
 return av
 end
 
-function ad.SetTheme(au,av)
-if ad.Themes[av]then
-ad.Theme=ad.Themes[av]
-am.SetTheme(ad.Themes[av])
+function aa.SetTheme(au,av)
+if aa.Themes[av]then
+aa.Theme=aa.Themes[av]
+an.SetTheme(aa.Themes[av])
 
-if ad.OnThemeChangeFunction then
-ad.OnThemeChangeFunction(av)
+if aa.OnThemeChangeFunction then
+aa.OnThemeChangeFunction(av)
 end
 
-return ad.Themes[av]
+return aa.Themes[av]
 end
 return nil
 end
 
-function ad.GetThemes(au)
-return ad.Themes
+function aa.GetThemes(au)
+return aa.Themes
 end
-function ad.GetCurrentTheme(au)
-return ad.Theme and ad.Theme.Name or nil
+function aa.GetCurrentTheme(au)
+return aa.Theme.Name
 end
-function ad.GetTransparency(au)
-return ad.Transparent or false
+function aa.GetTransparency(au)
+return aa.Transparent or false
 end
-function ad.GetWindowSize(au)
-if ad.Window and ad.Window.UIElements and ad.Window.UIElements.Main then
-return ad.Window.UIElements.Main.Size
+function aa.GetWindowSize(au)
+return aa.Window.UIElements.Main.Size
 end
-return nil
-end
-function ad.Localization(au,av)
-return ad.LocalizationModule:New(av,am)
+function aa.Localization(au,av)
+return aa.LocalizationModule:New(av,an)
 end
 
-function ad.SetLanguage(au,av)
-if am.Localization then
-return am.SetLanguage(av)
+function aa.SetLanguage(au,av)
+if an.Localization then
+return an.SetLanguage(av)
 end
 return false
 end
 
-function ad.ToggleAcrylic(au,av)
-if ad.Window and ad.Window.AcrylicPaint and ad.Window.AcrylicPaint.Model then
-ad.Window.Acrylic=av
-ad.Window.AcrylicPaint.Model.Transparency=av and 0.98 or 1
+function aa.ToggleAcrylic(au,av)
+if aa.Window and aa.Window.AcrylicPaint and aa.Window.AcrylicPaint.Model then
+aa.Window.Acrylic=av
+aa.Window.AcrylicPaint.Model.Transparency=av and 0.98 or 1
 if av then
 ap.Enable()
 else
@@ -19265,12 +19523,7 @@ end
 end
 end
 
-
-function ad.Gradient(au,av,aw)
-if typeof(av)~="table"then
-av={}
-end
-
+function aa.Gradient(au,av,aw)
 local ax={}
 local ay={}
 
@@ -19291,15 +19544,14 @@ table.insert(ay,NumberSequenceKeypoint.new(aB,b))
 end
 end
 
-table.sort(ax,function(az,aA)return az.Time<aA.Time end)
-table.sort(ay,function(az,aA)return az.Time<aA.Time end)
+table.sort(ax,function(az,aA)
+return az.Time<aA.Time
+end)
+table.sort(ay,function(az,aA)
+return az.Time<aA.Time
+end)
 
-if#ax==0 then
-table.insert(ax,ColorSequenceKeypoint.new(0,Color3.new(1,1,1)))
-table.insert(ax,ColorSequenceKeypoint.new(1,Color3.new(1,1,1)))
-table.insert(ay,NumberSequenceKeypoint.new(0,0))
-table.insert(ay,NumberSequenceKeypoint.new(1,0))
-elseif#ax<2 then
+if#ax<2 then
 table.insert(ax,ColorSequenceKeypoint.new(1,ax[1].Value))
 table.insert(ay,NumberSequenceKeypoint.new(1,ay[1].Value))
 end
@@ -19318,57 +19570,46 @@ end
 return az
 end
 
-
-function ad.Popup(au,av)
-av.WindUI=ad
-return a.s().new(av)
+function aa.Popup(au,av)
+av.WindUI=aa
+return a.t().new(av)
 end
 
+aa.Themes=a.u()(aa)
 
-ad.Themes=a.t()(ad)
+an.Themes=aa.Themes
 
-am.Themes=ad.Themes
+aa:SetTheme"Dark"
+aa:SetLanguage(an.Language)
 
+function aa.CreateWindow(au,av)
+local aw=a.ai()
 
-ad:SetTheme"Dark"
-ad:SetLanguage(am.Language)
-
-
-function ad.CreateWindow(au,av)
-av=av or{}
-
-local aw=a.ah()
-
-if not aa:IsStudio()and writefile then
+if not ai:IsStudio()and writefile then
 if not isfolder"WindUI"then
 makefolder"WindUI"
 end
 if av.Folder then
-if not isfolder(av.Folder)then
 makefolder(av.Folder)
-end
 else
-if av.Title and not isfolder(av.Title)then
 makefolder(av.Title)
 end
 end
-end
 
-av.WindUI=ad
-av.Parent=ad.ScreenGui.Window
+av.WindUI=aa
+av.Parent=aa.ScreenGui.Window
 
-if ad.Window then
+if aa.Window then
 warn"You cannot create more than one window"
 return
 end
 
 local ax=true
 
-local ay=ad.Themes[av.Theme or"Dark"]or ad.Theme or ad.Themes.Dark
-if ay then
-am.SetTheme(ay)
-end
+local ay=aa.Themes[av.Theme or"Dark"]
 
+
+an.SetTheme(ay)
 
 local az=gethwid or function()
 return af.LocalPlayer.UserId
@@ -19380,7 +19621,9 @@ if av.KeySystem then
 ax=false
 
 local function loadKeysystem()
-ak.new(av,aA,function(aB)ax=aB end)
+am.new(av,aA,function(aB)
+ax=aB
+end)
 end
 
 local aB=(av.Folder or"Temp").."/"..aA..".key"
@@ -19401,8 +19644,7 @@ end
 elseif not av.KeySystem.API then
 if av.KeySystem.SaveKey and isfile(aB)then
 local aC=readfile(aB)
-local b=(type(av.KeySystem.Key)=="table")
-and table.find(av.KeySystem.Key,aC)
+local b=(type(av.KeySystem.Key)=="table")and table.find(av.KeySystem.Key,aC)
 or tostring(av.KeySystem.Key)==tostring(aC)
 
 if b then
@@ -19419,7 +19661,7 @@ local aC=readfile(aB)
 local b=false
 
 for d,f in next,av.KeySystem.API do
-local g=ad.Services[f.Type]
+local g=aa.Services[f.Type]
 if g then
 local h={}
 for j,l in next,g.Args do
@@ -19436,19 +19678,23 @@ end
 end
 
 ax=b
-if not b then loadKeysystem()end
+if not b then
+loadKeysystem()
+end
 else
 loadKeysystem()
 end
 end
 
-repeat task.wait()until ax
+repeat
+task.wait()
+until ax
 end
 
 local aB=aw(av)
 
-ad.Transparent=av.Transparent
-ad.Window=aB
+aa.Transparent=av.Transparent
+aa.Window=aB
 
 if av.Acrylic then
 ap.init()
@@ -19469,4 +19715,4 @@ end
 return aB
 end
 
-return ad
+return aa
